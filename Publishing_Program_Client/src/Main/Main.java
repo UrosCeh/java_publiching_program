@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package common.communication;
-
-import java.io.Serializable;
+package Main;
 
 /**
  *
  * @author hatch
  */
-public enum Operation implements Serializable {
-    // names of all the operations program will do
-    
+public class Main {
+    public static void main(String[] args) {
+        //MainCordinator.getInstance().openLoginForm();
+    }
 }
