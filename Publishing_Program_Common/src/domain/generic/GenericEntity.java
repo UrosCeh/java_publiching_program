@@ -5,6 +5,7 @@
  */
 package domain.generic;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author hatch
  */
-public interface GenericEntity {
+public interface GenericEntity extends Serializable {
     
     public String getTableName();
     
