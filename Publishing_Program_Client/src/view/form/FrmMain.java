@@ -5,6 +5,7 @@
  */
 package view.form;
 
+import domainClient.Article;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -13,11 +14,15 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 /**
  *
@@ -49,6 +54,7 @@ public class FrmMain extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         pnlHeaderBtns = new javax.swing.JPanel();
         pnlArticles = new javax.swing.JScrollPane();
+        pnlAllArticles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +87,7 @@ public class FrmMain extends javax.swing.JFrame {
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(880, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,16 +103,31 @@ public class FrmMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout pnlAllArticlesLayout = new javax.swing.GroupLayout(pnlAllArticles);
+        pnlAllArticles.setLayout(pnlAllArticlesLayout);
+        pnlAllArticlesLayout.setHorizontalGroup(
+            pnlAllArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1794, Short.MAX_VALUE)
+        );
+        pnlAllArticlesLayout.setVerticalGroup(
+            pnlAllArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 928, Short.MAX_VALUE)
+        );
+
+        pnlArticles.setViewportView(pnlAllArticles);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlArticles))
+                .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(pnlArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 1800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,26 +135,19 @@ public class FrmMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlArticles, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                .addComponent(pnlArticles, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addPanels() {
-        
-    }
-    
-    private void addComponents() {
-
-    }
-    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbCategory;
+    private javax.swing.JPanel pnlAllArticles;
     private javax.swing.JScrollPane pnlArticles;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlHeaderBtns;
@@ -163,6 +177,14 @@ public class FrmMain extends javax.swing.JFrame {
     public void setPnlArticles(javax.swing.JScrollPane pnlArticles) {
         this.pnlArticles = pnlArticles;
     }
+    
+    public javax.swing.JPanel getPnlAllArticles() {
+        return pnlAllArticles;
+    }
+
+    public void setPnlAllArticles(javax.swing.JPanel pnlAllArticles) {
+        this.pnlAllArticles = pnlAllArticles;
+    }
 
     public javax.swing.JPanel getPnlHeader() {
         return pnlHeader;
@@ -187,4 +209,5 @@ public class FrmMain extends javax.swing.JFrame {
     public void setTxtSearch(javax.swing.JTextField txtSearch) {
         this.txtSearch = txtSearch;
     }
+
 }
