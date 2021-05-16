@@ -23,15 +23,25 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pnlHeader" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="pnlArticles" min="-2" pref="1800" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="54" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnHome" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnLogin" min="-2" pref="120" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlHeader" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-              <Component id="pnlArticles" min="-2" pref="1800" max="-2" attributes="0"/>
-              <EmptySpace pref="60" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,9 +49,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnLogin" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="btnHome" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="pnlArticles" max="32767" attributes="0"/>
+              <Component id="pnlArticles" min="-2" pref="836" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -54,9 +69,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                   <Component id="pnlHeaderWriter" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="529" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="401" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="txtSearch" alignment="2" min="-2" pref="300" max="-2" attributes="0"/>
                       <Component id="cbCategory" alignment="2" min="-2" pref="300" max="-2" attributes="0"/>
@@ -64,22 +79,26 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="pnlHeaderAdmin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="pnlHeaderAdmin" alignment="1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
-                  <Component id="txtSearch" min="-2" pref="29" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cbCategory" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnSearch" pref="38" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="txtSearch" min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="cbCategory" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnSearch" pref="38" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="pnlHeaderWriter" alignment="1" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="pnlHeaderAdmin" alignment="1" max="32767" attributes="0"/>
-              <Component id="pnlHeaderWriter" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -164,5 +183,15 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnLogin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Login"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnHome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Home Page"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

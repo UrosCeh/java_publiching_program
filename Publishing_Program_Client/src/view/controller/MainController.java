@@ -49,18 +49,9 @@ public class MainController {
 
     private void addHeaderBtns() {
         JPanel pnlHeaderWriter = frmMain.getPnlHeaderWriter();
-        int width = 200, height = 30, margin = 10;
+        int width = 200, height = 50, margin = 10, order = 0;
         
-        
-        JButton btnLogin = makeButton("See All Articles", 0, width, height, margin);
-        btnLogin.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ViewCoordinator.getInstance().openLoginForm();
-            }
-        });
-        
-        JButton btnSeeMyArticles = makeButton("See My Articles", 1, width, height, margin);
+        JButton btnSeeMyArticles = makeButton("See My Articles", order++, width, height, margin);
         btnSeeMyArticles.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +59,7 @@ public class MainController {
             }
         });
         
-        JButton btnAddNewArticle = makeButton("Add New Article", 2, width, height, margin);
+        JButton btnAddNewArticle = makeButton("Add New Article", order++, width, height, margin);
         btnAddNewArticle.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,7 +67,7 @@ public class MainController {
             }
         });
         
-        pnlHeaderWriter.add(btnLogin);
+//        pnlHeaderWriter.add(btnLogin);
         pnlHeaderWriter.add(btnSeeMyArticles);
         pnlHeaderWriter.add(btnAddNewArticle);
                 
@@ -86,9 +77,17 @@ public class MainController {
     private void addHeaderAdmin() {
         
         JPanel pnlHeaderAdmin = frmMain.getPnlHeaderAdmin();
-        int width = 200, height = 25, margin = 5;
+        int width = 200, height = 20, margin = 4, order = 0;
         
-        JButton btnSeePublished = makeButton("See Published", 0, width, height, margin);
+        JButton btnSeeAll = makeButton("See All", order++, width, height, margin);
+        btnSeeAll.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                ViewCoordinator.getInstance().openAddArticleForm();
+            }
+        });
+        
+        JButton btnSeePublished = makeButton("See Published", order++, width, height, margin);
         btnSeePublished.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,7 +95,7 @@ public class MainController {
             }
         });
         
-        JButton btnSeeDueUnpublished = makeButton("See Due Unpublished", 1, width, height, margin);
+        JButton btnSeeDueUnpublished = makeButton("See Due Unpublished", order++, width, height, margin);
         btnSeeDueUnpublished.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,7 +103,7 @@ public class MainController {
             }
         });
         
-        JButton btnSeeUnpublished = makeButton("See Unpublished", 2, width, height, margin);
+        JButton btnSeeUnpublished = makeButton("See Unpublished", order++, width, height, margin);
         btnSeeUnpublished.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,7 +111,7 @@ public class MainController {
             }
         });
         
-        JButton btnAddNewCategory = makeButton("Add New Category", 3, width, height, margin);
+        JButton btnAddNewCategory = makeButton("Add New Category", order++, width, height, margin);
         btnAddNewCategory.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,6 +120,7 @@ public class MainController {
         });
         
         
+        pnlHeaderAdmin.add(btnSeeAll);
         pnlHeaderAdmin.add(btnSeePublished);
         pnlHeaderAdmin.add(btnSeeDueUnpublished);
         pnlHeaderAdmin.add(btnSeeUnpublished);
@@ -134,7 +134,7 @@ public class MainController {
         return btn;
     }
     
-    //private void addArticles
+    //private void add btn action listeners home, login, search
     //private void fillCbCategories
     
     private void addArticles() {
