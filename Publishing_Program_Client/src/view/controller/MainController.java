@@ -8,16 +8,21 @@ package view.controller;
 import domainClient.Article;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import view.coordinator.ViewCoordinator;
 import view.form.FrmMain;
 
 /**
@@ -32,35 +37,101 @@ public class MainController {
     }
 
     public void openForm() {
-        addButtons();
+        addHeaderBtns();
+        addHeaderAdmin();
         addArticles();
         frmMain.setVisible(true);
     }
-    
-    //action listeners
     
     public FrmMain getFrmMain() {
         return frmMain;
     }
 
-    private void addButtons() {
-        JPanel pnlHeaderBtns = frmMain.getPnlHeaderBtns();
+    private void addHeaderBtns() {
+        JPanel pnlHeaderWriter = frmMain.getPnlHeaderWriter();
+        int width = 200, height = 30, margin = 10;
         
-        //napravi if loginku za logovanog usera
-        //za svkao dugme dodaj actionlistenere
         
-        JButton btnLogin = new JButton("Login");
-        btnLogin.setBounds(pnlHeaderBtns.getX(), pnlHeaderBtns.getY(), 200, 30);
+        JButton btnLogin = makeButton("See All Articles", 0, width, height, margin);
+        btnLogin.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewCoordinator.getInstance().openLoginForm();
+            }
+        });
         
-        JButton btnSeeMyArticles = new JButton("See My Articles");
-        btnSeeMyArticles.setBounds(pnlHeaderBtns.getX(), pnlHeaderBtns.getY()+40, 200, 30);
+        JButton btnSeeMyArticles = makeButton("See My Articles", 1, width, height, margin);
+        btnSeeMyArticles.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                list all writers articles
+            }
+        });
         
-        JButton btnAddNewCategory = new JButton("Add New Category");
-        btnAddNewCategory.setBounds(pnlHeaderBtns.getX(), pnlHeaderBtns.getY()+80, 200, 30);
+        JButton btnAddNewArticle = makeButton("Add New Article", 2, width, height, margin);
+        btnAddNewArticle.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewCoordinator.getInstance().openAddArticleForm();
+            }
+        });
         
-        pnlHeaderBtns.add(btnLogin);
-        pnlHeaderBtns.add(btnSeeMyArticles);
-        pnlHeaderBtns.add(btnAddNewCategory);
+        pnlHeaderWriter.add(btnLogin);
+        pnlHeaderWriter.add(btnSeeMyArticles);
+        pnlHeaderWriter.add(btnAddNewArticle);
+                
+        
+    }
+    
+    private void addHeaderAdmin() {
+        
+        JPanel pnlHeaderAdmin = frmMain.getPnlHeaderAdmin();
+        int width = 200, height = 25, margin = 5;
+        
+        JButton btnSeePublished = makeButton("See Published", 0, width, height, margin);
+        btnSeePublished.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                ViewCoordinator.getInstance().openAddArticleForm();
+            }
+        });
+        
+        JButton btnSeeDueUnpublished = makeButton("See Due Unpublished", 1, width, height, margin);
+        btnSeeDueUnpublished.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                ViewCoordinator.getInstance().openAddArticleForm();
+            }
+        });
+        
+        JButton btnSeeUnpublished = makeButton("See Unpublished", 2, width, height, margin);
+        btnSeeUnpublished.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                ViewCoordinator.getInstance().openAddArticleForm();
+            }
+        });
+        
+        JButton btnAddNewCategory = makeButton("Add New Category", 3, width, height, margin);
+        btnAddNewCategory.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                ViewCoordinator.getInstance().openAddArticleForm();
+            }
+        });
+        
+        
+        pnlHeaderAdmin.add(btnSeePublished);
+        pnlHeaderAdmin.add(btnSeeDueUnpublished);
+        pnlHeaderAdmin.add(btnSeeUnpublished);
+        pnlHeaderAdmin.add(btnAddNewCategory);
+    }
+    
+    private JButton makeButton(String title, int order, int width, int height, int margin) {
+        JButton btn = new JButton(title);
+        btn.setBounds(0, order*(height+margin), width, height);
+        
+        return btn;
     }
     
     //private void addArticles
@@ -68,12 +139,12 @@ public class MainController {
     
     private void addArticles() {
         JPanel pnlAllArticles = frmMain.getPnlAllArticles();
-        pnlAllArticles.setBackground(Color.BLACK);
+//        pnlAllArticles.setBackground(Color.BLACK);
         List<Article> articles = new ArrayList<>();
         
         Article a1 = new Article();
         a1.setArticleID(1);
-        a1.setTitle("Article no 1");
+        a1.setTitle("Article no 1, check can it fit if the article is a bit longer and not short like all the others");
         a1.setBody("Sport / Celebrity");
         a1.setWriter("Dominic Thiem");
         
@@ -95,117 +166,94 @@ public class MainController {
         a4.setBody("Animals");
         a4.setWriter("Rafel Nadal");
         
-        articles.add(a1);
-        articles.add(a2);
-        articles.add(a3);
-        articles.add(a4);
+//        articles.add(a1);
+//        articles.add(a2);
+//        articles.add(a3);
+//        articles.add(a4);
         
-        int i = 0;
+//      getArticles
         
-        for (Article article : articles) {
-            JPanel pnlArticle = new JPanel(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
+        for (int i = 0; i < articles.size(); i++) {
+            JPanel pnlArticle = makeArticle(articles.get(i));
             pnlArticle.setBounds(pnlAllArticles.getX(), pnlAllArticles.getY()+(i*220), pnlAllArticles.getWidth(), 200);
-            
-            JLabel lblTitle = new JLabel(article.getTitle(), SwingConstants.CENTER);
-            JLabel lblCategory = new JLabel(article.getBody());
-            JLabel lblWriter = new JLabel(article.getWriter());
-            JButton btnRead = new JButton("Read More");
-            btnRead.setPreferredSize(new Dimension(200,35));
-            
-            JButton btnEdit = new JButton("Edit");
-            btnEdit.setPreferredSize(new Dimension(100,25));
-            JButton btnDelete = new JButton("Delete");
-            btnDelete.setPreferredSize(new Dimension(100,25));
-            
-            JButton btnPublish = new JButton("Publish");
-            btnPublish.setPreferredSize(new Dimension(100,25));
-            JButton btnUnpublish = new JButton("Unpublish");
-            btnUnpublish.setPreferredSize(new Dimension(100,25));
-            
-            
-            
-            JPanel pnlLeft = new JPanel(new GridBagLayout());
-            pnlLeft.setBackground(Color.gray);
-            JPanel pnlRight = new JPanel(new GridBagLayout());
-            pnlRight.setBackground(Color.gray);
-            
-            JPanel pnlCenter = new JPanel(new GridBagLayout());
-            pnlCenter.setBackground(Color.white);
-            
-            GridBagConstraints gbcs = new GridBagConstraints();
-            
-            
-            gbc.fill = GridBagConstraints.BOTH;
-            gbc.weightx = 1;
-            gbc.weighty = 1;
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            pnlArticle.add(pnlLeft, gbc);
-            
-            gbc.fill = GridBagConstraints.BOTH;
-            gbc.weightx = 2.5;
-            gbc.weighty = 1;
-            gbc.gridx = 1;
-            gbc.gridy = 0;
-            pnlArticle.add(pnlCenter, gbc);
-            
-            gbc.fill = GridBagConstraints.BOTH;
-            gbc.weightx = 1;
-            gbc.weighty = 1;
-            gbc.gridx = 2;
-            gbc.gridy = 0;
-            pnlArticle.add(pnlRight, gbc);
-            
-            
-            
-            gbcs.insets = new Insets(15, 0, 0, 0);
-            gbcs.gridx = 0;
-            gbcs.gridy = 0;
-            pnlLeft.add(btnEdit, gbcs);
-            gbcs.gridx = 0;
-            gbcs.gridy = 1;
-            pnlLeft.add(btnDelete, gbcs);
-            
-            gbcs.insets = new Insets(15, 0, 0, 0);
-            gbcs.gridx = 0;
-            gbcs.gridy = 0;
-            pnlRight.add(btnPublish, gbcs);
-            gbcs.gridx = 0;
-            gbcs.gridy = 1;
-            pnlRight.add(btnUnpublish, gbcs);
-            
-            gbcs.insets = new Insets(25, 0, 0, 0);
-//            gbcs.fill = GridBagConstraints.HORIZONTAL;
-            
-            gbcs.anchor = GridBagConstraints.PAGE_START;
-            gbcs.weightx = 1;
-            gbcs.gridx = 0;
-            gbcs.gridy = 0;
-            pnlCenter.add(lblCategory, gbcs);
-            gbcs.anchor = GridBagConstraints.CENTER;
-            gbcs.weightx = 4;
-            gbcs.gridx = 1;
-            gbcs.gridy = 1;
-            pnlCenter.add(lblTitle, gbcs);
-            gbcs.anchor = GridBagConstraints.CENTER;
-            gbcs.weightx = 4;
-            gbcs.gridx = 1;
-            gbcs.gridy = 2;
-            pnlCenter.add(btnRead, gbcs);
-            gbcs.anchor = GridBagConstraints.PAGE_END;
-            gbcs.weightx = 1;
-            gbcs.gridx = 2;
-            gbcs.gridy = 3;
-            pnlCenter.add(lblWriter, gbcs);
-            
-            
-            
-            
             pnlAllArticles.add(pnlArticle);
-            i+=1;
-//            System.out.println(articles.get(i));
+            
         }
         
     }
+
+    private JPanel makeArticle(Article article) {
+        JPanel pnlArticle = new JPanel(new BorderLayout());
+            
+        JLabel lblTitle = new JLabel(article.getTitle(), SwingConstants.CENTER);
+        JLabel lblCategory = new JLabel(article.getBody());
+        JLabel lblWriter = new JLabel(article.getWriter());
+        JButton btnRead = new JButton("Read More");
+        btnRead.setPreferredSize(new Dimension(200,35));
+
+        JButton btnEdit = new JButton("Edit");
+        btnEdit.setPreferredSize(new Dimension(150,25));
+        JButton btnDelete = new JButton("Delete");
+        btnDelete.setPreferredSize(new Dimension(150,25));
+        
+        JButton btnPublish = new JButton("Publish");
+        btnPublish.setPreferredSize(new Dimension(150,25));
+        JButton btnUnpublish = new JButton("Unpublish");
+        btnUnpublish.setPreferredSize(new Dimension(150,25));
+
+
+        JPanel pnlLeft = new JPanel(new GridBagLayout());
+        pnlLeft.setBackground(Color.gray);
+        pnlLeft.setPreferredSize(new Dimension(200,200));
+        
+        JPanel pnlRight = new JPanel(new GridBagLayout());
+        pnlRight.setBackground(Color.gray);
+        pnlRight.setPreferredSize(new Dimension(200,200));
+        
+        JPanel pnlCenter = new JPanel(new GridBagLayout());
+        pnlCenter.setBackground(Color.white);
+
+
+        
+        addToGBC(pnlLeft, btnEdit, 0, 0, 0);
+        addToGBC(pnlLeft, btnDelete, 0, 1, 0);
+        
+        addToGBC(pnlRight, btnPublish, 0, 0, 0);
+        addToGBC(pnlRight, btnUnpublish, 0, 1, 0);
+        
+        addToGBC(pnlCenter, lblCategory, 0, 0, -1);
+        addToGBC(pnlCenter, lblTitle, 1, 1, 0);
+        addToGBC(pnlCenter, btnRead, 1, 2, 0);
+        addToGBC(pnlCenter, lblWriter, 2, 3, 1);
+
+
+        pnlArticle.add(pnlLeft, BorderLayout.WEST);
+        pnlArticle.add(pnlCenter, BorderLayout.CENTER);
+        pnlArticle.add(pnlRight, BorderLayout.EAST);
+        
+        return pnlArticle;
+    }
+    
+    public void addToGBC(Container parent, Component child, int gridx, int gridy, int anchor) {
+        Insets insets = new Insets(25, 5, 0, 5);
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 1;
+        c.gridx = gridx;
+        c.gridy = gridy;
+        switch (anchor) {
+            case -1:
+                c.anchor = GridBagConstraints.LINE_START;
+                break;
+            case 1:
+                c.anchor = GridBagConstraints.LINE_END;
+                break;
+            default:
+                c.anchor = GridBagConstraints.CENTER;
+                break;
+        }
+        c.insets = insets;
+        
+        parent.add(child, c);
+    }
+    
 }

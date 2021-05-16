@@ -52,7 +52,8 @@ public class FrmMain extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         cbCategory = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
-        pnlHeaderBtns = new javax.swing.JPanel();
+        pnlHeaderWriter = new javax.swing.JPanel();
+        pnlHeaderAdmin = new javax.swing.JPanel();
         pnlArticles = new javax.swing.JScrollPane();
         pnlAllArticles = new javax.swing.JPanel();
 
@@ -64,14 +65,25 @@ public class FrmMain extends javax.swing.JFrame {
 
         btnSearch.setText("Search");
 
-        javax.swing.GroupLayout pnlHeaderBtnsLayout = new javax.swing.GroupLayout(pnlHeaderBtns);
-        pnlHeaderBtns.setLayout(pnlHeaderBtnsLayout);
-        pnlHeaderBtnsLayout.setHorizontalGroup(
-            pnlHeaderBtnsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlHeaderWriterLayout = new javax.swing.GroupLayout(pnlHeaderWriter);
+        pnlHeaderWriter.setLayout(pnlHeaderWriterLayout);
+        pnlHeaderWriterLayout.setHorizontalGroup(
+            pnlHeaderWriterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 250, Short.MAX_VALUE)
         );
-        pnlHeaderBtnsLayout.setVerticalGroup(
-            pnlHeaderBtnsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlHeaderWriterLayout.setVerticalGroup(
+            pnlHeaderWriterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnlHeaderAdminLayout = new javax.swing.GroupLayout(pnlHeaderAdmin);
+        pnlHeaderAdmin.setLayout(pnlHeaderAdminLayout);
+        pnlHeaderAdminLayout.setHorizontalGroup(
+            pnlHeaderAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        pnlHeaderAdminLayout.setVerticalGroup(
+            pnlHeaderAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -81,26 +93,27 @@ public class FrmMain extends javax.swing.JFrame {
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlHeaderBtns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlHeaderWriter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(529, 529, 529)
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlHeaderAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                    .addComponent(pnlHeaderBtns, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(pnlHeaderAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlHeaderWriter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlAllArticlesLayout = new javax.swing.GroupLayout(pnlAllArticles);
@@ -135,7 +148,7 @@ public class FrmMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlArticles, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
+                .addComponent(pnlArticles)
                 .addContainerGap())
         );
 
@@ -150,7 +163,8 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAllArticles;
     private javax.swing.JScrollPane pnlArticles;
     private javax.swing.JPanel pnlHeader;
-    private javax.swing.JPanel pnlHeaderBtns;
+    private javax.swing.JPanel pnlHeaderAdmin;
+    private javax.swing.JPanel pnlHeaderWriter;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
@@ -194,14 +208,22 @@ public class FrmMain extends javax.swing.JFrame {
         this.pnlHeader = pnlHeader;
     }
 
-    public javax.swing.JPanel getPnlHeaderBtns() {
-        return pnlHeaderBtns;
+    public javax.swing.JPanel getPnlHeaderWriter() {
+        return pnlHeaderWriter;
     }
 
-    public void setPnlHeaderBtns(javax.swing.JPanel pnlHeaderBtns) {
-        this.pnlHeaderBtns = pnlHeaderBtns;
+    public void setPnlHeaderWriter(javax.swing.JPanel pnlHeaderWriter) {
+        this.pnlHeaderWriter = pnlHeaderWriter;
     }
 
+    public javax.swing.JPanel getPnlHeaderAdmin() {
+        return pnlHeaderAdmin;
+    }
+
+    public void setPnlHeaderAdmin(javax.swing.JPanel pnlHeaderAdmin) {
+        this.pnlHeaderAdmin = pnlHeaderAdmin;
+    }
+    
     public javax.swing.JTextField getTxtSearch() {
         return txtSearch;
     }
@@ -209,5 +231,7 @@ public class FrmMain extends javax.swing.JFrame {
     public void setTxtSearch(javax.swing.JTextField txtSearch) {
         this.txtSearch = txtSearch;
     }
+
+
 
 }
