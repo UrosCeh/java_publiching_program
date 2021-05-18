@@ -5,7 +5,6 @@
  */
 package view.form;
 
-import domainClient.Article;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;

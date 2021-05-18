@@ -5,7 +5,9 @@
  */
 package view.controller;
 
-import domainClient.Article;
+import communication.Communication;
+import domain.classes.Clanak;
+import domain.classes.ObjavljenClanak;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,6 +20,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -140,54 +144,28 @@ public class MainController {
     private void addArticles() {
         JPanel pnlAllArticles = frmMain.getPnlAllArticles();
 //        pnlAllArticles.setBackground(Color.BLACK);
-        List<Article> articles = new ArrayList<>();
-        
-        Article a1 = new Article();
-        a1.setArticleID(1);
-        a1.setTitle("Article no 1, check can it fit if the article is a bit longer and not short like all the others");
-        a1.setBody("Sport / Celebrity");
-        a1.setWriter("Dominic Thiem");
-        
-        Article a2 = new Article();
-        a2.setArticleID(2);
-        a2.setTitle("Article no 2");
-        a2.setBody("Sport / Film");
-        a2.setWriter("Roger Federer");
-
-        Article a3 = new Article();
-        a3.setArticleID(3);
-        a3.setTitle("Article no 3");
-        a3.setBody("TV / Reality");
-        a3.setWriter("Roger Federer");
-        
-        Article a4 = new Article();
-        a4.setArticleID(4);
-        a4.setTitle("Article no 4");
-        a4.setBody("Animals");
-        a4.setWriter("Rafel Nadal");
-        
-//        articles.add(a1);
-//        articles.add(a2);
-//        articles.add(a3);
-//        articles.add(a4);
-        
-//      getArticles
-        
-        for (int i = 0; i < articles.size(); i++) {
-            JPanel pnlArticle = makeArticle(articles.get(i));
-            pnlArticle.setBounds(pnlAllArticles.getX(), pnlAllArticles.getY()+(i*220), pnlAllArticles.getWidth(), 200);
-            pnlAllArticles.add(pnlArticle);
+        List<ObjavljenClanak> articles;
+        try {
+            articles = Communication.getInstance().getAllObjavljeniClanak();
             
+            for (int i = 0; i < articles.size(); i++) {
+                JPanel pnlArticle = makeArticle(articles.get(i));
+                pnlArticle.setBounds(pnlAllArticles.getX(), pnlAllArticles.getY()+(i*220), pnlAllArticles.getWidth(), 200);
+                pnlAllArticles.add(pnlArticle);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+ 
     }
 
-    private JPanel makeArticle(Article article) {
+    private JPanel makeArticle(Clanak article) {
         JPanel pnlArticle = new JPanel(new BorderLayout());
             
-        JLabel lblTitle = new JLabel(article.getTitle(), SwingConstants.CENTER);
-        JLabel lblCategory = new JLabel(article.getBody());
-        JLabel lblWriter = new JLabel(article.getWriter());
+        JLabel lblTitle = new JLabel(article.getNaslov(), SwingConstants.CENTER);
+        JLabel lblCategory = new JLabel(article.getTekst());
+        JLabel lblWriter = new JLabel(article.getAutor().toString());
         JButton btnRead = new JButton("Read More");
         btnRead.setPreferredSize(new Dimension(200,35));
 

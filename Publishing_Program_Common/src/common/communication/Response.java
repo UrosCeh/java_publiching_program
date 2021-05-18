@@ -12,23 +12,23 @@ import java.io.Serializable;
  * @author hatch
  */
 public class Response implements Serializable {
-    String result;
-    Object resultObject;
+    Object result;
+    String resultString;
     Exception exception;
 
     public Response() {
     }
 
-    public Response(String result, Exception exception) {
+    public Response(Object result, Exception exception) {
         this.result = result;
         this.exception = exception;
     }
 
-    public String getResult() {
+    public Object getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Object result) {
         this.result = result;
     }
 
@@ -40,11 +40,11 @@ public class Response implements Serializable {
         this.exception = exception;
     }
 
-    public Object getResultObject() {
-        return resultObject;
+    public String getResultString() {
+        return resultString;
     }
 
-    public void setResultObject(Object resultObject) {
-        this.resultObject = resultObject;
+    public void setResultString(String resultString) {
+        this.resultString = resultString;
     }
 }

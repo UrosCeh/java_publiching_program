@@ -5,6 +5,11 @@
  */
 package controller;
 
+import domain.classes.ObjavljenClanak;
+import java.util.ArrayList;
+import operation.GenericOperation;
+import operation.objavljenClanak.getAllObjavljenClanak;
+
 
 /**
  *
@@ -21,5 +26,11 @@ public class Controller {
             instance = new Controller();
         }
         return instance;
+    }
+    
+    public ArrayList<ObjavljenClanak> getAllObjavljeniClanak() throws Exception {
+        GenericOperation o = new getAllObjavljenClanak();
+        o.execute(new ObjavljenClanak());
+        return ((getAllObjavljenClanak) o).getResult();
     }
 }

@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package common.communication;
+package main;
 
-import java.io.Serializable;
+import view.controller.ServerViewController;
 
 /**
  *
  * @author hatch
  */
-public enum Operation implements Serializable {
-    // names of all the operations program will do
-    GET_ALL_OBJAVLJENI_CLANAK,
+public class MainServer {
+    public static void main(String[] args) {
+        ServerViewController.getInstance().startForm();
+    }
 }

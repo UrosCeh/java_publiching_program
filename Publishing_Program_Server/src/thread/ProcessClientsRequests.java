@@ -9,7 +9,10 @@ import common.communication.Receiver;
 import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
+import controller.Controller;
+import domain.classes.ObjavljenClanak;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +41,9 @@ public class ProcessClientsRequests extends Thread {
                 Response response = new Response();
                 try {
                     switch (request.getOperation()) {
-                        //cases
+                        case GET_ALL_OBJAVLJENI_CLANAK:
+                            ArrayList<ObjavljenClanak> list = Controller.getInstance().getAllObjavljeniClanak();
+                            response.setResult(list);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

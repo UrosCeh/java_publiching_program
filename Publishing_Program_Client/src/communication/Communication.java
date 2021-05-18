@@ -5,9 +5,14 @@
  */
 package communication;
 
+import common.communication.Operation;
 import common.communication.Receiver;
+import common.communication.Request;
+import common.communication.Response;
 import common.communication.Sender;
+import domain.classes.ObjavljenClanak;
 import java.net.Socket;
+import java.util.List;
 
 /**
  *
@@ -33,6 +38,17 @@ public class Communication {
         return instance;
     }
     
+    public List<ObjavljenClanak> getAllObjavljeniClanak() throws Exception {
+        Request request = new Request(Operation.GET_ALL_OBJAVLJENI_CLANAK, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException() == null) {
+            return (List<ObjavljenClanak>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
     //operations
         //Request r = new Request(Operation.IME, prop/null)
         //sender.send(r)
