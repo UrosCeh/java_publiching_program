@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -56,6 +55,8 @@ public class ObjavljenClanak extends Clanak {
         this.kategorija = kategorija;
     }
 
+
+    //////////////////////////////////////////////////////////////////////////
     
     
     @Override

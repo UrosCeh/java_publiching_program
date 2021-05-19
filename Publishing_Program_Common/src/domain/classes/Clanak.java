@@ -83,6 +83,11 @@ public abstract class Clanak implements GenericEntity {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return naslov;
+    }
     
     
     

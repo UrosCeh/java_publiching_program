@@ -6,6 +6,7 @@
 package operation.objavljenClanak;
 
 import domain.classes.Autor;
+import domain.classes.Kategorija;
 import domain.classes.ObjavljenClanak;
 import java.util.ArrayList;
 import operation.GenericOperation;
@@ -26,9 +27,12 @@ public class getAllObjavljenClanak extends GenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.getAll(new ObjavljenClanak(), null, "datumObjavljivanja", null);
+//        repo.getAll(new ObjavljenClanak(), null, null, null);
+        result = repo.getAll(new ObjavljenClanak(), null, null, null);
+        if (result == null) System.out.println("nema nista jebiga");
         for (ObjavljenClanak objavljenClanak : result) {
             objavljenClanak.setAutor((Autor) repo.get(objavljenClanak.getAutor(), null, null));
+            objavljenClanak.setKategorija((Kategorija) repo.get(objavljenClanak.getKategorija(), null, null));
         }
         
     }

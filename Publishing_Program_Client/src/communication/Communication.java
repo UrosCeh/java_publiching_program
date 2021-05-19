@@ -10,8 +10,13 @@ import common.communication.Receiver;
 import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
+import domain.classes.Autor;
+import domain.classes.Kategorija;
 import domain.classes.ObjavljenClanak;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +31,7 @@ public class Communication {
     private static Communication instance;
     
     private Communication() throws Exception{
-        socket=new Socket("127.0.0.1", 9000);
+        socket=new Socket("localhost", 9000);
         sender=new Sender(socket);
         receiver=new Receiver(socket);
     }
@@ -42,6 +47,23 @@ public class Communication {
         Request request = new Request(Operation.GET_ALL_OBJAVLJENI_CLANAK, null);
         sender.send(request);
         Response response = (Response) receiver.receive();
+        
+//        Autor a1 = new Autor(1, "pera", "peric", "peric123", "peric123", true, true);
+//        Autor a2 = new Autor(2, "zika", "zikic", "zikic123", "zikic123", true, false);
+//        Autor a3 = new Autor(3, "mika", "mikic", "mikic123", "mikic123", false, true);
+//        
+//        Kategorija k1 = new Kategorija(1, "zivot");
+//        Kategorija k2 = new Kategorija(2, "sport");
+//        
+//        ObjavljenClanak oc1 = new ObjavljenClanak(1, "naslov 1", "tekst 1", a1, LocalDateTime.of(2021, Month.MARCH, 3, 15, 0), 123, k1);
+//        ObjavljenClanak oc2 = new ObjavljenClanak(2, "naslov 2", "tekst 2", a2, LocalDateTime.of(2021, Month.MARCH, 3, 15, 0), 123, k2);
+//        
+//        List<ObjavljenClanak> clanci = new ArrayList<>();
+//        clanci.add(oc1);
+//        clanci.add(oc2);
+//        return clanci;
+
+
         if(response.getException() == null) {
             return (List<ObjavljenClanak>) response.getResult();
         }

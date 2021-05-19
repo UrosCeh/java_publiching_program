@@ -5,6 +5,7 @@
  */
 package repository.db.impl;
 
+import domain.classes.ObjavljenClanak;
 import domain.generic.GenericEntity;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,30 +24,46 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     public ArrayList<GenericEntity> getAll(GenericEntity g, String where, String orderby, String innerJoin) throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM ");
-
-        if (innerJoin != null) {
-            sb.append(innerJoin);
-        } else {
-            sb.append(g.getTableName());
-        }
-
-        if (where != null) {
-            sb.append(" WHERE ")
-                    .append(where);
-        }
-        if (orderby != null) {
-            sb.append(" ORDER BY ")
-                    .append(orderby);
-        }
-
+        sb.append(g.getTableName());
+        
         String query = sb.toString();
-        Statement s = connect().createStatement();
-        ResultSet rs = s.executeQuery(query);
-
+        System.out.println(query);
+        Connection connection = DbConnectionFactory.getInstance().getConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
-        s.close();
+        
+        for (GenericEntity genericEntity : lista) {
+            System.out.println(((ObjavljenClanak) genericEntity).toString());
+        }
+        
+        stmt.close();
         rs.close();
         return lista;
+//        if (innerJoin != null) {
+//            sb.append(innerJoin);
+//        } else {
+//            sb.append(g.getTableName());
+//        }
+//
+//        if (where != null) {
+//            sb.append(" WHERE ")
+//                    .append(where);
+//        }
+//        if (orderby != null) {
+//            sb.append(" ORDER BY ")
+//                    .append(orderby);
+//        }
+//
+//        String query = sb.toString();
+//        Statement s = connect().createStatement();
+//        ResultSet rs = s.executeQuery(query);
+//
+//        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
+//        s.close();
+//        rs.close();
+//        return lista;
     }
 
     @Override

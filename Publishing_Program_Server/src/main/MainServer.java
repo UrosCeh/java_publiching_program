@@ -5,6 +5,7 @@
  */
 package main;
 
+import server.Server;
 import view.controller.ServerViewController;
 
 /**
@@ -13,6 +14,6 @@ import view.controller.ServerViewController;
  */
 public class MainServer {
     public static void main(String[] args) {
-        ServerViewController.getInstance().startForm();
+        new Server().startServer();
     }
 }

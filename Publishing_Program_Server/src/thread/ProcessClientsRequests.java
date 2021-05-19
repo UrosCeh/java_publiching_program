@@ -42,6 +42,7 @@ public class ProcessClientsRequests extends Thread {
                 try {
                     switch (request.getOperation()) {
                         case GET_ALL_OBJAVLJENI_CLANAK:
+                            System.out.println("Dosao u pcr");
                             ArrayList<ObjavljenClanak> list = Controller.getInstance().getAllObjavljeniClanak();
                             response.setResult(list);
                     }

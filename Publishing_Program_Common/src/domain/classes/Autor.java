@@ -155,7 +155,7 @@ public class Autor implements GenericEntity {
 
     @Override
     public String whereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "autorId = " + autorId;
     }
 
     @Override

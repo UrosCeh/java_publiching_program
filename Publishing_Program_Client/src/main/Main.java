@@ -12,6 +12,7 @@ import view.coordinator.ViewCoordinator;
  * @author hatch
  */
 public class Main {
+
     public static void main(String[] args) {
         ViewCoordinator.getInstance().openMainForm();
     }
