@@ -45,25 +45,48 @@ public class MainController {
     }
 
     public void openForm() {
-        setUser();
-        addHeaderBtns();
-        addHeaderAdmin();
-        addArticles();
-        addActionListeners();
+        setupComponents();
         frmMain.setVisible(true);
     }
     
     public FrmMain getFrmMain() {
         return frmMain;
     }
+    
+    private void setupComponents() {
+        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
+        addActionListeners(autor);
+        if (autor == null) {
+            autor = new Autor();
+            autor.setIme("Gost");
+            autor.setPrezime("");
+        }
+        
+        if (autor.isPisac()) {
+            addHeaderBtns();
+        }
+        if (autor.isAdmin()) {
+            addHeaderAdmin();
+        }
+        
+        
+        setUser(autor);
+        addArticles();
+    }
 
-    private void addActionListeners() {
+    private void addActionListeners(Autor autor) {
+        if (autor != null) { 
+            frmMain.getBtnLogin().setText("Logout");
+        }
+        else{
+            frmMain.getBtnLogin().setText("Login");
+        }
+
         frmMain.getBtnLogin().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 ViewCoordinator.getInstance().openLoginForm();
             }
-            
         });
     }   
     
@@ -248,12 +271,8 @@ public class MainController {
         parent.add(child, c);
     }
 
-    private void setUser() {
-        System.out.println("pozvana");
-        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
-        if (autor != null ) {
-            frmMain.getLblUser().setText(autor.toString());
-        }
+    private void setUser(Autor autor) {
+        frmMain.getLblUser().setText(autor.toString());
     }
 
     public void repaint() {
