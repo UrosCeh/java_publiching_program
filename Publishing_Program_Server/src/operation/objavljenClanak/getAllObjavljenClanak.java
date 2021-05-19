@@ -27,7 +27,6 @@ public class getAllObjavljenClanak extends GenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-//        repo.getAll(new ObjavljenClanak(), null, null, null);
         result = repo.getAll(new ObjavljenClanak(), null, null, null);
         if (result == null) System.out.println("nema nista jebiga");
         for (ObjavljenClanak objavljenClanak : result) {

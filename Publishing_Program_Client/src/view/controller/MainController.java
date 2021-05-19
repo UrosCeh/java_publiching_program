@@ -6,6 +6,7 @@
 package view.controller;
 
 import communication.Communication;
+import domain.classes.Autor;
 import domain.classes.Clanak;
 import domain.classes.ObjavljenClanak;
 import java.awt.BorderLayout;
@@ -26,7 +27,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import view.constants.Constants;
 import view.coordinator.ViewCoordinator;
+import view.form.FrmLogin;
 import view.form.FrmMain;
 
 /**
@@ -41,9 +45,11 @@ public class MainController {
     }
 
     public void openForm() {
+        setUser();
         addHeaderBtns();
         addHeaderAdmin();
         addArticles();
+        addActionListeners();
         frmMain.setVisible(true);
     }
     
@@ -51,6 +57,16 @@ public class MainController {
         return frmMain;
     }
 
+    private void addActionListeners() {
+        frmMain.getBtnLogin().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openLoginForm();
+            }
+            
+        });
+    }   
+    
     private void addHeaderBtns() {
         JPanel pnlHeaderWriter = frmMain.getPnlHeaderWriter();
         int width = 200, height = 50, margin = 10, order = 0;
@@ -138,9 +154,6 @@ public class MainController {
         return btn;
     }
     
-    //private void add btn action listeners home, login, search
-    //private void fillCbCategories
-    
     private void addArticles() {
         JPanel pnlAllArticles = frmMain.getPnlAllArticles();
 //        pnlAllArticles.setBackground(Color.BLACK);
@@ -160,12 +173,13 @@ public class MainController {
  
     }
 
-    private JPanel makeArticle(Clanak article) {
+    private JPanel makeArticle(ObjavljenClanak article) {
         JPanel pnlArticle = new JPanel(new BorderLayout());
             
         JLabel lblTitle = new JLabel(article.getNaslov(), SwingConstants.CENTER);
-        JLabel lblCategory = new JLabel(article.getTekst());
-        JLabel lblWriter = new JLabel(article.getAutor().toString());
+        JLabel lblBody = new JLabel(article.getTekst());
+//        JLabel lblCategory = new JLabel(article.getKategorija().getNaziv());
+        JLabel lblWriter = new JLabel(article.getAutor().toString() + " " + article.getKategorija().getNaziv());
         JButton btnRead = new JButton("Read More");
         btnRead.setPreferredSize(new Dimension(200,35));
 
@@ -199,7 +213,7 @@ public class MainController {
         addToGBC(pnlRight, btnPublish, 0, 0, 0);
         addToGBC(pnlRight, btnUnpublish, 0, 1, 0);
         
-        addToGBC(pnlCenter, lblCategory, 0, 0, -1);
+        addToGBC(pnlCenter, lblBody, 0, 0, -1);
         addToGBC(pnlCenter, lblTitle, 1, 1, 0);
         addToGBC(pnlCenter, btnRead, 1, 2, 0);
         addToGBC(pnlCenter, lblWriter, 2, 3, 1);
@@ -232,6 +246,18 @@ public class MainController {
         c.insets = insets;
         
         parent.add(child, c);
+    }
+
+    private void setUser() {
+        System.out.println("pozvana");
+        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
+        if (autor != null ) {
+            frmMain.getLblUser().setText(autor.toString());
+        }
+    }
+
+    public void repaint() {
+        frmMain.dispose();
     }
     
 }

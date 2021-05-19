@@ -103,7 +103,7 @@ public class Kategorija implements GenericEntity {
         while (rs.next()) {
             int id = rs.getInt("kategorijaId");
             String title = rs.getString("naziv");
-            Kategorija kategorija = new Kategorija(kategorijaId, naziv);
+            Kategorija kategorija = new Kategorija(id, title);
             kategorije.add(kategorija);
         }
         return new ArrayList<>(kategorije);

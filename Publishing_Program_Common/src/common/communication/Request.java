@@ -5,6 +5,7 @@
  */
 package common.communication;
 
+import domain.classes.Autor;
 import java.io.Serializable;
 
 /**
@@ -13,14 +14,14 @@ import java.io.Serializable;
  */
 public class Request implements Serializable {
     Operation operation;
-    String arguments;
+//    String arguments;
     Object object;
     public Request() {
     }
 
-    public Request(Operation operation, String arguments) {
+    public Request(Operation operation, Object object) {
         this.operation = operation;
-        this.arguments = arguments;
+        this.object = object;
     }
 
     public Operation getOperation() {
@@ -30,14 +31,14 @@ public class Request implements Serializable {
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
-
-    public String getArguments() {
-        return arguments;
-    }
-
-    public void setArguments(String arguments) {
-        this.arguments = arguments;
-    }
+//
+//    public String getArguments() {
+//        return arguments;
+//    }
+//
+//    public void setArguments(String arguments) {
+//        this.arguments = arguments;
+//    }
 
     public void setObject(Object object) {
         this.object = object;

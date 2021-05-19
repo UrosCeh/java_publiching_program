@@ -89,6 +89,9 @@ public abstract class Clanak implements GenericEntity {
         return naslov;
     }
     
+    //////////////////////////////////////////////////////////////////////////
+
+    
     
     
 }

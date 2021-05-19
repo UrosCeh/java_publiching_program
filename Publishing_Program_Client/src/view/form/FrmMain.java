@@ -57,6 +57,7 @@ public class FrmMain extends javax.swing.JFrame {
         pnlAllArticles = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
+        lblUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +137,10 @@ public class FrmMain extends javax.swing.JFrame {
 
         btnHome.setText("Home Page");
 
+        lblUser.setFont(new java.awt.Font("DejaVu Sans", 0, 16)); // NOI18N
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblUser.setText("Gost");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,6 +158,8 @@ public class FrmMain extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -162,7 +169,8 @@ public class FrmMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -180,6 +188,7 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbCategory;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnlAllArticles;
     private javax.swing.JScrollPane pnlArticles;
     private javax.swing.JPanel pnlHeader;
@@ -266,6 +275,14 @@ public class FrmMain extends javax.swing.JFrame {
 
     public void setBtnLogin(javax.swing.JButton btnLogin) {
         this.btnLogin = btnLogin;
+    }
+
+    public javax.swing.JLabel getLblUser() {
+        return lblUser;
+    }
+
+    public void setLblUser(javax.swing.JLabel lblUser) {
+        this.lblUser = lblUser;
     }
 
 

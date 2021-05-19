@@ -5,9 +5,11 @@
  */
 package controller;
 
+import domain.classes.Autor;
 import domain.classes.ObjavljenClanak;
 import java.util.ArrayList;
 import operation.GenericOperation;
+import operation.autor.LoginAutor;
 import operation.objavljenClanak.getAllObjavljenClanak;
 
 
@@ -32,5 +34,11 @@ public class Controller {
         GenericOperation o = new getAllObjavljenClanak();
         o.execute(new ObjavljenClanak());
         return ((getAllObjavljenClanak) o).getResult();
+    }
+
+    public Autor login(Autor a) throws Exception {
+        GenericOperation o = new LoginAutor();
+        o.execute(a);
+        return ((LoginAutor) o).getResult();
     }
 }

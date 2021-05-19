@@ -10,6 +10,7 @@ import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
+import domain.classes.Autor;
 import domain.classes.ObjavljenClanak;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -42,9 +43,14 @@ public class ProcessClientsRequests extends Thread {
                 try {
                     switch (request.getOperation()) {
                         case GET_ALL_OBJAVLJENI_CLANAK:
-                            System.out.println("Dosao u pcr");
                             ArrayList<ObjavljenClanak> list = Controller.getInstance().getAllObjavljeniClanak();
                             response.setResult(list);
+                            break;
+                        case LOGIN:
+                            Autor a = (Autor) request.getObject();
+                            Autor autor = Controller.getInstance().login(a);
+                            response.setResult(autor);
+                            break;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

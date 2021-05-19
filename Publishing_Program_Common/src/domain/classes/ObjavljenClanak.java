@@ -89,7 +89,7 @@ public class ObjavljenClanak extends Clanak {
 
     @Override
     public String whereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "objavljenClanakID = " + super.getClanakId();
     }
 
     @Override

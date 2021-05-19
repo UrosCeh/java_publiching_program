@@ -43,6 +43,11 @@ public class ViewCoordinator {
         mainController.openForm();
     }
     
+    public void repaintMainForm() {
+        mainController.repaint();
+        mainController.openForm();
+    }
+    
     public void openReadArticleForm() {
         ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
         articleController.openForm(FrmMode.ARTICLE_READ);

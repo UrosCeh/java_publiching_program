@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -66,9 +65,9 @@ public class NeobjavljenClanak extends Clanak {
 
     @Override
     public String whereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "neobjavljenClanakID = " + super.getClanakId();
     }
-
+    
     @Override
     public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
         ArrayList<NeobjavljenClanak> clanci = new ArrayList<>();

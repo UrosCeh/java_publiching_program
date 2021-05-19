@@ -167,9 +167,9 @@ public class Autor implements GenericEntity {
             String lastname = rs.getString("prezime");
             String username = rs.getString("korisnickoIme");
             String password = rs.getString("lozinka");
-            boolean admin = rs.getBoolean("admin");
-            boolean pisac = rs.getBoolean("pisac");
-            Autor autor = new Autor(autorId, ime, prezime, korisnickoIme, lozinka, admin, pisac);
+            boolean administrator = rs.getBoolean("admin");
+            boolean writer = rs.getBoolean("pisac");
+            Autor autor = new Autor(id, firstname, lastname, username, password, administrator, writer);
             autori.add(autor);
         }
         return new ArrayList<>(autori);

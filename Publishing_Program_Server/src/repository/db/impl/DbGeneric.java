@@ -26,11 +26,11 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         sb.append("SELECT * FROM ");
         sb.append(g.getTableName());
         
-        String query = sb.toString();
-        System.out.println(query);
+        String sql = sb.toString();
+        System.out.println(sql);
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+        ResultSet rs = stmt.executeQuery(sql);
         
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         
@@ -181,34 +181,55 @@ public class DbGeneric implements DbRepository<GenericEntity> {
 
     @Override
     public GenericEntity get(GenericEntity g, String innerJoin, String where) throws Exception {
-        //SELECT * FROM user where userID="+id
-        Connection connection = DbConnectionFactory.getInstance().getConnection();
+        //SELECT * FROM >>table<< where ID="+id
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM ");
-
-        if (innerJoin != null) {
-            sb.append(innerJoin);
-        } else {
-            sb.append(g.getTableName());
-        }
-        
+        sb.append(g.getTableName());
         sb.append(" WHERE ");
-        
-        if (where != null) {
-            sb.append(where);
-        } else {
+        if (where == null) {
             sb.append(g.whereCondition());
         }
-
-        String query = sb.toString();
-        System.out.println(query);
-        Statement s = connection.createStatement();
-        ResultSet rs = s.executeQuery(query);
-
+        else {
+            sb.append(where);
+        }
+        
+        String sql = sb.toString();
+        System.out.println(sql);
+        Connection connection = DbConnectionFactory.getInstance().getConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
-        s.close();
+        stmt.close();
         rs.close();
-        if(lista.size()==0) return null;
+        if(lista.isEmpty()) return null;
+        
+        System.out.println(lista.get(0));
         return lista.get(0);
+
+//        if (innerJoin != null) {
+//            sb.append(innerJoin);
+//        } else {
+//            sb.append(g.getTableName());
+//        }
+//        
+//        sb.append(" WHERE ");
+//        
+//        if (where != null) {
+//            sb.append(where);
+//        } else {
+//            sb.append(g.whereCondition());
+//        }
+//
+//        String query = sb.toString();
+//        System.out.println(query);
+//        Statement s = connection.createStatement();
+//        ResultSet rs = s.executeQuery(query);
+//
+//        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
+//        s.close();
+//        rs.close();
+//        if(lista.size()==0) return null;
+//        return lista.get(0);
     }
 }

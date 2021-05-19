@@ -14,4 +14,5 @@ import java.io.Serializable;
 public enum Operation implements Serializable {
     // names of all the operations program will do
     GET_ALL_OBJAVLJENI_CLANAK,
+    LOGIN,
 }

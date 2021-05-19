@@ -48,6 +48,13 @@ public class Communication {
         sender.send(request);
         Response response = (Response) receiver.receive();
         
+        if(response.getException() == null) {
+            return (List<ObjavljenClanak>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+        
 //        Autor a1 = new Autor(1, "pera", "peric", "peric123", "peric123", true, true);
 //        Autor a2 = new Autor(2, "zika", "zikic", "zikic123", "zikic123", true, false);
 //        Autor a3 = new Autor(3, "mika", "mikic", "mikic123", "mikic123", false, true);
@@ -63,16 +70,38 @@ public class Communication {
 //        clanci.add(oc2);
 //        return clanci;
 
-
-        if(response.getException() == null) {
-            return (List<ObjavljenClanak>) response.getResult();
-        }
-        else {
-            throw response.getException();
-        }
+       
     }
     //operations
         //Request r = new Request(Operation.IME, prop/null)
         //sender.send(r)
         //Response response = (Response) receiver.receive();
+
+    public Autor login(String username, String password) throws Exception {
+        Autor a = new Autor();
+        a.setKorisnickoIme(username);
+        a.setLozinka(password);
+        
+        Request request = new Request(Operation.LOGIN, a);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (Autor) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+//       User user=new User();
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        Request request=new Request(Operation.LOGIN, user);
+//        sender.send(request);
+//        Response response=(Response)receiver.receive();
+//        if(response.getException()==null){
+//            return (User)response.getResult();
+//        }else{
+//            throw response.getException();
+//        }
+    }
 }
