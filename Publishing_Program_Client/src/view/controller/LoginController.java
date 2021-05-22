@@ -61,6 +61,9 @@ public class LoginController {
                         if (!validate(username, password)) {
                             frmLogin.getLblError().setText("Oba polja moraju biti popunjena!");
                         }
+                        else {
+                            frmLogin.getLblError().setText("");
+                        }
 
                         Autor autor = Communication.getInstance().login(username, password);
 
@@ -70,15 +73,12 @@ public class LoginController {
                         ViewCoordinator.getInstance().addParam(Constants.CURRENT_AUTOR, autor);
                         ViewCoordinator.getInstance().repaintMainForm();
                     } catch (Exception ex) {
-                        frmLogin.getLblError().setText(ex.getMessage());
+                        JOptionPane.showMessageDialog(frmLogin, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
                     }
                 }
 
                 private boolean validate(String username, String password) {
-                    if (username.isEmpty() || password.isEmpty()){
-                        return false;
-                    }
-                    return true;
+                    return !(username.isEmpty() || password.isEmpty());
                 }
             });
         }

@@ -111,62 +111,32 @@ public class FrmLogin extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JButton getBtnLogin() {
-        return btnLogin;
-    }
-
-    public void setBtnLogin(javax.swing.JButton btnLogin) {
-        this.btnLogin = btnLogin;
-    }
-    
     public javax.swing.JButton getBtnCancel() {
         return btnCancel;
     }
 
-    public void setBtnCancel(javax.swing.JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
-    
-    public javax.swing.JPasswordField getTxtPassword() {
-        return txtPassword;
-    }
-
-    public void setTxtPassword(javax.swing.JPasswordField txtPassword) {
-        this.txtPassword = txtPassword;
-    }
-
-    public javax.swing.JTextField getTxtUsername() {
-        return txtUsername;
-    }
-
-    public void setTxtUsername(javax.swing.JTextField txtUsername) {
-        this.txtUsername = txtUsername;
+    public javax.swing.JButton getBtnLogin() {
+        return btnLogin;
     }
 
     public javax.swing.JLabel getLblError() {
         return lblError;
     }
 
-    public void setLblError(javax.swing.JLabel lblError) {
-        this.lblError = lblError;
-    }
-
     public javax.swing.JLabel getLblPassword() {
         return lblPassword;
-    }
-
-    public void setLblPassword(javax.swing.JLabel lblPassword) {
-        this.lblPassword = lblPassword;
     }
 
     public javax.swing.JLabel getLblUsername() {
         return lblUsername;
     }
 
-    public void setLblUsername(javax.swing.JLabel lblUsername) {
-        this.lblUsername = lblUsername;
+    public javax.swing.JPasswordField getTxtPassword() {
+        return txtPassword;
     }
-    
-    
+
+    public javax.swing.JTextField getTxtUsername() {
+        return txtUsername;
+    }
 
 }

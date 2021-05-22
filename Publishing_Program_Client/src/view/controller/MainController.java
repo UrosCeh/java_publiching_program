@@ -19,6 +19,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -199,47 +200,58 @@ public class MainController {
     private JPanel makeArticle(ObjavljenClanak article) {
         JPanel pnlArticle = new JPanel(new BorderLayout());
             
-        JLabel lblTitle = new JLabel(article.getNaslov(), SwingConstants.CENTER);
-        JLabel lblBody = new JLabel(article.getTekst());
-//        JLabel lblCategory = new JLabel(article.getKategorija().getNaziv());
-        JLabel lblWriter = new JLabel(article.getAutor().toString() + " " + article.getKategorija().getNaziv());
+        JLabel lblDate = new JLabel(article.getStringDatumIVreme(), SwingConstants.LEADING);
+
+        JLabel lblCategory = new JLabel(article.getKategorija().getNaziv());
+//        JLabel lblTitle = new JLabel("Ovo je neki naslov koji treba da bude dugacak da bih video kako radi jebani swing", SwingConstants.CENTER);
+        JLabel lblTitle = new JLabel(article.getNaslov());
         JButton btnRead = new JButton("Read More");
-        btnRead.setPreferredSize(new Dimension(200,35));
-
-        JButton btnEdit = new JButton("Edit");
-        btnEdit.setPreferredSize(new Dimension(150,25));
-        JButton btnDelete = new JButton("Delete");
-        btnDelete.setPreferredSize(new Dimension(150,25));
+            btnRead.setPreferredSize(new Dimension(200,35));    
+        JPanel pnlMiddle = new JPanel(new GridBagLayout());
+        pnlMiddle.setBackground(Color.white);
         
-        JButton btnPublish = new JButton("Publish");
-        btnPublish.setPreferredSize(new Dimension(150,25));
-        JButton btnUnpublish = new JButton("Unpublish");
-        btnUnpublish.setPreferredSize(new Dimension(150,25));
+        JLabel lblWriter = new JLabel(article.getAutor().toString(), SwingConstants.TRAILING);
 
 
-        JPanel pnlLeft = new JPanel(new GridBagLayout());
+
+        JPanel pnlLeft = new JPanel(new BorderLayout());
         pnlLeft.setBackground(Color.gray);
         pnlLeft.setPreferredSize(new Dimension(200,200));
         
-        JPanel pnlRight = new JPanel(new GridBagLayout());
+        JPanel pnlRight = new JPanel(new BorderLayout());
         pnlRight.setBackground(Color.gray);
         pnlRight.setPreferredSize(new Dimension(200,200));
         
-        JPanel pnlCenter = new JPanel(new GridBagLayout());
+        JPanel pnlCenter = new JPanel(new BorderLayout());
         pnlCenter.setBackground(Color.white);
 
+        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
+        if (autor != null) {
+            if (autor.isPisac() && article.getAutor().equals(autor)) {
+                System.out.println("pisac i njegov artikal " + article.toString());
+                JButton btnEdit = new JButton("Edit/Delete");
+                btnEdit.setPreferredSize(new Dimension(150,25));
+                pnlLeft.add(btnEdit, BorderLayout.CENTER);
+            }
 
+            if (autor.isAdmin()) {
+                System.out.println("admin je " + article.toString());
+                JButton btnPublish = new JButton("Publish/Unpublish");
+                btnPublish.setPreferredSize(new Dimension(150,25));
+                pnlRight.add(btnPublish, BorderLayout.CENTER);
+            }
+        }
+        else {
+            pnlLeft.removeAll();
+            pnlRight.removeAll();
+        }
+        addToGBC(pnlMiddle, lblCategory, 0, 0, -1, 5);
+        addToGBC(pnlMiddle, lblTitle, 0, 1, 0, 30);
+        addToGBC(pnlMiddle, btnRead, 0, 2, 0, 25);
         
-        addToGBC(pnlLeft, btnEdit, 0, 0, 0);
-        addToGBC(pnlLeft, btnDelete, 0, 1, 0);
-        
-        addToGBC(pnlRight, btnPublish, 0, 0, 0);
-        addToGBC(pnlRight, btnUnpublish, 0, 1, 0);
-        
-        addToGBC(pnlCenter, lblBody, 0, 0, -1);
-        addToGBC(pnlCenter, lblTitle, 1, 1, 0);
-        addToGBC(pnlCenter, btnRead, 1, 2, 0);
-        addToGBC(pnlCenter, lblWriter, 2, 3, 1);
+        pnlCenter.add(lblDate, BorderLayout.NORTH);
+        pnlCenter.add(pnlMiddle, BorderLayout.CENTER);
+        pnlCenter.add(lblWriter, BorderLayout.SOUTH);
 
 
         pnlArticle.add(pnlLeft, BorderLayout.WEST);
@@ -249,8 +261,8 @@ public class MainController {
         return pnlArticle;
     }
     
-    public void addToGBC(Container parent, Component child, int gridx, int gridy, int anchor) {
-        Insets insets = new Insets(25, 5, 0, 5);
+    public void addToGBC(Container parent, Component child, int gridx, int gridy, int anchor, int topMargin) {
+        Insets insets = new Insets(topMargin, 5, 0, 5);
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 1;
         c.gridx = gridx;
@@ -277,6 +289,7 @@ public class MainController {
 
     public void repaint() {
         frmMain.dispose();
+        this.openForm();
     }
     
 }

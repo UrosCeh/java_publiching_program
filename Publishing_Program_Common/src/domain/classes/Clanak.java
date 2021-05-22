@@ -17,12 +17,14 @@ public abstract class Clanak implements GenericEntity {
     private String naslov;
     private String tekst;
     private Autor autor;
+    private Kategorija kategorija;
 
-    public Clanak(int clanakId, String naslov, String tekst, Autor autor) {
+    public Clanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija) {
         this.clanakId = clanakId;
         this.naslov = naslov;
         this.tekst = tekst;
         this.autor = autor;
+        this.kategorija = kategorija;
     }
     
     public Clanak() {
@@ -58,6 +60,14 @@ public abstract class Clanak implements GenericEntity {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
+    }
+
+    public Kategorija getKategorija() {
+        return kategorija;
+    }
+
+    public void setKategorija(Kategorija kategorija) {
+        this.kategorija = kategorija;
     }
 
     @Override

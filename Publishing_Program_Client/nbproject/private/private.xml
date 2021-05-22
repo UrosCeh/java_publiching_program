@@ -4,7 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/hatch/Documents/PS/Publishing_Program_Client/src/view/controller/MainController.java</file>
-            <file>file:/home/hatch/Documents/PS/Publishing_Program_Client/src/communication/Communication.java</file>
+            <file>file:/home/hatch/Documents/PS/Publishing_Program_Client/src/view/form/FrmMain.java</file>
+            <file>file:/home/hatch/Documents/PS/Publishing_Program_Client/src/view/form/FrmArticle.java</file>
+            <file>file:/home/hatch/Documents/PS/Publishing_Program_Client/src/view/form/util/FrmMode.java</file>
+            <file>file:/home/hatch/Documents/PS/Publishing_Program_Client/src/view/controller/ArticleController.java</file>
         </group>
     </open-files>
 </project-private>

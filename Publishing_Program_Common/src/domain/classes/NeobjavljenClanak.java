@@ -19,22 +19,28 @@ public class NeobjavljenClanak extends Clanak {
 
     private LocalDateTime rokZaObjavu;
 
-    public NeobjavljenClanak(int clanakId, String naslov, String tekst, Autor autor, LocalDateTime rokZaObjavu) {
-        super(clanakId, naslov, tekst, autor);
+    public NeobjavljenClanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime rokZaObjavu) {
+        super(clanakId, naslov, tekst, autor, kategorija);
         this.rokZaObjavu = rokZaObjavu;
     }
 
     public NeobjavljenClanak() {
     }
     
-    public LocalDateTime getRokZaObjavu() {
+    public LocalDateTime getDatumIVreme() {
         return rokZaObjavu;
     }
 
-    public void setRokZaObjavu(LocalDateTime rokZaObjavu) {
+    public void setDatumIVreme(LocalDateTime rokZaObjavu) {
         this.rokZaObjavu = rokZaObjavu;
     }
     
+    public String getStringDatumIVreme() {
+        return rokZaObjavu.format(DateTimeFormatter.ofPattern("d.M.yyyy, HH:mm"));
+    }
+    
+    
+    //////////////////////////////////////////////////////////////////////////
     
     
     @Override
@@ -44,7 +50,7 @@ public class NeobjavljenClanak extends Clanak {
     
     @Override
     public String columnNamesForInsert() {
-        return "neobjavljenClanakId, naslov, tekst, autorId, rokZaObjavu";
+        return "neobjavljenClanakId, naslov, tekst, autorId, kategorijaId, rokZaObjavu";
     }
 
     @Override
@@ -77,8 +83,10 @@ public class NeobjavljenClanak extends Clanak {
             String body = rs.getString("tekst");
             Autor autor = new Autor();
                 autor.setAutorId(rs.getInt("autorId"));
+            Kategorija category = new Kategorija();
+                category.setKategorijaId(rs.getInt("kategorijaId"));
             LocalDateTime dueDate = rs.getTimestamp("rokZaObjavu").toLocalDateTime();
-            NeobjavljenClanak clanak = new NeobjavljenClanak(id, title, body, autor, dueDate);
+            NeobjavljenClanak clanak = new NeobjavljenClanak(id, title, body, autor, category, dueDate);
             clanci.add(clanak);
         }
         return new ArrayList<>(clanci);

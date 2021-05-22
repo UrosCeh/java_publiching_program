@@ -18,43 +18,27 @@ import java.util.ArrayList;
 public class ObjavljenClanak extends Clanak {
       
     private LocalDateTime datumObjvaljivanja;
-    private int brojPregleda;
-    private Kategorija kategorija;
 
-    public ObjavljenClanak(int clanakId, String naslov, String tekst, Autor autor, LocalDateTime datumObjvaljivanja, int brojPregleda, Kategorija kategorija) {
-        super(clanakId, naslov, tekst, autor);
+    public ObjavljenClanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime datumObjvaljivanja) {
+        super(clanakId, naslov, tekst, autor, kategorija);
         this.datumObjvaljivanja = datumObjvaljivanja;
-        this.brojPregleda = brojPregleda;
-        this.kategorija = kategorija;
     }
 
     public ObjavljenClanak() {
     }
     
-    public LocalDateTime getDatumObjvaljivanja() {
+    public LocalDateTime getDatumIVreme() {
         return datumObjvaljivanja;
     }
 
-    public void setDatumObjvaljivanja(LocalDateTime datumObjvaljivanja) {
+    public void setDatumIVreme(LocalDateTime datumObjvaljivanja) {
         this.datumObjvaljivanja = datumObjvaljivanja;
     }
 
-    public int getBrojPregleda() {
-        return brojPregleda;
+    
+    public String getStringDatumIVreme() {
+        return datumObjvaljivanja.format(DateTimeFormatter.ofPattern("d.M.yyyy, HH:mm"));
     }
-
-    public void setBrojPregleda(int brojPregleda) {
-        this.brojPregleda = brojPregleda;
-    }
-
-    public Kategorija getKategorija() {
-        return kategorija;
-    }
-
-    public void setKategorija(Kategorija kategorija) {
-        this.kategorija = kategorija;
-    }
-
 
     //////////////////////////////////////////////////////////////////////////
     
@@ -66,7 +50,7 @@ public class ObjavljenClanak extends Clanak {
 
     @Override
     public String columnNamesForInsert() {
-        return "objavljenClanakId, naslov, tekst, autorId, datumObjavljivanja, brojPregleda, kategorijaId";
+        return "objavljenClanakId, naslov, tekst, autorId, kategorijaId, datumObjavljivanja";
     }
 
     @Override
@@ -76,9 +60,7 @@ public class ObjavljenClanak extends Clanak {
             .append("'").append(super.getNaslov()).append("',")
             .append("'").append(super.getTekst()).append("',")
             .append("'").append(super.getAutor().getAutorId()).append("',")
-            .append("'").append(datumObjvaljivanja.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss"))).append("',")
-            .append("'").append(brojPregleda).append("',")
-            .append("'").append(kategorija.getKategorijaId()).append("'");
+            .append("'").append(datumObjvaljivanja.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss"))).append("'");
         return sb.toString();
     }
 
@@ -101,11 +83,10 @@ public class ObjavljenClanak extends Clanak {
             String body = rs.getString("tekst");
             Autor autor = new Autor();
                 autor.setAutorId(rs.getInt("autorId"));
-            LocalDateTime publishDate = rs.getTimestamp("datumObjavljivanja").toLocalDateTime();
-            int views = rs.getInt("brojPregleda");
             Kategorija category = new Kategorija();
                 category.setKategorijaId(rs.getInt("kategorijaId"));
-            ObjavljenClanak clanak = new ObjavljenClanak(id, title, body, autor, publishDate, views, category);
+            LocalDateTime publishDate = rs.getTimestamp("datumObjavljivanja").toLocalDateTime();
+            ObjavljenClanak clanak = new ObjavljenClanak(id, title, body, autor, category, publishDate);
             clanci.add(clanak);
         }
         return new ArrayList<>(clanci);

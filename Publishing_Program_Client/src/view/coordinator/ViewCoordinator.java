@@ -45,7 +45,7 @@ public class ViewCoordinator {
     
     public void repaintMainForm() {
         mainController.repaint();
-        mainController.openForm();
+//        mainController.openForm();
     }
     
     public void openReadArticleForm() {

@@ -30,9 +30,11 @@ public class FrmArticle extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         body = new javax.swing.JTextArea();
-        lblTitle = new javax.swing.JLabel();
-        lblCategories = new javax.swing.JLabel();
         lblWriter = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        txtTitle = new javax.swing.JTextField();
+        lblCategory = new javax.swing.JLabel();
+        cbCategory = new javax.swing.JComboBox<>();
         pnlButtons = new javax.swing.JPanel();
         btnUnpublish = new javax.swing.JButton();
         btnPublish = new javax.swing.JButton();
@@ -44,19 +46,20 @@ public class FrmArticle extends javax.swing.JDialog {
         body.setRows(5);
         jScrollPane1.setViewportView(body);
 
-        lblTitle.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("jLabel1");
-
-        lblCategories.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCategories.setText("jLabel2");
-
         lblWriter.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblWriter.setText("jLabel3");
+        lblWriter.setText("Pisac");
 
-        btnUnpublish.setText("Unpublish");
+        lblDate.setText("Rok za objavu");
 
-        btnPublish.setText("Publish");
+        txtTitle.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lblCategory.setText("Kategorija");
+
+        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnUnpublish.setText("Publish/Unpublish");
+
+        btnPublish.setText("Delete");
 
         btnSave.setText("Save");
 
@@ -93,25 +96,35 @@ public class FrmArticle extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblWriter, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnlButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblWriter, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(207, 207, 207)
+                .addComponent(lblCategory)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(lblWriter)
-                .addGap(31, 31, 31)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWriter)
+                    .addComponent(lblDate))
+                .addGap(42, 42, 42)
+                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblCategories)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCategory)
+                    .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -120,57 +133,61 @@ public class FrmArticle extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmArticle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmArticle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmArticle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmArticle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmArticle dialog = new FrmArticle(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea body;
     private javax.swing.JButton btnPublish;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUnpublish;
+    private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCategories;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblCategory;
+    private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblWriter;
     private javax.swing.JPanel pnlButtons;
+    private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTextArea getBody() {
+        return body;
+    }
+
+    public javax.swing.JButton getBtnPublish() {
+        return btnPublish;
+    }
+
+    public javax.swing.JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public javax.swing.JButton getBtnUnpublish() {
+        return btnUnpublish;
+    }
+
+    public javax.swing.JComboBox<String> getCbCategory() {
+        return cbCategory;
+    }
+
+    public javax.swing.JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public javax.swing.JLabel getLblCategory() {
+        return lblCategory;
+    }
+
+    public javax.swing.JLabel getLblDate() {
+        return lblDate;
+    }
+
+    public javax.swing.JLabel getLblWriter() {
+        return lblWriter;
+    }
+
+    public javax.swing.JPanel getPnlButtons() {
+        return pnlButtons;
+    }
+
+    public javax.swing.JTextField getTxtTitle() {
+        return txtTitle;
+    }
 }
