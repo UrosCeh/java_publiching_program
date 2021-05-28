@@ -12,7 +12,16 @@ import java.io.Serializable;
  * @author hatch
  */
 public enum Operation implements Serializable {
-    // names of all the operations program will do
-    GET_ALL_OBJAVLJENI_CLANAK,
-    LOGIN,
+    ULOGUJ_AUTORA,
+    KREIRAJ_NOVU_KATEGORIJU,
+    KREIRAJ_CLANAK,
+    PRONADJI_CLANKE,
+    UCITAJ_OBJAVLJEN_CLANAK,
+    UCITAJ_NEOBJAVLJEN_CLANAK,
+    AZURIRAJ_CLANAK,
+    OBRISI_CLANAK,
+    OBJAVI_CLANAK,
+    UKLONI_OBJAVLJENI_CLANAK,
+    UCITAJ_LISTU_KATEGORIJA,
+    UCITAJ_LISTU_OBJAVLJENIH_CLANAKA,
 }

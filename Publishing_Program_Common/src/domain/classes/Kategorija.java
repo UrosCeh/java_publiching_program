@@ -76,14 +76,13 @@ public class Kategorija implements GenericEntity {
 
     @Override
     public String columnNamesForInsert() {
-        return "kategorijaId, naziv";
+        return "naziv";
     }
 
     @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
-        sb  .append("'").append(kategorijaId).append("',")
-            .append("'").append(naziv).append("'");
+        sb  .append("'").append(naziv).append("'");
         return sb.toString();    
     }
 

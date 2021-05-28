@@ -50,17 +50,16 @@ public class ObjavljenClanak extends Clanak {
 
     @Override
     public String columnNamesForInsert() {
-        return "objavljenClanakId, naslov, tekst, autorId, kategorijaId, datumObjavljivanja";
+        return "naslov, tekst, autorId, kategorijaId, datumObjavljivanja";
     }
 
     @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
-        sb  .append("'").append(super.getClanakId()).append("',")
-            .append("'").append(super.getNaslov()).append("',")
+        sb  .append("'").append(super.getNaslov()).append("',")
             .append("'").append(super.getTekst()).append("',")
             .append("'").append(super.getAutor().getAutorId()).append("',")
-            .append("'").append(datumObjvaljivanja.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss"))).append("'");
+            .append("'").append(LocalDateTime.now()).append("'");
         return sb.toString();
     }
 
