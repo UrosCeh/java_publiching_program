@@ -11,6 +11,8 @@ import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
 import domain.classes.Autor;
+import domain.classes.Clanak;
+import domain.classes.Kategorija;
 import domain.classes.ObjavljenClanak;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -42,14 +44,38 @@ public class ProcessClientsRequests extends Thread {
                 Response response = new Response();
                 try {
                     switch (request.getOperation()) {
-                        case GET_ALL_OBJAVLJENI_CLANAK:
-                            ArrayList<ObjavljenClanak> list = Controller.getInstance().getAllObjavljeniClanak();
-                            response.setResult(list);
+                        case ULOGUJ_AUTORA:
+                            response.setResult(Controller.getInstance().ulogujAutora((Autor) request.getObject()));
                             break;
-                        case LOGIN:
-                            Autor a = (Autor) request.getObject();
-                            Autor autor = Controller.getInstance().login(a);
-                            response.setResult(autor);
+                        case KREIRAJ_NOVU_KATEGORIJU:
+                            response.setResult(Controller.getInstance().kreirajNovuKategoriju((Kategorija) request.getObject()));
+                            break;
+                        case KREIRAJ_CLANAK:
+                            response.setResult(Controller.getInstance().kreirajClanak((Clanak) request.getObject()));
+                            break;
+                        case PRONADJI_CLANKE:
+                            
+                            break; 
+                        case UCITAJ_OBJAVLJEN_CLANAK:
+                            response.setResult(Controller.getInstance().getObjavljenClanak((ObjavljenClanak) request.getObject()));
+                            break; 
+                        case UCITAJ_NEOBJAVLJEN_CLANAK:
+                            response.setResult(Controller.getInstance().getObjavljenClanak((ObjavljenClanak) request.getObject()));
+                            break; 
+                        case AZURIRAJ_CLANAK:
+                            response.setResult(Controller.getInstance().);
+                            break; 
+                        case OBRISI_CLANAK:
+                            break; 
+                        case OBJAVI_CLANAK:
+                            break; 
+                        case UKLONI_OBJAVLJENI_CLANAK:
+                            break; 
+                        case UCITAJ_LISTU_KATEGORIJA:
+                            break;
+                        case UCITAJ_LISTU_OBJAVLJENIH_CLANAKA:
+                            ArrayList<ObjavljenClanak> list = Controller.getInstance().ucitajListuObjavljenihClanaka();
+                            response.setResult(list);
                             break;
                     }
                 } catch (Exception e) {

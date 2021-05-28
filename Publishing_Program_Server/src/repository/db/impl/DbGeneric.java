@@ -26,11 +26,11 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         sb.append("SELECT * FROM ");
         sb.append(g.getTableName());
         
-        String sql = sb.toString();
-        System.out.println(sql);
+        String query = sb.toString();
+        System.out.println(query);
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery(query);
         
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         
@@ -67,30 +67,34 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public void add(GenericEntity g, String table, String columns, String values) throws Exception {
+    public boolean add(GenericEntity g, String table, String columns, String values) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
             sb.append("INSERT INTO ");
-                    if(table!=null) sb.append(table);
-                    else sb.append(g.getTableName());
+//                    if(table!=null) sb.append(table);
+//                    else sb.append(g.getTableName());
+                    sb.append(g.getTableName());
                     
                     sb.append("(");
-                    if(columns!=null) sb.append(columns);
-                    else sb.append(g.columnNamesForInsert());
+//                    if(columns!=null) sb.append(columns);
+//                    else sb.append(g.columnNamesForInsert());
+                    sb.append(g.columnNamesForInsert());
                     sb.append(")");
                     
                     sb.append(" VALUES(");
-                    if(values!=null) sb.append(values);
-                    else sb.append(g.getInsertValues());
+//                    if(values!=null) sb.append(values);
+//                    else sb.append(g.getInsertValues());
+                    sb.append(g.getInsertValues());
                     sb.append(")");
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();
-            s.executeUpdate(query);
-
+            int ar = s.executeUpdate(query);
+            
             s.close();
 
+            return ar>0;
         } catch (Exception e) {
             throw e;
         }
@@ -130,7 +134,7 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public void update(GenericEntity g, String values, String where) throws Exception {
+    public boolean update(GenericEntity g, String values, String where) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
@@ -147,16 +151,18 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();
-            s.executeUpdate(query);
-
+            int ar = s.executeUpdate(query);
+            
             s.close();
+
+            return ar>0;
         } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    public void delete(GenericEntity g,String table, String where) throws Exception {
+    public boolean delete(GenericEntity g,String table, String where) throws Exception {
         //"DELETE FROM director where directorID=" + director.getId()
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
@@ -171,9 +177,11 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();
-            s.executeUpdate(query);
-
+            int ar = s.executeUpdate(query);
+            
             s.close();
+
+            return ar>0;
         } catch (Exception e) {
             throw e;
         }
@@ -193,11 +201,11 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             sb.append(where);
         }
         
-        String sql = sb.toString();
-        System.out.println(sql);
+        String query = sb.toString();
+        System.out.println(query);
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery(query);
         
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         stmt.close();

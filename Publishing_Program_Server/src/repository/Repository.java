@@ -16,11 +16,11 @@ public interface Repository<T> {
     
     public T get(T t,String innerJoin ,String where) throws Exception;
     
-    public void add(T t, String table, String columns, String values) throws Exception;
+    public boolean add(T t, String table, String columns, String values) throws Exception;
     
-    public void update(T t, String values, String where)throws Exception;
+    public boolean update(T t, String values, String where)throws Exception;
     
-    public void delete(T t,String table, String where)throws Exception;
+    public boolean delete(T t,String table, String where)throws Exception;
     
     public void addWithGenKeys(T t, String table, String columns, String values) throws Exception;
 }
