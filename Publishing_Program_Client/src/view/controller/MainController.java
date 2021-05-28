@@ -61,13 +61,18 @@ public class MainController {
             autor = new Autor();
             autor.setIme("Gost");
             autor.setPrezime("");
+            autor.setAdmin(false);
+            autor.setPisac(false);
+            frmMain.getMenu().setVisible(false);
         }
         
         if (autor.isPisac()) {
             addHeaderBtns();
+//            frmMain.getMePisac().setVisible(false);
         }
         if (autor.isAdmin()) {
             addHeaderAdmin();
+//            frmMain.getMeAdmin().setVisible(false);
         }
         
         
@@ -183,7 +188,17 @@ public class MainController {
 //        pnlAllArticles.setBackground(Color.BLACK);
         List<ObjavljenClanak> articles;
         try {
-            articles = Communication.getInstance().getAllObjavljeniClanak();
+            articles = Communication.getInstance().ucitajListuObjavljenihClanaka();
+            String term = (String) ViewCoordinator.getInstance().getParam(Constants.SEARCH_TERM);
+            if (term != null) {
+                List<ObjavljenClanak> filtered = null;
+                for (ObjavljenClanak article : articles) {
+                    if (article.getNaslov().toLowerCase().contains(term.toLowerCase())) {
+                        filtered.add(article);
+                    }
+                }
+                articles = filtered;
+            }
             
             for (int i = 0; i < articles.size(); i++) {
                 JPanel pnlArticle = makeArticle(articles.get(i));
@@ -214,39 +229,59 @@ public class MainController {
 
 
 
-        JPanel pnlLeft = new JPanel(new BorderLayout());
+        JPanel pnlLeft = new JPanel();
         pnlLeft.setBackground(Color.gray);
         pnlLeft.setPreferredSize(new Dimension(200,200));
         
-        JPanel pnlRight = new JPanel(new BorderLayout());
+        JPanel pnlRight = new JPanel();
         pnlRight.setBackground(Color.gray);
         pnlRight.setPreferredSize(new Dimension(200,200));
         
         JPanel pnlCenter = new JPanel(new BorderLayout());
         pnlCenter.setBackground(Color.white);
+        
+//        pnlArticle.add(pnlLeft, BorderLayout.WEST);
+//        pnlArticle.add(pnlCenter, BorderLayout.CENTER);
+//        pnlArticle.add(pnlRight, BorderLayout.EAST);
+        
+        JButton btnEdit = new JButton("Edit/Delete");
+        btnEdit.setPreferredSize(new Dimension(150,25));
+        pnlLeft.add(btnEdit);
+            
+        JButton btnPublish = new JButton("Publish/Unpublish");
+        btnPublish.setPreferredSize(new Dimension(150,25));
+        pnlRight.add(btnPublish);
 
         Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
         if (autor != null) {
-            if (autor.isPisac() && article.getAutor().equals(autor)) {
-                System.out.println("pisac i njegov artikal " + article.toString());
-                JButton btnEdit = new JButton("Edit/Delete");
-                btnEdit.setPreferredSize(new Dimension(150,25));
-                pnlLeft.add(btnEdit, BorderLayout.CENTER);
+        System.out.println(autor.toString());
+            if (!autor.isPisac() || !article.getAutor().equals(autor)) {
+//                System.out.println("pisac i njegov artikal " + article.toString());
+//                JButton btnEdit = new JButton("Edit/Delete");
+//                btnEdit.setPreferredSize(new Dimension(150,25));
+//                pnlLeft.remove(btnEdit);
+                pnlLeft.remove(btnEdit);
+//                addToGBC(pnlLeft, btnEdit, 0, 0, 0, 30);
             }
 
-            if (autor.isAdmin()) {
-                System.out.println("admin je " + article.toString());
-                JButton btnPublish = new JButton("Publish/Unpublish");
-                btnPublish.setPreferredSize(new Dimension(150,25));
-                pnlRight.add(btnPublish, BorderLayout.CENTER);
+            if (!autor.isAdmin()) {
+//                System.out.println("admin je " + article.toString());
+//                JButton btnPublish = new JButton("Publish/Unpublish");
+//                btnPublish.setPreferredSize(new Dimension(150,25));
+//                pnlRight.remove(btnPublish);
+                pnlRight.remove(btnPublish);
             }
         }
         else {
             pnlLeft.removeAll();
             pnlRight.removeAll();
         }
+//        if (autor == null) {
+//            pnlLeft.removeAll();
+//            pnlRight.removeAll();
+//        }
         addToGBC(pnlMiddle, lblCategory, 0, 0, -1, 5);
-        addToGBC(pnlMiddle, lblTitle, 0, 1, 0, 30);
+        addToGBC(pnlMiddle, lblTitle, 0, 1, 0, 20);
         addToGBC(pnlMiddle, btnRead, 0, 2, 0, 25);
         
         pnlCenter.add(lblDate, BorderLayout.NORTH);

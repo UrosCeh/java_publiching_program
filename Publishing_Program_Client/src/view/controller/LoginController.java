@@ -44,7 +44,7 @@ public class LoginController {
             frmLogin.getBtnLogin().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    ViewCoordinator.getInstance().addParam(Constants.CURRENT_AUTOR, null);
+                    ViewCoordinator.getInstance().removeParam(Constants.CURRENT_AUTOR, ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
                     ViewCoordinator.getInstance().repaintMainForm();
                     frmLogin.dispose();
                 }
@@ -65,7 +65,7 @@ public class LoginController {
                             frmLogin.getLblError().setText("");
                         }
 
-                        Autor autor = Communication.getInstance().login(username, password);
+                        Autor autor = Communication.getInstance().ulogujAutora(username, password);
 
                         JOptionPane.showMessageDialog(frmLogin, "Uspesno ste se ulogovali!", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
 

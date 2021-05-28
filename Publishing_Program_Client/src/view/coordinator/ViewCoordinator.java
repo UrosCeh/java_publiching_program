@@ -80,4 +80,9 @@ public class ViewCoordinator {
     public Object getParam(String name) {
         return params.get(name);
     }
+    
+    public void removeParam(String name, Object key) {
+//        params.remove(name);
+        params.remove(name, key);
+    }
 }

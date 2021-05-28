@@ -58,6 +58,15 @@ public class FrmMain extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
+        menu = new javax.swing.JMenuBar();
+        meAdmin = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        mePisac = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,6 +150,34 @@ public class FrmMain extends javax.swing.JFrame {
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblUser.setText("Gost");
 
+        meAdmin.setText("Admin");
+
+        jMenuItem1.setText("jMenuItem1");
+        meAdmin.add(jMenuItem1);
+
+        jMenuItem2.setText("jMenuItem2");
+        meAdmin.add(jMenuItem2);
+
+        jMenuItem3.setText("jMenuItem3");
+        meAdmin.add(jMenuItem3);
+
+        jMenuItem4.setText("jMenuItem4");
+        meAdmin.add(jMenuItem4);
+
+        menu.add(meAdmin);
+
+        mePisac.setText("Pisac");
+
+        jMenuItem5.setText("jMenuItem5");
+        mePisac.add(jMenuItem5);
+
+        jMenuItem6.setText("jMenuItem6");
+        mePisac.add(jMenuItem6);
+
+        menu.add(mePisac);
+
+        setJMenuBar(menu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,12 +201,12 @@ public class FrmMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUser))
+                    .addComponent(lblUser)
+                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlArticles, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+                .addComponent(pnlArticles, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -183,7 +220,16 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbCategory;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JMenu meAdmin;
+    private javax.swing.JMenu mePisac;
+    private javax.swing.JMenuBar menu;
     private javax.swing.JPanel pnlAllArticles;
     private javax.swing.JScrollPane pnlArticles;
     private javax.swing.JPanel pnlHeader;
@@ -235,4 +281,30 @@ public class FrmMain extends javax.swing.JFrame {
     public javax.swing.JTextField getTxtSearch() {
         return txtSearch;
     }
+
+    public javax.swing.JMenu getMeAdmin() {
+        return meAdmin;
+    }
+
+    public void setMeAdmin(javax.swing.JMenu meAdmin) {
+        this.meAdmin = meAdmin;
+    }
+
+    public javax.swing.JMenu getMePisac() {
+        return mePisac;
+    }
+
+    public void setMePisac(javax.swing.JMenu mePisac) {
+        this.mePisac = mePisac;
+    }
+
+    public javax.swing.JMenuBar getMenu() {
+        return menu;
+    }
+
+    public void setMenu(javax.swing.JMenuBar menu) {
+        this.menu = menu;
+    }
+    
+    
 }

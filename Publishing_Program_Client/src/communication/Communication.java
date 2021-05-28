@@ -11,7 +11,9 @@ import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
 import domain.classes.Autor;
+import domain.classes.Clanak;
 import domain.classes.Kategorija;
+import domain.classes.NeobjavljenClanak;
 import domain.classes.ObjavljenClanak;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -43,46 +45,20 @@ public class Communication {
         return instance;
     }
     
-    public List<ObjavljenClanak> getAllObjavljeniClanak() throws Exception {
-        Request request = new Request(Operation.GET_ALL_OBJAVLJENI_CLANAK, null);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        
-        if(response.getException() == null) {
-            return (List<ObjavljenClanak>) response.getResult();
-        }
-        else {
-            throw response.getException();
-        }
-        
-//        Autor a1 = new Autor(1, "pera", "peric", "peric123", "peric123", true, true);
-//        Autor a2 = new Autor(2, "zika", "zikic", "zikic123", "zikic123", true, false);
-//        Autor a3 = new Autor(3, "mika", "mikic", "mikic123", "mikic123", false, true);
-//        
-//        Kategorija k1 = new Kategorija(1, "zivot");
-//        Kategorija k2 = new Kategorija(2, "sport");
-//        
-//        ObjavljenClanak oc1 = new ObjavljenClanak(1, "naslov 1", "tekst 1", a1, LocalDateTime.of(2021, Month.MARCH, 3, 15, 0), 123, k1);
-//        ObjavljenClanak oc2 = new ObjavljenClanak(2, "naslov 2", "tekst 2", a2, LocalDateTime.of(2021, Month.MARCH, 3, 15, 0), 123, k2);
-//        
-//        List<ObjavljenClanak> clanci = new ArrayList<>();
-//        clanci.add(oc1);
-//        clanci.add(oc2);
-//        return clanci;
 
-       
-    }
+    
+//    public List<Clanak> getAllClanak()
     //operations
         //Request r = new Request(Operation.IME, prop/null)
         //sender.send(r)
         //Response response = (Response) receiver.receive();
 
-    public Autor login(String username, String password) throws Exception {
+    public Autor ulogujAutora(String username, String password) throws Exception {
         Autor a = new Autor();
         a.setKorisnickoIme(username);
         a.setLozinka(password);
         
-        Request request = new Request(Operation.LOGIN, a);
+        Request request = new Request(Operation.ULOGUJ_AUTORA, a);
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -92,16 +68,157 @@ public class Communication {
         else {
             throw response.getException();
         }
-//       User user=new User();
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        Request request=new Request(Operation.LOGIN, user);
-//        sender.send(request);
-//        Response response=(Response)receiver.receive();
-//        if(response.getException()==null){
-//            return (User)response.getResult();
-//        }else{
-//            throw response.getException();
-//        }
+    }
+    
+    public boolean kreirajNovuKategoriju(String naziv) throws Exception {
+        Kategorija k = new Kategorija();
+        k.setNaziv(naziv);
+        
+        Request request = new Request(Operation.KREIRAJ_NOVU_KATEGORIJU, k);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public boolean kreirajClanak(NeobjavljenClanak nc) throws Exception {
+        Request request = new Request(Operation.KREIRAJ_CLANAK, nc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    } 
+    
+    public List<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
+        Request request = new Request(Operation.PRONADJI_CLANKE, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (List<NeobjavljenClanak>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }      
+    }
+    
+    public ObjavljenClanak ucitajObjavljeniClanak(int id) throws Exception {
+        ObjavljenClanak oc = new ObjavljenClanak();
+        oc.setId(id);
+        
+        Request request = new Request(Operation.UCITAJ_OBJAVLJEN_CLANAK, oc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (ObjavljenClanak) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public NeobjavljenClanak ucitajNeobjavljeniClanak(int id) throws Exception {
+        NeobjavljenClanak nc = new NeobjavljenClanak();
+        nc.setId(id);
+        
+        Request request = new Request(Operation.UCITAJ_NEOBJAVLJEN_CLANAK, nc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (NeobjavljenClanak) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public boolean azurirajClanak(NeobjavljenClanak nc) throws Exception {
+        Request request = new Request(Operation.AZURIRAJ_CLANAK, nc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public boolean obrisiClanak(NeobjavljenClanak nc) throws Exception {
+        Request request = new Request(Operation.OBRISI_CLANAK, nc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public boolean objaviClanak(NeobjavljenClanak nc) throws Exception {
+        Request request = new Request(Operation.OBJAVI_CLANAK, nc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public boolean ukloniObjavljeniClanak(ObjavljenClanak oc) throws Exception {
+        Request request = new Request(Operation.UKLONI_OBJAVLJENI_CLANAK, oc);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public List<Kategorija> ucitajListuKategorija() throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_KATEGORIJA, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (List<Kategorija>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }      
+    }
+    
+    public List<ObjavljenClanak> ucitajListuObjavljenihClanaka(String s) throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_OBJAVLJENIH_CLANAKA, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (List<ObjavljenClanak>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }      
     }
 }

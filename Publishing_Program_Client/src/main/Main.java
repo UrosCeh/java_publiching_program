@@ -5,6 +5,7 @@
  */
 package main;
 
+import domain.classes.Kategorija;
 import view.coordinator.ViewCoordinator;
 
 /**
@@ -14,6 +15,6 @@ import view.coordinator.ViewCoordinator;
 public class Main {
 
     public static void main(String[] args) {
-        ViewCoordinator.getInstance().openMainForm();
+//        ViewCoordinator.getInstance().openMainForm();
     }
 }
