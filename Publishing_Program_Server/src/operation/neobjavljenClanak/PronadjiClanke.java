@@ -8,6 +8,7 @@ package operation.neobjavljenClanak;
 import domain.classes.Autor;
 import domain.classes.Kategorija;
 import domain.classes.NeobjavljenClanak;
+import java.util.ArrayList;
 import java.util.List;
 import operation.GenericOperation;
 
@@ -17,7 +18,7 @@ import operation.GenericOperation;
  */
 public class PronadjiClanke extends GenericOperation {
 
-    private List<NeobjavljenClanak> result;
+    private ArrayList<NeobjavljenClanak> result;
 
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -39,7 +40,7 @@ public class PronadjiClanke extends GenericOperation {
         }
     }
     
-    public List<NeobjavljenClanak> getResult() {
+    public ArrayList<NeobjavljenClanak> getResult() {
         return result;
     }
 }

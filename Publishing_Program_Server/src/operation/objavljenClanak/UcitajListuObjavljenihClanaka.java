@@ -16,6 +16,7 @@ import operation.GenericOperation;
  * @author hatch
  */
 public class UcitajListuObjavljenihClanaka extends GenericOperation {
+    
     ArrayList<ObjavljenClanak> result;
 
     @Override

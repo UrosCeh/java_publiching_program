@@ -19,6 +19,7 @@ import operation.neobjavljenClanak.AzurirajClanak;
 import operation.neobjavljenClanak.KreirajClanak;
 import operation.neobjavljenClanak.ObjaviClanak;
 import operation.neobjavljenClanak.ObrisiClanak;
+import operation.neobjavljenClanak.PronadjiClanke;
 import operation.neobjavljenClanak.UcitajNeobjavljenClanak;
 import operation.objavljenClanak.UcitajListuObjavljenihClanaka;
 import operation.objavljenClanak.UcitajObjavljenClanak;
@@ -61,8 +62,10 @@ public class Controller {
         return ((KreirajClanak) o).getResult();
     }
     
-    public ArrayList<NeobjavljenClanak> pronadjiClanke() {
-        return null;
+    public ArrayList<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
+        GenericOperation o = new PronadjiClanke();
+        o.execute(s);
+        return ((PronadjiClanke) o).getResult();
     }
 
     public ObjavljenClanak ucitajObjavljenClanak(ObjavljenClanak c) throws Exception {
