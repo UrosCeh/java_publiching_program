@@ -25,7 +25,7 @@ public class KreirajClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.add((NeobjavljenClanak) params, null, null, null);
+        result = repo.add((NeobjavljenClanak) params);
     }
     
     public boolean getResult() {

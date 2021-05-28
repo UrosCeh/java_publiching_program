@@ -13,6 +13,7 @@ import controller.Controller;
 import domain.classes.Autor;
 import domain.classes.Clanak;
 import domain.classes.Kategorija;
+import domain.classes.NeobjavljenClanak;
 import domain.classes.ObjavljenClanak;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -48,34 +49,38 @@ public class ProcessClientsRequests extends Thread {
                             response.setResult(Controller.getInstance().ulogujAutora((Autor) request.getObject()));
                             break;
                         case KREIRAJ_NOVU_KATEGORIJU:
+                            System.out.println(((Kategorija)request.getObject()).toString());
                             response.setResult(Controller.getInstance().kreirajNovuKategoriju((Kategorija) request.getObject()));
                             break;
                         case KREIRAJ_CLANAK:
                             response.setResult(Controller.getInstance().kreirajClanak((Clanak) request.getObject()));
                             break;
                         case PRONADJI_CLANKE:
-                            
+                            response.setResult(Controller.getInstance().pronadjiClanke((String) request.getObject()));
                             break; 
                         case UCITAJ_OBJAVLJEN_CLANAK:
-                            response.setResult(Controller.getInstance().getObjavljenClanak((ObjavljenClanak) request.getObject()));
+                            response.setResult(Controller.getInstance().ucitajObjavljenClanak((ObjavljenClanak) request.getObject()));
                             break; 
                         case UCITAJ_NEOBJAVLJEN_CLANAK:
-                            response.setResult(Controller.getInstance().getObjavljenClanak((ObjavljenClanak) request.getObject()));
+                            response.setResult(Controller.getInstance().ucitajNeobjavljenClanak((NeobjavljenClanak) request.getObject()));
                             break; 
                         case AZURIRAJ_CLANAK:
-                            response.setResult(Controller.getInstance().);
+                            response.setResult(Controller.getInstance().azurirajClanak((NeobjavljenClanak) request.getObject()));
                             break; 
                         case OBRISI_CLANAK:
+                            response.setResult(Controller.getInstance().obrisiClanak((NeobjavljenClanak) request.getObject()));
                             break; 
                         case OBJAVI_CLANAK:
+                            response.setResult(Controller.getInstance().objaviClanak((NeobjavljenClanak) request.getObject()));
                             break; 
                         case UKLONI_OBJAVLJENI_CLANAK:
+                            response.setResult(Controller.getInstance().ukloniObjavljeniClanak((ObjavljenClanak) request.getObject()));
                             break; 
                         case UCITAJ_LISTU_KATEGORIJA:
+                            response.setResult(Controller.getInstance().ucitajListuKategorija());
                             break;
                         case UCITAJ_LISTU_OBJAVLJENIH_CLANAKA:
-                            ArrayList<ObjavljenClanak> list = Controller.getInstance().ucitajListuObjavljenihClanaka();
-                            response.setResult(list);
+                            response.setResult(Controller.getInstance().ucitajListuObjavljenihClanaka((String) request.getObject()));
                             break;
                     }
                 } catch (Exception e) {

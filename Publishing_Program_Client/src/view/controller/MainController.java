@@ -186,12 +186,12 @@ public class MainController {
     private void addArticles() {
         JPanel pnlAllArticles = frmMain.getPnlAllArticles();
 //        pnlAllArticles.setBackground(Color.BLACK);
-        List<ObjavljenClanak> articles;
+        ArrayList<ObjavljenClanak> articles;
         try {
-            articles = Communication.getInstance().ucitajListuObjavljenihClanaka();
+            articles = Communication.getInstance().ucitajListuObjavljenihClanaka("");
             String term = (String) ViewCoordinator.getInstance().getParam(Constants.SEARCH_TERM);
             if (term != null) {
-                List<ObjavljenClanak> filtered = null;
+                ArrayList<ObjavljenClanak> filtered = null;
                 for (ObjavljenClanak article : articles) {
                     if (article.getNaslov().toLowerCase().contains(term.toLowerCase())) {
                         filtered.add(article);

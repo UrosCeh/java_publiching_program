@@ -21,72 +21,71 @@ import repository.db.DbRepository;
 public class DbGeneric implements DbRepository<GenericEntity> {
 
     @Override
-    public ArrayList<GenericEntity> getAll(GenericEntity g, String where, String orderby, String innerJoin) throws Exception {
+    public ArrayList<GenericEntity> getAll(GenericEntity g, String where, String orderby) throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM ");
         sb.append(g.getTableName());
+        if (where != null) {
+            sb.append(where);
+        }
+        if (orderby != null) {
+            sb.append(orderby);
+        }
         
         String query = sb.toString();
-        System.out.println(query);
+//        System.out.println(query);
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         
-        for (GenericEntity genericEntity : lista) {
-            System.out.println(((ObjavljenClanak) genericEntity).toString());
-        }
-        
         stmt.close();
         rs.close();
         return lista;
-//        if (innerJoin != null) {
-//            sb.append(innerJoin);
-//        } else {
-//            sb.append(g.getTableName());
-//        }
-//
-//        if (where != null) {
-//            sb.append(" WHERE ")
-//                    .append(where);
-//        }
-//        if (orderby != null) {
-//            sb.append(" ORDER BY ")
-//                    .append(orderby);
-//        }
-//
-//        String query = sb.toString();
-//        Statement s = connect().createStatement();
-//        ResultSet rs = s.executeQuery(query);
-//
-//        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
-//        s.close();
-//        rs.close();
-//        return lista;
     }
 
     @Override
-    public boolean add(GenericEntity g, String table, String columns, String values) throws Exception {
+    public GenericEntity get(GenericEntity g, String where) throws Exception {
+        //SELECT * FROM >>table<< where ID="+id
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM ");
+        sb.append(g.getTableName());
+        sb.append(" WHERE ");
+        if (where != null) sb.append(where);
+        else sb.append(g.whereCondition());
+        
+        String query = sb.toString();
+//        System.out.println(query);
+        Connection connection = DbConnectionFactory.getInstance().getConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        
+        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
+        stmt.close();
+        rs.close();
+        if(lista.isEmpty()) return null;
+        
+//        System.out.println(lista.get(0));
+        return lista.get(0);
+    }
+
+    @Override
+    public boolean add(GenericEntity g) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
             sb.append("INSERT INTO ");
-//                    if(table!=null) sb.append(table);
-//                    else sb.append(g.getTableName());
                     sb.append(g.getTableName());
                     
                     sb.append("(");
-//                    if(columns!=null) sb.append(columns);
-//                    else sb.append(g.columnNamesForInsert());
                     sb.append(g.columnNamesForInsert());
                     sb.append(")");
                     
                     sb.append(" VALUES(");
-//                    if(values!=null) sb.append(values);
-//                    else sb.append(g.getInsertValues());
                     sb.append(g.getInsertValues());
                     sb.append(")");
+                    
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();
@@ -100,6 +99,55 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         }
     }
 
+    @Override
+    public boolean update(GenericEntity g) throws Exception {
+        try {
+            Connection connection = DbConnectionFactory.getInstance().getConnection();
+            StringBuilder sb = new StringBuilder();
+            sb.append("UPDATE ")
+                    .append(g.getTableName())
+                    .append(" SET ");
+                    sb.append(g.columnNamesForUpdate());
+                    sb.append(" WHERE ");
+                    sb.append(g.whereCondition());
+                    
+            String query = sb.toString();
+            System.out.println(query);
+            Statement s = connection.createStatement();
+            int ar = s.executeUpdate(query);
+            
+            s.close();
+
+            return ar>0;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public boolean delete(GenericEntity g) throws Exception {
+        //"DELETE FROM director where directorID=" + director.getId()
+        try {
+            Connection connection = DbConnectionFactory.getInstance().getConnection();
+            StringBuilder sb = new StringBuilder();
+            sb.append("DELETE FROM ");
+                    sb.append(g.getTableName());
+                    sb.append(" WHERE ");
+                    sb.append(g.whereCondition());
+                    
+            String query = sb.toString();
+            System.out.println(query);
+            Statement s = connection.createStatement();
+            int ar = s.executeUpdate(query);
+            
+            s.close();
+
+            return ar>0;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
     @Override
     public void addWithGenKeys(GenericEntity g, String table, String columns, String values) throws Exception {
         try {
@@ -131,113 +179,5 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         } catch (Exception e) {
             throw e;
         }
-    }
-
-    @Override
-    public boolean update(GenericEntity g, String values, String where) throws Exception {
-        try {
-            Connection connection = DbConnectionFactory.getInstance().getConnection();
-            StringBuilder sb = new StringBuilder();
-            sb.append("UPDATE ")
-                    .append(g.getTableName())
-                    .append(" SET ");
-                    if(values!=null) sb.append(values);
-                    else sb.append(g.columnNamesForUpdate());
-                    sb.append(" WHERE ");
-                    
-                    if(where!=null) sb.append(where);
-                    else sb.append(g.whereCondition());
-                    
-            String query = sb.toString();
-            System.out.println(query);
-            Statement s = connection.createStatement();
-            int ar = s.executeUpdate(query);
-            
-            s.close();
-
-            return ar>0;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    @Override
-    public boolean delete(GenericEntity g,String table, String where) throws Exception {
-        //"DELETE FROM director where directorID=" + director.getId()
-        try {
-            Connection connection = DbConnectionFactory.getInstance().getConnection();
-            StringBuilder sb = new StringBuilder();
-            sb.append("DELETE FROM ");
-                    if(table!=null) sb.append(table);
-                    else sb.append(g.getTableName());
-                    sb.append(" WHERE ");
-                    if(where!=null) sb.append(where);
-                    else sb.append(g.whereCondition());
-                    
-            String query = sb.toString();
-            System.out.println(query);
-            Statement s = connection.createStatement();
-            int ar = s.executeUpdate(query);
-            
-            s.close();
-
-            return ar>0;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    @Override
-    public GenericEntity get(GenericEntity g, String innerJoin, String where) throws Exception {
-        //SELECT * FROM >>table<< where ID="+id
-        StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM ");
-        sb.append(g.getTableName());
-        sb.append(" WHERE ");
-        if (where == null) {
-            sb.append(g.whereCondition());
-        }
-        else {
-            sb.append(where);
-        }
-        
-        String query = sb.toString();
-        System.out.println(query);
-        Connection connection = DbConnectionFactory.getInstance().getConnection();
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        
-        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
-        stmt.close();
-        rs.close();
-        if(lista.isEmpty()) return null;
-        
-        System.out.println(lista.get(0));
-        return lista.get(0);
-
-//        if (innerJoin != null) {
-//            sb.append(innerJoin);
-//        } else {
-//            sb.append(g.getTableName());
-//        }
-//        
-//        sb.append(" WHERE ");
-//        
-//        if (where != null) {
-//            sb.append(where);
-//        } else {
-//            sb.append(g.whereCondition());
-//        }
-//
-//        String query = sb.toString();
-//        System.out.println(query);
-//        Statement s = connection.createStatement();
-//        ResultSet rs = s.executeQuery(query);
-//
-//        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
-//        s.close();
-//        rs.close();
-//        if(lista.size()==0) return null;
-//        return lista.get(0);
     }
 }

@@ -50,6 +50,7 @@ public class Controller {
 
     public boolean kreirajNovuKategoriju(Kategorija k) throws Exception {
         GenericOperation o = new KreirajNovuKategoriju();
+        System.out.println(k.toString());
         o.execute(k);
         return ((KreirajNovuKategoriju) o).getResult();
     }
@@ -110,9 +111,9 @@ public class Controller {
     
     
     //IZMENI
-    public ArrayList<ObjavljenClanak> ucitajListuObjavljenihClanaka() throws Exception {
+    public ArrayList<ObjavljenClanak> ucitajListuObjavljenihClanaka(String s) throws Exception {
         GenericOperation o = new UcitajListuObjavljenihClanaka();
-        o.execute(new ObjavljenClanak());
+        o.execute(s);
         return ((UcitajListuObjavljenihClanaka) o).getResult();
     }
 }

@@ -5,6 +5,8 @@
  */
 package operation.objavljenClanak;
 
+import domain.classes.Autor;
+import domain.classes.Kategorija;
 import domain.classes.ObjavljenClanak;
 import operation.GenericOperation;
 
@@ -25,7 +27,9 @@ public class UcitajObjavljenClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (ObjavljenClanak) repo.get((ObjavljenClanak) params, null, null);
+        result = (ObjavljenClanak) repo.get((ObjavljenClanak) params, null);
+        result.setAutor((Autor) repo.get(result.getAutor(), null));
+        result.setKategorija((Kategorija) repo.get(result.getKategorija(), null));
     }
     
     public ObjavljenClanak getResult() {

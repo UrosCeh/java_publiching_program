@@ -17,14 +17,14 @@ public class KreirajNovuKategoriju extends GenericOperation {
 
     @Override
     protected void preconditions(Object params) throws Exception {
-        if (params == null || (params instanceof Kategorija)) {
+        if (params == null || !(params instanceof Kategorija)) {
             throw new Exception("Podaci nisu validni!");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.add((Kategorija) params, null, null, null);
+        result = repo.add((Kategorija) params);
     }
     
     public boolean getResult() {

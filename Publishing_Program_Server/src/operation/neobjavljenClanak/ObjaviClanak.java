@@ -26,8 +26,8 @@ public class ObjaviClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        boolean d = repo.delete((NeobjavljenClanak) params, null, null);
-        boolean a = repo.add((ObjavljenClanak) params, null, null, null);
+        boolean d = repo.delete((NeobjavljenClanak) params);
+        boolean a = repo.add((ObjavljenClanak) params);
         result = d && a;
     }
     

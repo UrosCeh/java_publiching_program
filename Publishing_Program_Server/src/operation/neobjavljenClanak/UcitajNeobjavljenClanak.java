@@ -25,7 +25,7 @@ public class UcitajNeobjavljenClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null, null);
+        result = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null);
     }
     
     public NeobjavljenClanak getResult() {

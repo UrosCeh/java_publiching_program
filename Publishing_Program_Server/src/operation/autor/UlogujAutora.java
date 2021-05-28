@@ -26,7 +26,7 @@ public class UlogujAutora extends GenericOperation {
     protected void executeOperation(Object params) throws Exception {
         String username = ((Autor) params).getKorisnickoIme();
         String password = ((Autor) params).getLozinka();
-        Autor autor = (Autor) repo.get(params, null, "korisnickoIme = '" + username + "'");
+        Autor autor = (Autor) repo.get(params, "korisnickoIme = '" + username + "'");
         
         if (autor.getLozinka().equals(password)) {
             result = autor;

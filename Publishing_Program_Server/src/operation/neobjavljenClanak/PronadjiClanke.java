@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operation.objavljenClanak;
+package operation.neobjavljenClanak;
 
 import domain.classes.Autor;
 import domain.classes.Kategorija;
-import domain.classes.ObjavljenClanak;
-import java.util.ArrayList;
+import domain.classes.NeobjavljenClanak;
+import java.util.List;
 import operation.GenericOperation;
 
 /**
  *
  * @author hatch
  */
-public class UcitajListuObjavljenihClanaka extends GenericOperation {
-    ArrayList<ObjavljenClanak> result;
+public class PronadjiClanke extends GenericOperation {
+
+    private List<NeobjavljenClanak> result;
 
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -29,17 +30,16 @@ public class UcitajListuObjavljenihClanaka extends GenericOperation {
     protected void executeOperation(Object params) throws Exception {
         System.out.println(params);
         String where = " WHERE LOWER(naslov) LIKE '%" + params + "%'";
-        result = repo.getAll(new ObjavljenClanak(), where, null);
+        result = repo.getAll(new NeobjavljenClanak(), where, null);
         if (result != null) {
-            for (ObjavljenClanak objavljenClanak : result) {
+            for (NeobjavljenClanak objavljenClanak : result) {
                 objavljenClanak.setAutor((Autor) repo.get(objavljenClanak.getAutor(), null));
                 objavljenClanak.setKategorija((Kategorija) repo.get(objavljenClanak.getKategorija(), null));
             }
         }
     }
-
-    public ArrayList<ObjavljenClanak> getResult() {
+    
+    public List<NeobjavljenClanak> getResult() {
         return result;
     }
-    
 }

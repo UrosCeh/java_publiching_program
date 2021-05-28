@@ -74,6 +74,8 @@ public class Communication {
         Kategorija k = new Kategorija();
         k.setNaziv(naziv);
         
+        System.out.println(k.toString());
+        
         Request request = new Request(Operation.KREIRAJ_NOVU_KATEGORIJU, k);
         sender.send(request);
         Response response = (Response) receiver.receive();
@@ -114,7 +116,7 @@ public class Communication {
     
     public ObjavljenClanak ucitajObjavljeniClanak(int id) throws Exception {
         ObjavljenClanak oc = new ObjavljenClanak();
-        oc.setId(id);
+        oc.setClanakId(id);
         
         Request request = new Request(Operation.UCITAJ_OBJAVLJEN_CLANAK, oc);
         sender.send(request);
@@ -130,7 +132,7 @@ public class Communication {
     
     public NeobjavljenClanak ucitajNeobjavljeniClanak(int id) throws Exception {
         NeobjavljenClanak nc = new NeobjavljenClanak();
-        nc.setId(id);
+        nc.setClanakId(id);
         
         Request request = new Request(Operation.UCITAJ_NEOBJAVLJEN_CLANAK, nc);
         sender.send(request);
@@ -196,26 +198,26 @@ public class Communication {
         }
     }
     
-    public List<Kategorija> ucitajListuKategorija() throws Exception {
+    public ArrayList<Kategorija> ucitajListuKategorija() throws Exception {
         Request request = new Request(Operation.UCITAJ_LISTU_KATEGORIJA, null);
         sender.send(request);
         Response response = (Response) receiver.receive();
         
         if(response.getException() == null) {
-            return (List<Kategorija>) response.getResult();
+            return (ArrayList<Kategorija>) response.getResult();
         }
         else {
             throw response.getException();
         }      
     }
     
-    public List<ObjavljenClanak> ucitajListuObjavljenihClanaka(String s) throws Exception {
-        Request request = new Request(Operation.UCITAJ_LISTU_OBJAVLJENIH_CLANAKA, s);
+    public ArrayList<ObjavljenClanak> ucitajListuObjavljenihClanaka(String s) throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_OBJAVLJENIH_CLANAKA, s.toLowerCase());
         sender.send(request);
         Response response = (Response) receiver.receive();
         
         if(response.getException() == null) {
-            return (List<ObjavljenClanak>) response.getResult();
+            return (ArrayList<ObjavljenClanak>) response.getResult();
         }
         else {
             throw response.getException();

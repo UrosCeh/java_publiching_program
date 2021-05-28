@@ -66,6 +66,12 @@ public class Kategorija implements GenericEntity {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+
     //////////////////////////////////////////////////////////////////////////
     
     

@@ -25,7 +25,7 @@ public class ObrisiClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.delete((NeobjavljenClanak) params, null, null);
+        result = repo.delete((NeobjavljenClanak) params);
     }
     
     public boolean getResult() {

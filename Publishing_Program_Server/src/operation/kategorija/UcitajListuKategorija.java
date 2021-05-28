@@ -26,7 +26,7 @@ public class UcitajListuKategorija extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.getAll(new Kategorija(), null, null, null);
+        result = repo.getAll(new Kategorija(), null, null);
     }
     
     public ArrayList<Kategorija> getResult() {
