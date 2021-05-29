@@ -101,13 +101,13 @@ public class Communication {
         }
     } 
     
-    public List<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
+    public ArrayList<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
         Request request = new Request(Operation.PRONADJI_CLANKE, s);
         sender.send(request);
         Response response = (Response) receiver.receive();
         
         if(response.getException() == null) {
-            return (List<NeobjavljenClanak>) response.getResult();
+            return (ArrayList<NeobjavljenClanak>) response.getResult();
         }
         else {
             throw response.getException();

@@ -59,13 +59,20 @@ public class NeobjavljenClanak extends Clanak {
         sb  .append("'").append(super.getNaslov()).append("',")
             .append("'").append(super.getTekst()).append("',")
             .append("'").append(super.getAutor().getAutorId()).append("',")
-            .append("'").append(rokZaObjavu.format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss"))).append("'");
+            .append("'").append(super.getKategorija().getKategorijaId()).append("',")
+            .append("'").append(rokZaObjavu.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("'");
         return sb.toString();
     }
 
     @Override
     public String columnNamesForUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb  .append("naslov='").append(super.getNaslov()).append("', ")
+            .append("tekst='").append(super.getTekst()).append("', ")
+            .append("kategorijaID='").append(super.getKategorija().getKategorijaId()).append("', ")
+            .append("rokZaObjavu='").append(rokZaObjavu.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("'");
+        
+        return sb.toString();    
     }
 
     @Override

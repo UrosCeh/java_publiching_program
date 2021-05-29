@@ -59,6 +59,7 @@ public class ObjavljenClanak extends Clanak {
         sb  .append("'").append(super.getNaslov()).append("',")
             .append("'").append(super.getTekst()).append("',")
             .append("'").append(super.getAutor().getAutorId()).append("',")
+            .append("'").append(super.getKategorija().getKategorijaId()).append("',")
             .append("'").append(LocalDateTime.now()).append("'");
         return sb.toString();
     }
