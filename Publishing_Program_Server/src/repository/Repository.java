@@ -5,6 +5,7 @@
  */
 package repository;
 
+import domain.classes.NeobjavljenClanak;
 import java.util.ArrayList;
 
 /**

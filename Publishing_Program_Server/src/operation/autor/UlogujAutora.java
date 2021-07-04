@@ -16,9 +16,12 @@ public class UlogujAutora extends GenericOperation {
     private Autor result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof Autor)){
             throw new Exception("Podaci nisu validni!");
+        }
+        if (autor != null) {
+            throw new Exception("Jedan autor je vec ulogovan na ovom klijentu!");
         }
     }
 

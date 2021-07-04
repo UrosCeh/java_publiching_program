@@ -5,6 +5,7 @@
  */
 package operation.neobjavljenClanak;
 
+import domain.classes.Autor;
 import domain.classes.NeobjavljenClanak;
 import operation.GenericOperation;
 
@@ -17,10 +18,14 @@ public class UcitajNeobjavljenClanak extends GenericOperation {
     private NeobjavljenClanak result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof NeobjavljenClanak)){
             throw new Exception("Podaci nisu validni!");
         }
+        if (!autor.isAdmin() && !autor.isPisac()) {
+            throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
+        }
+        
     }
 
     @Override

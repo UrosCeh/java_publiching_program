@@ -16,12 +16,15 @@ public class Request implements Serializable {
     Operation operation;
 //    String arguments;
     Object object;
+    Autor autor;
+    
     public Request() {
     }
 
-    public Request(Operation operation, Object object) {
+    public Request(Operation operation, Object object, Autor autor) {
         this.operation = operation;
         this.object = object;
+        this.autor = autor;
     }
 
     public Operation getOperation() {
@@ -46,5 +49,13 @@ public class Request implements Serializable {
 
     public Object getObject() {
         return object;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 }

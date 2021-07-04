@@ -5,6 +5,7 @@
  */
 package operation;
 
+import domain.classes.Autor;
 import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.impl.DbGeneric;
@@ -20,10 +21,10 @@ public abstract class GenericOperation {
         repo = new DbGeneric();
     }
     
-    public final void execute(Object params) throws Exception{
+    public final void execute(Object params, Autor autor) throws Exception{
         try {
             startTransaction();
-            preconditions(params);
+            preconditions(params, autor);
             executeOperation(params);
             commitTransaction();
         } catch (Exception e) {
@@ -36,18 +37,18 @@ public abstract class GenericOperation {
         
     }
     
-    public final void executeWithoutCommit(Object params) throws Exception{
-        try {
-            startTransaction();
-            preconditions(params);
-            executeOperation(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-            rollbackTransaction();
-            throw e;
-        }
-        
-    }
+//    public final void executeWithoutCommit(Object params) throws Exception{
+//        try {
+//            startTransaction();
+//            preconditions(params);
+//            executeOperation(params);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            rollbackTransaction();
+//            throw e;
+//        }
+//        
+//    }
     
     private void startTransaction() throws Exception {
         ((DbRepository) repo).connect();
@@ -65,7 +66,7 @@ public abstract class GenericOperation {
         ((DbRepository) repo).disconnect();
     }
 
-    protected abstract void preconditions(Object params) throws Exception;
+    protected abstract void preconditions(Object params, Autor autor) throws Exception;
 
     protected abstract void executeOperation(Object params)throws Exception;
 }

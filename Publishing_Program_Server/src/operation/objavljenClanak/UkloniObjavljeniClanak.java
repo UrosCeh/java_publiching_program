@@ -5,6 +5,7 @@
  */
 package operation.objavljenClanak;
 
+import domain.classes.Autor;
 import domain.classes.NeobjavljenClanak;
 import domain.classes.ObjavljenClanak;
 import java.time.LocalDateTime;
@@ -19,9 +20,12 @@ public class UkloniObjavljeniClanak extends GenericOperation {
     private boolean result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof ObjavljenClanak)){
             throw new Exception("Podaci nisu validni!");
+        }
+        if (!autor.isAdmin()) {
+            throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
         }
     }
 

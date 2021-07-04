@@ -19,7 +19,7 @@ import operation.neobjavljenClanak.AzurirajClanak;
 import operation.neobjavljenClanak.KreirajClanak;
 import operation.neobjavljenClanak.ObjaviClanak;
 import operation.neobjavljenClanak.ObrisiClanak;
-import operation.neobjavljenClanak.PronadjiClanke;
+import operation.objavljenClanak.PronadjiClanke;
 import operation.neobjavljenClanak.UcitajNeobjavljenClanak;
 import operation.objavljenClanak.UcitajListuObjavljenihClanaka;
 import operation.objavljenClanak.UcitajObjavljenClanak;
@@ -43,80 +43,87 @@ public class Controller {
         return instance;
     }
 
-    public Autor ulogujAutora(Autor a) throws Exception {
+    public Autor ulogujAutora(Autor a, Autor loggedIn) throws Exception {
         GenericOperation o = new UlogujAutora();
-        o.execute(a);
+        o.execute(a, loggedIn);
         return ((UlogujAutora) o).getResult();
     }
 
-    public boolean kreirajNovuKategoriju(Kategorija k) throws Exception {
+    public boolean kreirajNovuKategoriju(Kategorija k, Autor loggedIn) throws Exception {
         GenericOperation o = new KreirajNovuKategoriju();
         System.out.println(k.toString());
-        o.execute(k);
+        o.execute(k, loggedIn);
         return ((KreirajNovuKategoriju) o).getResult();
     }
 
-    public boolean kreirajClanak(Clanak c) throws Exception {
+    public boolean kreirajClanak(Clanak c, Autor loggedIn) throws Exception {
         GenericOperation o = new KreirajClanak();
-        o.execute(c);
+        o.execute(c, loggedIn);
         return ((KreirajClanak) o).getResult();
     }
     
-    public ArrayList<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
+    
+    
+    // ne trebaju posebne dozvole
+    public ArrayList<ObjavljenClanak> pronadjiClanke(String s) throws Exception {
         GenericOperation o = new PronadjiClanke();
-        o.execute(s);
+        o.execute(s, null);
         return ((PronadjiClanke) o).getResult();
     }
 
     public ObjavljenClanak ucitajObjavljenClanak(ObjavljenClanak c) throws Exception {
         GenericOperation o = new UcitajObjavljenClanak();
-        o.execute(c);
+        o.execute(c, null);
         return ((UcitajObjavljenClanak) o).getResult();
     }
+    //////////////////////////////////////////////
     
-    public NeobjavljenClanak ucitajNeobjavljenClanak(NeobjavljenClanak c) throws Exception {
+    
+    
+    public NeobjavljenClanak ucitajNeobjavljenClanak(NeobjavljenClanak c, Autor loggedIn) throws Exception {
         GenericOperation o = new UcitajNeobjavljenClanak();
-        o.execute(c);
+        o.execute(c, loggedIn);
         return ((UcitajNeobjavljenClanak) o).getResult();
     }
     
-    public boolean azurirajClanak(NeobjavljenClanak c) throws Exception {
+    public boolean azurirajClanak(NeobjavljenClanak c, Autor loggedIn) throws Exception {
         GenericOperation o = new AzurirajClanak();
-        o.execute(c);
+        o.execute(c, loggedIn);
         return ((AzurirajClanak) o).getResult();
     }
     
-    public boolean obrisiClanak(NeobjavljenClanak c) throws Exception {
+    public boolean obrisiClanak(NeobjavljenClanak c, Autor loggedIn) throws Exception {
         GenericOperation o = new ObrisiClanak();
-        o.execute(c);
+        o.execute(c, loggedIn);
         return ((ObrisiClanak) o).getResult();
     }
     
-    public boolean objaviClanak(NeobjavljenClanak c) throws Exception {
+    public boolean objaviClanak(NeobjavljenClanak c, Autor loggedIn) throws Exception {
         GenericOperation o = new ObjaviClanak();
-        o.execute(c);
+        o.execute(c, loggedIn);
         return ((ObjaviClanak) o).getResult();
     }
     
-    public boolean ukloniObjavljeniClanak(ObjavljenClanak c) throws Exception {
+    public boolean ukloniObjavljeniClanak(ObjavljenClanak c, Autor loggedIn) throws Exception {
         GenericOperation o = new UkloniObjavljeniClanak();
-        o.execute(c);
+        o.execute(c, loggedIn);
         return ((UkloniObjavljeniClanak) o).getResult();
     }
     
+    
+    // ne trebaju posebne dozvole
     public ArrayList<Kategorija> ucitajListuKategorija() throws Exception {
         GenericOperation o = new UcitajListuKategorija();
-        o.execute(new Kategorija());
+        o.execute(new Kategorija(), null);
         return ((UcitajListuKategorija) o).getResult();
     }
-    
-    
     
     
     //IZMENI
     public ArrayList<ObjavljenClanak> ucitajListuObjavljenihClanaka(String s) throws Exception {
         GenericOperation o = new UcitajListuObjavljenihClanaka();
-        o.execute(s);
+        o.execute(s, null);
         return ((UcitajListuObjavljenihClanaka) o).getResult();
     }
+    ////////////////////////////////////////////////
 }

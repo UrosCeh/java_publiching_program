@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operation.neobjavljenClanak;
+package operation.objavljenClanak;
 
 import domain.classes.Autor;
 import domain.classes.Kategorija;
 import domain.classes.NeobjavljenClanak;
+import domain.classes.ObjavljenClanak;
 import java.util.ArrayList;
 import java.util.List;
 import operation.GenericOperation;
@@ -18,10 +19,10 @@ import operation.GenericOperation;
  */
 public class PronadjiClanke extends GenericOperation {
 
-    private ArrayList<NeobjavljenClanak> result;
+    private ArrayList<ObjavljenClanak> result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof String)){
             throw new Exception("Podaci nisu validni!");
         }
@@ -33,14 +34,14 @@ public class PronadjiClanke extends GenericOperation {
         String where = " WHERE LOWER(naslov) LIKE '%" + params + "%'";
         result = repo.getAll(new NeobjavljenClanak(), where, null);
         if (result != null) {
-            for (NeobjavljenClanak objavljenClanak : result) {
+            for (ObjavljenClanak objavljenClanak : result) {
                 objavljenClanak.setAutor((Autor) repo.get(objavljenClanak.getAutor(), null));
                 objavljenClanak.setKategorija((Kategorija) repo.get(objavljenClanak.getKategorija(), null));
             }
         }
     }
     
-    public ArrayList<NeobjavljenClanak> getResult() {
+    public ArrayList<ObjavljenClanak> getResult() {
         return result;
     }
 }

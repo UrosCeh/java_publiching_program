@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import view.constants.Constants;
+import view.coordinator.ViewCoordinator;
 
 /**
  *
@@ -45,20 +47,12 @@ public class Communication {
         return instance;
     }
     
-
-    
-//    public List<Clanak> getAllClanak()
-    //operations
-        //Request r = new Request(Operation.IME, prop/null)
-        //sender.send(r)
-        //Response response = (Response) receiver.receive();
-
     public Autor ulogujAutora(String username, String password) throws Exception {
         Autor a = new Autor();
         a.setKorisnickoIme(username);
         a.setLozinka(password);
         
-        Request request = new Request(Operation.ULOGUJ_AUTORA, a);
+        Request request = new Request(Operation.ULOGUJ_AUTORA, a, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -76,7 +70,7 @@ public class Communication {
         
         System.out.println(k.toString());
         
-        Request request = new Request(Operation.KREIRAJ_NOVU_KATEGORIJU, k);
+        Request request = new Request(Operation.KREIRAJ_NOVU_KATEGORIJU, k, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -89,7 +83,7 @@ public class Communication {
     }
     
     public boolean kreirajClanak(NeobjavljenClanak nc) throws Exception {
-        Request request = new Request(Operation.KREIRAJ_CLANAK, nc);
+        Request request = new Request(Operation.KREIRAJ_CLANAK, nc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -102,7 +96,7 @@ public class Communication {
     } 
     
     public ArrayList<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
-        Request request = new Request(Operation.PRONADJI_CLANKE, s);
+        Request request = new Request(Operation.PRONADJI_CLANKE, s, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -118,7 +112,7 @@ public class Communication {
         ObjavljenClanak oc = new ObjavljenClanak();
         oc.setClanakId(id);
         
-        Request request = new Request(Operation.UCITAJ_OBJAVLJEN_CLANAK, oc);
+        Request request = new Request(Operation.UCITAJ_OBJAVLJEN_CLANAK, oc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -134,7 +128,7 @@ public class Communication {
         NeobjavljenClanak nc = new NeobjavljenClanak();
         nc.setClanakId(id);
         
-        Request request = new Request(Operation.UCITAJ_NEOBJAVLJEN_CLANAK, nc);
+        Request request = new Request(Operation.UCITAJ_NEOBJAVLJEN_CLANAK, nc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -147,7 +141,7 @@ public class Communication {
     }
     
     public boolean azurirajClanak(NeobjavljenClanak nc) throws Exception {
-        Request request = new Request(Operation.AZURIRAJ_CLANAK, nc);
+        Request request = new Request(Operation.AZURIRAJ_CLANAK, nc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -160,7 +154,7 @@ public class Communication {
     }
     
     public boolean obrisiClanak(NeobjavljenClanak nc) throws Exception {
-        Request request = new Request(Operation.OBRISI_CLANAK, nc);
+        Request request = new Request(Operation.OBRISI_CLANAK, nc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -173,7 +167,7 @@ public class Communication {
     }
     
     public boolean objaviClanak(NeobjavljenClanak nc) throws Exception {
-        Request request = new Request(Operation.OBJAVI_CLANAK, nc);
+        Request request = new Request(Operation.OBJAVI_CLANAK, nc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -186,7 +180,7 @@ public class Communication {
     }
     
     public boolean ukloniObjavljeniClanak(ObjavljenClanak oc) throws Exception {
-        Request request = new Request(Operation.UKLONI_OBJAVLJENI_CLANAK, oc);
+        Request request = new Request(Operation.UKLONI_OBJAVLJENI_CLANAK, oc, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -199,7 +193,7 @@ public class Communication {
     }
     
     public ArrayList<Kategorija> ucitajListuKategorija() throws Exception {
-        Request request = new Request(Operation.UCITAJ_LISTU_KATEGORIJA, null);
+        Request request = new Request(Operation.UCITAJ_LISTU_KATEGORIJA, null, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         
@@ -212,7 +206,7 @@ public class Communication {
     }
     
     public ArrayList<ObjavljenClanak> ucitajListuObjavljenihClanaka(String s) throws Exception {
-        Request request = new Request(Operation.UCITAJ_LISTU_OBJAVLJENIH_CLANAKA, s.toLowerCase());
+        Request request = new Request(Operation.UCITAJ_LISTU_OBJAVLJENIH_CLANAKA, s.toLowerCase(), (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();
         

@@ -5,6 +5,7 @@
  */
 package operation.kategorija;
 
+import domain.classes.Autor;
 import domain.classes.Kategorija;
 import java.util.ArrayList;
 import operation.GenericOperation;
@@ -18,7 +19,7 @@ public class UcitajListuKategorija extends GenericOperation {
     ArrayList<Kategorija> result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof Kategorija)){
             throw new Exception("Podaci nisu validni!");
         }

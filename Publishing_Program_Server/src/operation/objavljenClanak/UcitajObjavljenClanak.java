@@ -19,7 +19,7 @@ public class UcitajObjavljenClanak extends GenericOperation {
     private ObjavljenClanak result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof ObjavljenClanak)){
             throw new Exception("Podaci nisu validni!");
         }

@@ -46,14 +46,15 @@ public class ProcessClientsRequests extends Thread {
                 try {
                     switch (request.getOperation()) {
                         case ULOGUJ_AUTORA:
-                            response.setResult(Controller.getInstance().ulogujAutora((Autor) request.getObject()));
+                            response.setResult(Controller.getInstance().ulogujAutora((Autor) request.getObject(), request.getAutor()));
                             break;
                         case KREIRAJ_NOVU_KATEGORIJU:
-                            System.out.println(((Kategorija)request.getObject()).toString());
-                            response.setResult(Controller.getInstance().kreirajNovuKategoriju((Kategorija) request.getObject()));
+                            // da li je autor admin
+                            response.setResult(Controller.getInstance().kreirajNovuKategoriju((Kategorija) request.getObject(), request.getAutor()));
                             break;
                         case KREIRAJ_CLANAK:
-                            response.setResult(Controller.getInstance().kreirajClanak((Clanak) request.getObject()));
+                            // da li je autor pisac
+                            response.setResult(Controller.getInstance().kreirajClanak((Clanak) request.getObject(), request.getAutor()));
                             break;
                         case PRONADJI_CLANKE:
                             response.setResult(Controller.getInstance().pronadjiClanke((String) request.getObject()));
@@ -62,19 +63,24 @@ public class ProcessClientsRequests extends Thread {
                             response.setResult(Controller.getInstance().ucitajObjavljenClanak((ObjavljenClanak) request.getObject()));
                             break; 
                         case UCITAJ_NEOBJAVLJEN_CLANAK:
-                            response.setResult(Controller.getInstance().ucitajNeobjavljenClanak((NeobjavljenClanak) request.getObject()));
+                            // da li je autor pisac i njegov je clanak ili je admin
+                            response.setResult(Controller.getInstance().ucitajNeobjavljenClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case AZURIRAJ_CLANAK:
-                            response.setResult(Controller.getInstance().azurirajClanak((NeobjavljenClanak) request.getObject()));
+                            // da li je autor pisac i njegov je clanak
+                            response.setResult(Controller.getInstance().azurirajClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case OBRISI_CLANAK:
-                            response.setResult(Controller.getInstance().obrisiClanak((NeobjavljenClanak) request.getObject()));
+                            // da li je autor pisac i njegov je clanak
+                            response.setResult(Controller.getInstance().obrisiClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case OBJAVI_CLANAK:
-                            response.setResult(Controller.getInstance().objaviClanak((NeobjavljenClanak) request.getObject()));
+                            // da li je autor admin
+                            response.setResult(Controller.getInstance().objaviClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case UKLONI_OBJAVLJENI_CLANAK:
-                            response.setResult(Controller.getInstance().ukloniObjavljeniClanak((ObjavljenClanak) request.getObject()));
+                            // da li je autor admin
+                            response.setResult(Controller.getInstance().ukloniObjavljeniClanak((ObjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case UCITAJ_LISTU_KATEGORIJA:
                             response.setResult(Controller.getInstance().ucitajListuKategorija());

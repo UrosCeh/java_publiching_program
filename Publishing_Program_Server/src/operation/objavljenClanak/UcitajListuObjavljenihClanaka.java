@@ -20,7 +20,7 @@ public class UcitajListuObjavljenihClanaka extends GenericOperation {
     ArrayList<ObjavljenClanak> result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof String)){
             throw new Exception("Podaci nisu validni!");
         }

@@ -5,6 +5,7 @@
  */
 package operation.neobjavljenClanak;
 
+import domain.classes.Autor;
 import domain.classes.NeobjavljenClanak;
 import operation.GenericOperation;
 
@@ -17,9 +18,13 @@ public class AzurirajClanak extends GenericOperation {
     private boolean result;
 
     @Override
-    protected void preconditions(Object params) throws Exception {
+    protected void preconditions(Object params, Autor autor) throws Exception {
         if(params==null || !(params instanceof NeobjavljenClanak)){
             throw new Exception("Podaci nisu validni!");
+        }
+        NeobjavljenClanak nc = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null);
+        if (nc.getAutor().getAutorId() != autor.getAutorId()) {
+            throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
         }
     }
 
