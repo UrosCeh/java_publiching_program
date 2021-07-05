@@ -22,7 +22,8 @@ public class UcitajNeobjavljenClanak extends GenericOperation {
         if(params==null || !(params instanceof NeobjavljenClanak)){
             throw new Exception("Podaci nisu validni!");
         }
-        if (!autor.isAdmin() && !autor.isPisac()) {
+        NeobjavljenClanak nc = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null);
+        if ((autor.isPisac() && autor.getAutorId() != nc.getAutor().getAutorId() ) && !autor.isAdmin()) {
             throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
         }
         
