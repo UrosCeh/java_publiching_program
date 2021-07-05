@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -59,13 +60,13 @@ public class FrmMain extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         menu = new javax.swing.JMenuBar();
         miAdmin = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        miObjaviClanak = new javax.swing.JMenuItem();
+        miUkloniObjavljenClanak = new javax.swing.JMenuItem();
+        miDodajKategoriju = new javax.swing.JMenuItem();
         miPisac = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        miDodajClanak = new javax.swing.JMenuItem();
+        miAzurirajClanak = new javax.swing.JMenuItem();
+        miObrisiClanak = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,27 +151,27 @@ public class FrmMain extends javax.swing.JFrame {
 
         miAdmin.setText("Admin");
 
-        jMenuItem1.setText("jMenuItem1");
-        miAdmin.add(jMenuItem1);
+        miObjaviClanak.setText("Objavi clanak");
+        miAdmin.add(miObjaviClanak);
 
-        jMenuItem2.setText("jMenuItem2");
-        miAdmin.add(jMenuItem2);
+        miUkloniObjavljenClanak.setText("Ukloni objavljen clanak");
+        miAdmin.add(miUkloniObjavljenClanak);
 
-        jMenuItem3.setText("jMenuItem3");
-        miAdmin.add(jMenuItem3);
-
-        jMenuItem4.setText("jMenuItem4");
-        miAdmin.add(jMenuItem4);
+        miDodajKategoriju.setText("Dodaj kategoriju");
+        miAdmin.add(miDodajKategoriju);
 
         menu.add(miAdmin);
 
         miPisac.setText("Pisac");
 
-        jMenuItem5.setText("jMenuItem5");
-        miPisac.add(jMenuItem5);
+        miDodajClanak.setText("Dodaj clanak");
+        miPisac.add(miDodajClanak);
 
-        jMenuItem6.setText("jMenuItem6");
-        miPisac.add(jMenuItem6);
+        miAzurirajClanak.setText("Azuriraj clanak");
+        miPisac.add(miAzurirajClanak);
+
+        miObrisiClanak.setText("Obrisi clanak");
+        miPisac.add(miObrisiClanak);
 
         menu.add(miPisac);
 
@@ -217,16 +218,16 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel lblUser;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenu miAdmin;
+    private javax.swing.JMenuItem miAzurirajClanak;
+    private javax.swing.JMenuItem miDodajClanak;
+    private javax.swing.JMenuItem miDodajKategoriju;
+    private javax.swing.JMenuItem miObjaviClanak;
+    private javax.swing.JMenuItem miObrisiClanak;
     private javax.swing.JMenu miPisac;
+    private javax.swing.JMenuItem miUkloniObjavljenClanak;
     private javax.swing.JPanel pnlAllArticles;
     private javax.swing.JScrollPane pnlArticles;
     private javax.swing.JPanel pnlHeader;
@@ -275,29 +276,42 @@ public class FrmMain extends javax.swing.JFrame {
         return txtSearch;
     }
 
-    public javax.swing.JMenu getMiAdmin() {
+    public javax.swing.JMenu getMenuAdmin() {
         return miAdmin;
     }
-
-    public void setMiAdmin(javax.swing.JMenu meAdmin) {
-        this.miAdmin = meAdmin;
-    }
-
-    public javax.swing.JMenu getMiPisac() {
+    
+    public javax.swing.JMenu getMenuPisac() {
         return miPisac;
-    }
-
-    public void setMiPisac(javax.swing.JMenu mePisac) {
-        this.miPisac = mePisac;
     }
 
     public javax.swing.JMenuBar getMenu() {
         return menu;
     }
 
-    public void setMenu(javax.swing.JMenuBar menu) {
-        this.menu = menu;
+    public JMenuItem getMiAzurirajClanak() {
+        return miAzurirajClanak;
     }
+
+    public JMenuItem getMiDodajClanak() {
+        return miDodajClanak;
+    }
+
+    public JMenuItem getMiDodajKategoriju() {
+        return miDodajKategoriju;
+    }
+
+    public JMenuItem getMiObjaviClanak() {
+        return miObjaviClanak;
+    }
+
+    public JMenuItem getMiObrisiClanak() {
+        return miObrisiClanak;
+    }
+
+    public JMenuItem getMiUkloniObjavljenClanak() {
+        return miUkloniObjavljenClanak;
+    }
+
     
     
 }

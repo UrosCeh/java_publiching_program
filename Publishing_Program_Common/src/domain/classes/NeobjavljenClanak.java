@@ -17,26 +17,15 @@ import java.util.ArrayList;
  */
 public class NeobjavljenClanak extends Clanak {
 
-    private LocalDateTime rokZaObjavu;
-
     public NeobjavljenClanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime rokZaObjavu) {
-        super(clanakId, naslov, tekst, autor, kategorija);
-        this.rokZaObjavu = rokZaObjavu;
+        super(clanakId, naslov, tekst, autor, kategorija, rokZaObjavu);
+    }
+    
+    public NeobjavljenClanak(String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime rokZaObjavu) {
+        super(naslov, tekst, autor, kategorija, rokZaObjavu);
     }
 
     public NeobjavljenClanak() {
-    }
-    
-    public LocalDateTime getDatumIVreme() {
-        return rokZaObjavu;
-    }
-
-    public void setDatumIVreme(LocalDateTime rokZaObjavu) {
-        this.rokZaObjavu = rokZaObjavu;
-    }
-    
-    public String getStringDatumIVreme() {
-        return rokZaObjavu.format(DateTimeFormatter.ofPattern("d.M.yyyy, HH:mm"));
     }
     
     
@@ -60,7 +49,7 @@ public class NeobjavljenClanak extends Clanak {
             .append("'").append(super.getTekst()).append("',")
             .append("'").append(super.getAutor().getAutorId()).append("',")
             .append("'").append(super.getKategorija().getKategorijaId()).append("',")
-            .append("'").append(rokZaObjavu.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("'");
+            .append("'").append(super.getDbStringDatum()).append("'");
         return sb.toString();
     }
 
@@ -70,7 +59,7 @@ public class NeobjavljenClanak extends Clanak {
         sb  .append("naslov='").append(super.getNaslov()).append("', ")
             .append("tekst='").append(super.getTekst()).append("', ")
             .append("kategorijaID='").append(super.getKategorija().getKategorijaId()).append("', ")
-            .append("rokZaObjavu='").append(rokZaObjavu.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("'");
+            .append("rokZaObjavu='").append(super.getDbStringDatum()).append("'");
         
         return sb.toString();    
     }

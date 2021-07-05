@@ -64,29 +64,23 @@ public class MainController {
             autor.setAdmin(false);
             autor.setPisac(false);
         }
-        System.out.println(autor.getIme() + " " + autor.isAdmin() + " " + autor.isPisac());
 
         if (autor.isAdmin() && autor.isPisac()) {
-            System.out.println("usao u i admin i pisac");
             frmMain.getMenu().setVisible(true);
-            frmMain.getMiPisac().setVisible(true);
-            frmMain.getMiAdmin().setVisible(true);
+            frmMain.getMenuPisac().setVisible(true);
+            frmMain.getMenuAdmin().setVisible(true);
         }
         else if (autor.isPisac() && !autor.isAdmin()) {
-//            addHeaderBtns();
-            System.out.println("usao u pisac ne admin");
             frmMain.getMenu().setVisible(true);
-            frmMain.getMiPisac().setVisible(true);
-            frmMain.getMiAdmin().setVisible(false);
+            frmMain.getMenuPisac().setVisible(true);
+            frmMain.getMenuAdmin().setVisible(false);
         }
         else if (autor.isAdmin() && !autor.isPisac()) {
-            System.out.println("usao u admin ne pisac");
             frmMain.getMenu().setVisible(true);
-            frmMain.getMiPisac().setVisible(false);
-            frmMain.getMiAdmin().setVisible(true);
+            frmMain.getMenuPisac().setVisible(false);
+            frmMain.getMenuAdmin().setVisible(true);
         }
         else {
-            System.out.println("usao u ni pisac ni admin");
             frmMain.getMenu().setVisible(false);
         }
         
@@ -116,115 +110,61 @@ public class MainController {
                 addArticles();
             }
         });
-    }   
-    
-    private void addHeaderBtns() {
-        JPanel pnlHeaderWriter = frmMain.getPnlHeaderWriter();
-        int width = 200, height = 50, margin = 10, order = 0;
         
-        JButton btnSeeMyArticles = makeButton("See My Articles", order++, width, height, margin);
-        btnSeeMyArticles.addActionListener(new ActionListener(){
+        frmMain.getMiDodajClanak().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                list all writers articles
-            }
-        });
-        
-        JButton btnAddNewArticle = makeButton("Add New Article", order++, width, height, margin);
-        btnAddNewArticle.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent arg0) {
                 ViewCoordinator.getInstance().openAddArticleForm();
             }
         });
         
-//        pnlHeaderWriter.add(btnLogin);
-        pnlHeaderWriter.add(btnSeeMyArticles);
-        pnlHeaderWriter.add(btnAddNewArticle);
-                
-        
-    }
-    
-    private void addHeaderAdmin() {
-        
-        JPanel pnlHeaderAdmin = frmMain.getPnlHeaderAdmin();
-        int width = 200, height = 20, margin = 4, order = 0;
-        
-        JButton btnSeeAll = makeButton("See All", order++, width, height, margin);
-        btnSeeAll.addActionListener(new ActionListener(){
+        frmMain.getMiAzurirajClanak().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                ViewCoordinator.getInstance().openAddArticleForm();
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openEditArticleForm();
             }
         });
         
-        JButton btnSeePublished = makeButton("See Published", order++, width, height, margin);
-        btnSeePublished.addActionListener(new ActionListener(){
+        frmMain.getMiObrisiClanak().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                ViewCoordinator.getInstance().openAddArticleForm();
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openDeleteArticleForm();
             }
         });
         
-        JButton btnSeeDueUnpublished = makeButton("See Due Unpublished", order++, width, height, margin);
-        btnSeeDueUnpublished.addActionListener(new ActionListener(){
+        frmMain.getMiObjaviClanak().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                ViewCoordinator.getInstance().openAddArticleForm();
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openPublishArticleForm();
             }
         });
         
-        JButton btnSeeUnpublished = makeButton("See Unpublished", order++, width, height, margin);
-        btnSeeUnpublished.addActionListener(new ActionListener(){
+        frmMain.getMiUkloniObjavljenClanak().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                ViewCoordinator.getInstance().openAddArticleForm();
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openUnpublishArticleForm();
             }
         });
         
-        JButton btnAddNewCategory = makeButton("Add New Category", order++, width, height, margin);
-        btnAddNewCategory.addActionListener(new ActionListener(){
+        frmMain.getMiDodajKategoriju().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                ViewCoordinator.getInstance().openAddArticleForm();
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openAddNewCategoryForm();
             }
         });
         
         
-        pnlHeaderAdmin.add(btnSeeAll);
-        pnlHeaderAdmin.add(btnSeePublished);
-        pnlHeaderAdmin.add(btnSeeDueUnpublished);
-        pnlHeaderAdmin.add(btnSeeUnpublished);
-        pnlHeaderAdmin.add(btnAddNewCategory);
-    }
-    
-    private JButton makeButton(String title, int order, int width, int height, int margin) {
-        JButton btn = new JButton(title);
-        btn.setBounds(0, order*(height+margin), width, height);
-        
-        return btn;
-    }
+    }   
     
     private void addArticles() {
         JPanel pnlAllArticles = frmMain.getPnlAllArticles();
         pnlAllArticles.removeAll();
         pnlAllArticles.revalidate();
         pnlAllArticles.repaint();
-//        pnlAllArticles.setBackground(Color.BLACK);
         ArrayList<ObjavljenClanak> articles;
         try {
-            String term = (String) frmMain.getTxtSearch().getText();
-//            String term = (String) ViewCoordinator.getInstance().getParam(Constants.SEARCH_TERM);
+            String term = (String) frmMain.getTxtSearch().getText().trim();
             articles = Communication.getInstance().ucitajListuObjavljenihClanaka(term);
-//            if (term != null) {
-//                ArrayList<ObjavljenClanak> filtered = null;
-//                for (ObjavljenClanak article : articles) {
-//                    if (article.getNaslov().toLowerCase().contains(term.toLowerCase())) {
-//                        filtered.add(article);
-//                    }
-//                }
-//                articles = filtered;
-//            }
             
             for (int i = 0; i < articles.size(); i++) {
                 JPanel pnlArticle = makeArticle(articles.get(i));
@@ -241,13 +181,20 @@ public class MainController {
     private JPanel makeArticle(ObjavljenClanak article) {
         JPanel pnlArticle = new JPanel(new BorderLayout());
             
-        JLabel lblDate = new JLabel(article.getStringDatumIVreme(), SwingConstants.LEADING);
+        JLabel lblDate = new JLabel(article.getStringDatum(), SwingConstants.LEADING);
 
         JLabel lblCategory = new JLabel(article.getKategorija().getNaziv());
 //        JLabel lblTitle = new JLabel("Ovo je neki naslov koji treba da bude dugacak da bih video kako radi jebani swing", SwingConstants.CENTER);
         JLabel lblTitle = new JLabel(article.getNaslov());
         JButton btnRead = new JButton("Read More");
-            btnRead.setPreferredSize(new Dimension(200,35));    
+            btnRead.setPreferredSize(new Dimension(200,35));   
+        btnRead.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                ViewCoordinator.getInstance().openReadArticleForm(article);
+            }
+        });
+        
         JPanel pnlMiddle = new JPanel(new GridBagLayout());
         pnlMiddle.setBackground(Color.white);
         
@@ -265,47 +212,7 @@ public class MainController {
         
         JPanel pnlCenter = new JPanel(new BorderLayout());
         pnlCenter.setBackground(Color.white);
-        
-//        pnlArticle.add(pnlLeft, BorderLayout.WEST);
-//        pnlArticle.add(pnlCenter, BorderLayout.CENTER);
-//        pnlArticle.add(pnlRight, BorderLayout.EAST);
-        
-//        JButton btnEdit = new JButton("Edit/Delete");
-//        btnEdit.setPreferredSize(new Dimension(150,25));
-//        pnlLeft.add(btnEdit);
-//            
-//        JButton btnPublish = new JButton("Publish/Unpublish");
-//        btnPublish.setPreferredSize(new Dimension(150,25));
-//        pnlRight.add(btnPublish);
 
-//        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
-//        if (autor != null) {
-//        System.out.println(autor.toString());
-//            if (!autor.isPisac() || !article.getAutor().equals(autor)) {
-////                System.out.println("pisac i njegov artikal " + article.toString());
-////                JButton btnEdit = new JButton("Edit/Delete");
-////                btnEdit.setPreferredSize(new Dimension(150,25));
-////                pnlLeft.remove(btnEdit);
-//                pnlLeft.remove(btnEdit);
-////                addToGBC(pnlLeft, btnEdit, 0, 0, 0, 30);
-//            }
-//
-//            if (!autor.isAdmin()) {
-////                System.out.println("admin je " + article.toString());
-////                JButton btnPublish = new JButton("Publish/Unpublish");
-////                btnPublish.setPreferredSize(new Dimension(150,25));
-////                pnlRight.remove(btnPublish);
-//                pnlRight.remove(btnPublish);
-//            }
-//        }
-//        else {
-//            pnlLeft.removeAll();
-//            pnlRight.removeAll();
-//        }
-////        if (autor == null) {
-////            pnlLeft.removeAll();
-////            pnlRight.removeAll();
-////        }
         addToGBC(pnlMiddle, lblCategory, 0, 0, -1, 5);
         addToGBC(pnlMiddle, lblTitle, 0, 1, 0, 20);
         addToGBC(pnlMiddle, btnRead, 0, 2, 0, 25);

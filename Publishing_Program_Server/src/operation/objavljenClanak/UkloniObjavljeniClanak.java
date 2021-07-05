@@ -38,7 +38,7 @@ public class UkloniObjavljeniClanak extends GenericOperation {
             nc.setTekst(oc.getTekst());
             nc.setAutor(oc.getAutor());
             nc.setKategorija(oc.getKategorija());
-            nc.setDatumIVreme(LocalDateTime.MAX);
+            nc.setDatum(LocalDateTime.now());
         boolean a = repo.add(nc);
         result = d && a;
     }

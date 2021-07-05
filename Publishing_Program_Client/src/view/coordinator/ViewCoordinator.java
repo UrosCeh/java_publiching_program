@@ -5,11 +5,14 @@
  */
 package view.coordinator;
 
+import domain.classes.Clanak;
 import java.util.HashMap;
 import java.util.Map;
+import view.controller.AddCategoryController;
 import view.controller.ArticleController;
 import view.controller.LoginController;
 import view.controller.MainController;
+import view.form.FrmAddCategory;
 import view.form.FrmArticle;
 import view.form.FrmLogin;
 import view.form.FrmMain;
@@ -48,29 +51,44 @@ public class ViewCoordinator {
 //        mainController.openForm();
     }
     
-    public void openReadArticleForm() {
+    public void openReadArticleForm(Clanak c) {
         ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
-        articleController.openForm(FrmMode.ARTICLE_READ);
+        articleController.openForm(FrmMode.ARTICLE_READ, c);
     }
     
     public void openAddArticleForm() {
         ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
-        articleController.openForm(FrmMode.ARTICLE_ADD);
+        articleController.openForm(FrmMode.ARTICLE_ADD, null);
     }
     
     public void openEditArticleForm() {
         ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
-        articleController.openForm(FrmMode.ARTICLE_EDIT);
+        articleController.openForm(FrmMode.ARTICLE_EDIT, null);
+    }
+    
+    public void openDeleteArticleForm() {
+        ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
+        articleController.openForm(FrmMode.ARTICLE_DELETE, null);
     }
     
     public void openPublishArticleForm() {
         ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
-        articleController.openForm(FrmMode.ARTICLE_PUBLISH);
+        articleController.openForm(FrmMode.ARTICLE_PUBLISH, null);
+    }
+    
+    public void openUnpublishArticleForm() {
+        ArticleController articleController = new ArticleController(new FrmArticle(mainController.getFrmMain(), true));
+        articleController.openForm(FrmMode.ARTICLE_UNPUBLISH, null);
     }
     
     public void openLoginForm() {
         LoginController loginController = new LoginController(new FrmLogin(mainController.getFrmMain(), true));
         loginController.openForm();
+    }
+    
+    public void openAddNewCategoryForm() {
+        AddCategoryController addCategoryController = new AddCategoryController(new FrmAddCategory(mainController.getFrmMain(), true));
+        addCategoryController.openForm();
     }
     
     public void addParam(String name, Object key) {

@@ -6,6 +6,8 @@
 package domain.classes;
 
 import domain.generic.GenericEntity;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -18,13 +20,23 @@ public abstract class Clanak implements GenericEntity {
     private String tekst;
     private Autor autor;
     private Kategorija kategorija;
+    private LocalDateTime datum;
 
-    public Clanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija) {
+    public Clanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime datum) {
         this.clanakId = clanakId;
         this.naslov = naslov;
         this.tekst = tekst;
         this.autor = autor;
         this.kategorija = kategorija;
+        this.datum = datum;
+    }
+    
+    public Clanak(String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime datum) {
+        this.naslov = naslov;
+        this.tekst = tekst;
+        this.autor = autor;
+        this.kategorija = kategorija;
+        this.datum = datum;
     }
     
     public Clanak() {
@@ -70,6 +82,22 @@ public abstract class Clanak implements GenericEntity {
         this.kategorija = kategorija;
     }
 
+    public LocalDateTime getDatum() {
+        return datum;
+    }
+
+    public void setDatum(LocalDateTime datum) {
+        this.datum = datum;
+    }
+    
+    public String getStringDatum() {
+        return datum.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+    
+    public String getDbStringDatum() {
+        return datum.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -96,7 +124,7 @@ public abstract class Clanak implements GenericEntity {
 
     @Override
     public String toString() {
-        return naslov;
+        return autor.toString() + " | " + naslov;
     }
     
     //////////////////////////////////////////////////////////////////////////

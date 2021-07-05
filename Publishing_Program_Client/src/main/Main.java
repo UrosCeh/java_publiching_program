@@ -30,6 +30,7 @@ public class Main {
 //            Autor a = Communication.getInstance().ulogujAutora("adam13", "adam13"); //radi
 //            System.out.println("Autor " + a);
 //            ViewCoordinator.getInstance().addParam(Constants.CURRENT_AUTOR, a);
+            
 
 //            boolean k = Communication.getInstance().kreirajNovuKategoriju("neki cetvrti naziv"); //radi, ako ne posotji ulogovan user baca exception
 //            System.out.println("Kategorija " + k);

@@ -17,27 +17,15 @@ import java.util.ArrayList;
  */
 public class ObjavljenClanak extends Clanak {
       
-    private LocalDateTime datumObjvaljivanja;
-
     public ObjavljenClanak(int clanakId, String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime datumObjvaljivanja) {
-        super(clanakId, naslov, tekst, autor, kategorija);
-        this.datumObjvaljivanja = datumObjvaljivanja;
+        super(clanakId, naslov, tekst, autor, kategorija, datumObjvaljivanja);
+    }
+    
+    public ObjavljenClanak(String naslov, String tekst, Autor autor, Kategorija kategorija, LocalDateTime datumObjvaljivanja) {
+        super(naslov, tekst, autor, kategorija, datumObjvaljivanja);
     }
 
     public ObjavljenClanak() {
-    }
-    
-    public LocalDateTime getDatumIVreme() {
-        return datumObjvaljivanja;
-    }
-
-    public void setDatumIVreme(LocalDateTime datumObjvaljivanja) {
-        this.datumObjvaljivanja = datumObjvaljivanja;
-    }
-
-    
-    public String getStringDatumIVreme() {
-        return datumObjvaljivanja.format(DateTimeFormatter.ofPattern("d.M.yyyy, HH:mm"));
     }
 
     //////////////////////////////////////////////////////////////////////////
