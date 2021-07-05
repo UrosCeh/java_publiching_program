@@ -5,6 +5,9 @@
  */
 package view.form;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author hatch
@@ -30,15 +33,14 @@ public class FrmArticle extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         body = new javax.swing.JTextArea();
-        lblWriter = new javax.swing.JLabel();
-        lblDate = new javax.swing.JLabel();
         txtTitle = new javax.swing.JTextField();
         lblCategory = new javax.swing.JLabel();
         cbCategory = new javax.swing.JComboBox<>();
-        pnlButtons = new javax.swing.JPanel();
-        btnUnpublish = new javax.swing.JButton();
-        btnPublish = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
+        btnAction = new javax.swing.JButton();
+        lblWriter = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        cbArticles = new javax.swing.JComboBox<>();
+        btnSelectArticle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -46,45 +48,22 @@ public class FrmArticle extends javax.swing.JDialog {
         body.setRows(5);
         jScrollPane1.setViewportView(body);
 
-        lblWriter.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblWriter.setText("Pisac");
-
-        lblDate.setText("Rok za objavu");
-
         txtTitle.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lblCategory.setText("Kategorija");
 
         cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnUnpublish.setText("Publish/Unpublish");
+        btnAction.setText("Dugme");
 
-        btnPublish.setText("Delete");
+        lblWriter.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblWriter.setText("Pisac");
 
-        btnSave.setText("Save");
+        lblDate.setText("Rok za objavu");
 
-        javax.swing.GroupLayout pnlButtonsLayout = new javax.swing.GroupLayout(pnlButtons);
-        pnlButtons.setLayout(pnlButtonsLayout);
-        pnlButtonsLayout.setHorizontalGroup(
-            pnlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonsLayout.createSequentialGroup()
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPublish, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111)
-                .addComponent(btnUnpublish, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnlButtonsLayout.setVerticalGroup(
-            pnlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUnpublish, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addComponent(btnPublish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        cbArticles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnSelectArticle.setText("Izaberi clanak");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,41 +72,53 @@ public class FrmArticle extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+                    .addComponent(cbArticles, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(213, 213, 213)
+                                .addComponent(lblCategory)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(272, 272, 272)
+                                .addComponent(btnSelectArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(302, 302, 302)
+                                .addComponent(btnAction, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTitle)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblDate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblWriter, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(lblCategory)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
+                .addComponent(cbArticles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSelectArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCategory))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAction, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWriter)
                     .addComponent(lblDate))
-                .addGap(42, 42, 42)
-                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategory)
-                    .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -135,15 +126,14 @@ public class FrmArticle extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea body;
-    private javax.swing.JButton btnPublish;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUnpublish;
+    private javax.swing.JButton btnAction;
+    private javax.swing.JButton btnSelectArticle;
+    private javax.swing.JComboBox<String> cbArticles;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblWriter;
-    private javax.swing.JPanel pnlButtons;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 
@@ -151,25 +141,17 @@ public class FrmArticle extends javax.swing.JDialog {
         return body;
     }
 
-    public javax.swing.JButton getBtnPublish() {
-        return btnPublish;
-    }
-
-    public javax.swing.JButton getBtnSave() {
-        return btnSave;
-    }
-
-    public javax.swing.JButton getBtnUnpublish() {
-        return btnUnpublish;
+    public javax.swing.JButton getBtnAction() {
+        return btnAction;
     }
 
     public javax.swing.JComboBox<String> getCbCategory() {
         return cbCategory;
     }
 
-    public javax.swing.JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
+//    public javax.swing.JScrollPane getjScrollPane1() {
+//        return jScrollPane1;
+//    }
 
     public javax.swing.JLabel getLblCategory() {
         return lblCategory;
@@ -183,11 +165,16 @@ public class FrmArticle extends javax.swing.JDialog {
         return lblWriter;
     }
 
-    public javax.swing.JPanel getPnlButtons() {
-        return pnlButtons;
-    }
-
     public javax.swing.JTextField getTxtTitle() {
         return txtTitle;
     }
+
+    public JButton getBtnSelectArticle() {
+        return btnSelectArticle;
+    }
+
+    public JComboBox<String> getCbArticles() {
+        return cbArticles;
+    }
+    
 }

@@ -63,16 +63,31 @@ public class MainController {
             autor.setPrezime("");
             autor.setAdmin(false);
             autor.setPisac(false);
+        }
+        System.out.println(autor.getIme() + " " + autor.isAdmin() + " " + autor.isPisac());
+
+        if (autor.isAdmin() && autor.isPisac()) {
+            System.out.println("usao u i admin i pisac");
+            frmMain.getMenu().setVisible(true);
+            frmMain.getMiPisac().setVisible(true);
+            frmMain.getMiAdmin().setVisible(true);
+        }
+        else if (autor.isPisac() && !autor.isAdmin()) {
+//            addHeaderBtns();
+            System.out.println("usao u pisac ne admin");
+            frmMain.getMenu().setVisible(true);
+            frmMain.getMiPisac().setVisible(true);
+            frmMain.getMiAdmin().setVisible(false);
+        }
+        else if (autor.isAdmin() && !autor.isPisac()) {
+            System.out.println("usao u admin ne pisac");
+            frmMain.getMenu().setVisible(true);
+            frmMain.getMiPisac().setVisible(false);
+            frmMain.getMiAdmin().setVisible(true);
+        }
+        else {
+            System.out.println("usao u ni pisac ni admin");
             frmMain.getMenu().setVisible(false);
-        }
-        
-        if (autor.isPisac()) {
-            addHeaderBtns();
-//            frmMain.getMePisac().setVisible(false);
-        }
-        if (autor.isAdmin()) {
-            addHeaderAdmin();
-//            frmMain.getMeAdmin().setVisible(false);
         }
         
         
@@ -81,7 +96,7 @@ public class MainController {
     }
 
     private void addActionListeners(Autor autor) {
-        if (autor != null) { 
+        if (autor != null) {
             frmMain.getBtnLogin().setText("Logout");
         }
         else{
@@ -92,6 +107,13 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 ViewCoordinator.getInstance().openLoginForm();
+            }
+        });
+        
+        frmMain.getBtnSearch().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                addArticles();
             }
         });
     }   
@@ -185,20 +207,24 @@ public class MainController {
     
     private void addArticles() {
         JPanel pnlAllArticles = frmMain.getPnlAllArticles();
+        pnlAllArticles.removeAll();
+        pnlAllArticles.revalidate();
+        pnlAllArticles.repaint();
 //        pnlAllArticles.setBackground(Color.BLACK);
         ArrayList<ObjavljenClanak> articles;
         try {
-            articles = Communication.getInstance().ucitajListuObjavljenihClanaka("");
-            String term = (String) ViewCoordinator.getInstance().getParam(Constants.SEARCH_TERM);
-            if (term != null) {
-                ArrayList<ObjavljenClanak> filtered = null;
-                for (ObjavljenClanak article : articles) {
-                    if (article.getNaslov().toLowerCase().contains(term.toLowerCase())) {
-                        filtered.add(article);
-                    }
-                }
-                articles = filtered;
-            }
+            String term = (String) frmMain.getTxtSearch().getText();
+//            String term = (String) ViewCoordinator.getInstance().getParam(Constants.SEARCH_TERM);
+            articles = Communication.getInstance().ucitajListuObjavljenihClanaka(term);
+//            if (term != null) {
+//                ArrayList<ObjavljenClanak> filtered = null;
+//                for (ObjavljenClanak article : articles) {
+//                    if (article.getNaslov().toLowerCase().contains(term.toLowerCase())) {
+//                        filtered.add(article);
+//                    }
+//                }
+//                articles = filtered;
+//            }
             
             for (int i = 0; i < articles.size(); i++) {
                 JPanel pnlArticle = makeArticle(articles.get(i));
@@ -244,42 +270,42 @@ public class MainController {
 //        pnlArticle.add(pnlCenter, BorderLayout.CENTER);
 //        pnlArticle.add(pnlRight, BorderLayout.EAST);
         
-        JButton btnEdit = new JButton("Edit/Delete");
-        btnEdit.setPreferredSize(new Dimension(150,25));
-        pnlLeft.add(btnEdit);
-            
-        JButton btnPublish = new JButton("Publish/Unpublish");
-        btnPublish.setPreferredSize(new Dimension(150,25));
-        pnlRight.add(btnPublish);
+//        JButton btnEdit = new JButton("Edit/Delete");
+//        btnEdit.setPreferredSize(new Dimension(150,25));
+//        pnlLeft.add(btnEdit);
+//            
+//        JButton btnPublish = new JButton("Publish/Unpublish");
+//        btnPublish.setPreferredSize(new Dimension(150,25));
+//        pnlRight.add(btnPublish);
 
-        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
-        if (autor != null) {
-        System.out.println(autor.toString());
-            if (!autor.isPisac() || !article.getAutor().equals(autor)) {
-//                System.out.println("pisac i njegov artikal " + article.toString());
-//                JButton btnEdit = new JButton("Edit/Delete");
-//                btnEdit.setPreferredSize(new Dimension(150,25));
+//        Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
+//        if (autor != null) {
+//        System.out.println(autor.toString());
+//            if (!autor.isPisac() || !article.getAutor().equals(autor)) {
+////                System.out.println("pisac i njegov artikal " + article.toString());
+////                JButton btnEdit = new JButton("Edit/Delete");
+////                btnEdit.setPreferredSize(new Dimension(150,25));
+////                pnlLeft.remove(btnEdit);
 //                pnlLeft.remove(btnEdit);
-                pnlLeft.remove(btnEdit);
-//                addToGBC(pnlLeft, btnEdit, 0, 0, 0, 30);
-            }
-
-            if (!autor.isAdmin()) {
-//                System.out.println("admin je " + article.toString());
-//                JButton btnPublish = new JButton("Publish/Unpublish");
-//                btnPublish.setPreferredSize(new Dimension(150,25));
+////                addToGBC(pnlLeft, btnEdit, 0, 0, 0, 30);
+//            }
+//
+//            if (!autor.isAdmin()) {
+////                System.out.println("admin je " + article.toString());
+////                JButton btnPublish = new JButton("Publish/Unpublish");
+////                btnPublish.setPreferredSize(new Dimension(150,25));
+////                pnlRight.remove(btnPublish);
 //                pnlRight.remove(btnPublish);
-                pnlRight.remove(btnPublish);
-            }
-        }
-        else {
-            pnlLeft.removeAll();
-            pnlRight.removeAll();
-        }
-//        if (autor == null) {
+//            }
+//        }
+//        else {
 //            pnlLeft.removeAll();
 //            pnlRight.removeAll();
 //        }
+////        if (autor == null) {
+////            pnlLeft.removeAll();
+////            pnlRight.removeAll();
+////        }
         addToGBC(pnlMiddle, lblCategory, 0, 0, -1, 5);
         addToGBC(pnlMiddle, lblTitle, 0, 1, 0, 20);
         addToGBC(pnlMiddle, btnRead, 0, 2, 0, 25);

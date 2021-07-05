@@ -26,11 +26,30 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="834" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="cbArticles" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                              <Component id="lblCategory" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbCategory" min="-2" pref="270" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                              <Component id="btnSelectArticle" min="-2" pref="264" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
+                              <Component id="btnAction" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtTitle" alignment="1" max="32767" attributes="0"/>
-                          <Component id="pnlButtons" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTitle" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="lblDate" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
@@ -41,35 +60,32 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
-              <Component id="lblCategory" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="cbCategory" min="-2" pref="270" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cbArticles" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnSelectArticle" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="txtTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cbCategory" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCategory" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="525" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnAction" pref="41" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblWriter" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Component id="txtTitle" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCategory" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbCategory" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="536" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="pnlButtons" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,17 +106,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblWriter">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="11"/>
-        <Property name="text" type="java.lang.String" value="Pisac"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDate">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Rok za objavu"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtTitle">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
@@ -126,52 +131,41 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Container class="javax.swing.JPanel" name="pnlButtons">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Component id="btnSave" min="-2" pref="200" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnPublish" min="-2" pref="200" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                  <Component id="btnUnpublish" min="-2" pref="200" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnUnpublish" pref="54" max="32767" attributes="0"/>
-                      <Component id="btnPublish" max="32767" attributes="0"/>
-                      <Component id="btnSave" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="btnUnpublish">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Publish/Unpublish"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnPublish">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Delete"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnSave">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Save"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
+    <Component class="javax.swing.JButton" name="btnAction">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dugme"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblWriter">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="Pisac"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rok za objavu"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbArticles">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSelectArticle">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Izaberi clanak"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

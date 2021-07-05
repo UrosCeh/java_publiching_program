@@ -11,7 +11,7 @@ package view.constants;
  */
 public class Constants {
     public static final String CURRENT_AUTOR="CURRENT_AUTOR";
-    public static final String SEARCH_TERM="SEARCH_TERM";
+//    public static final String SEARCH_TERM="SEARCH_TERM";
 //    public static final String PARAM_PRODUCT="PRODUCT";
 //    public static final String FORM_ALL_PRODUCT="FORM_ALL_PRODUCT";
 }

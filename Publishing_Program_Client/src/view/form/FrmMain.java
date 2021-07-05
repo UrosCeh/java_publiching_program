@@ -49,7 +49,6 @@ public class FrmMain extends javax.swing.JFrame {
 
         pnlHeader = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
-        cbCategory = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
         pnlHeaderWriter = new javax.swing.JPanel();
         pnlHeaderAdmin = new javax.swing.JPanel();
@@ -59,20 +58,18 @@ public class FrmMain extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
         menu = new javax.swing.JMenuBar();
-        meAdmin = new javax.swing.JMenu();
+        miAdmin = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        mePisac = new javax.swing.JMenu();
+        miPisac = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtSearch.setFont(new java.awt.Font("Fira Sans Semi-Light", 0, 18)); // NOI18N
-
-        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSearch.setText("Search");
 
@@ -105,12 +102,14 @@ public class FrmMain extends javax.swing.JFrame {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addComponent(pnlHeaderWriter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(401, 401, 401)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlHeaderLayout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlHeaderLayout.createSequentialGroup()
+                        .addGap(438, 438, 438)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlHeaderAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(125, 125, 125))
         );
@@ -122,9 +121,8 @@ public class FrmMain extends javax.swing.JFrame {
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addGap(37, 37, 37))
                     .addComponent(pnlHeaderWriter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -150,31 +148,31 @@ public class FrmMain extends javax.swing.JFrame {
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblUser.setText("Gost");
 
-        meAdmin.setText("Admin");
+        miAdmin.setText("Admin");
 
         jMenuItem1.setText("jMenuItem1");
-        meAdmin.add(jMenuItem1);
+        miAdmin.add(jMenuItem1);
 
         jMenuItem2.setText("jMenuItem2");
-        meAdmin.add(jMenuItem2);
+        miAdmin.add(jMenuItem2);
 
         jMenuItem3.setText("jMenuItem3");
-        meAdmin.add(jMenuItem3);
+        miAdmin.add(jMenuItem3);
 
         jMenuItem4.setText("jMenuItem4");
-        meAdmin.add(jMenuItem4);
+        miAdmin.add(jMenuItem4);
 
-        menu.add(meAdmin);
+        menu.add(miAdmin);
 
-        mePisac.setText("Pisac");
+        miPisac.setText("Pisac");
 
         jMenuItem5.setText("jMenuItem5");
-        mePisac.add(jMenuItem5);
+        miPisac.add(jMenuItem5);
 
         jMenuItem6.setText("jMenuItem6");
-        mePisac.add(jMenuItem6);
+        miPisac.add(jMenuItem6);
 
-        menu.add(mePisac);
+        menu.add(miPisac);
 
         setJMenuBar(menu);
 
@@ -192,7 +190,7 @@ public class FrmMain extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlArticles, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(pnlArticles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1854, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -219,7 +217,6 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -227,9 +224,9 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel lblUser;
-    private javax.swing.JMenu meAdmin;
-    private javax.swing.JMenu mePisac;
     private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu miAdmin;
+    private javax.swing.JMenu miPisac;
     private javax.swing.JPanel pnlAllArticles;
     private javax.swing.JScrollPane pnlArticles;
     private javax.swing.JPanel pnlHeader;
@@ -248,10 +245,6 @@ public class FrmMain extends javax.swing.JFrame {
 
     public javax.swing.JButton getBtnSearch() {
         return btnSearch;
-    }
-
-    public javax.swing.JComboBox<String> getCbCategory() {
-        return cbCategory;
     }
 
     public javax.swing.JLabel getLblUser() {
@@ -282,20 +275,20 @@ public class FrmMain extends javax.swing.JFrame {
         return txtSearch;
     }
 
-    public javax.swing.JMenu getMeAdmin() {
-        return meAdmin;
+    public javax.swing.JMenu getMiAdmin() {
+        return miAdmin;
     }
 
-    public void setMeAdmin(javax.swing.JMenu meAdmin) {
-        this.meAdmin = meAdmin;
+    public void setMiAdmin(javax.swing.JMenu meAdmin) {
+        this.miAdmin = meAdmin;
     }
 
-    public javax.swing.JMenu getMePisac() {
-        return mePisac;
+    public javax.swing.JMenu getMiPisac() {
+        return miPisac;
     }
 
-    public void setMePisac(javax.swing.JMenu mePisac) {
-        this.mePisac = mePisac;
+    public void setMiPisac(javax.swing.JMenu mePisac) {
+        this.miPisac = mePisac;
     }
 
     public javax.swing.JMenuBar getMenu() {

@@ -25,11 +25,11 @@ import view.coordinator.ViewCoordinator;
 public class Main {
 
     public static void main(String[] args) {
-        try {
-//            ViewCoordinator.getInstance().openMainForm();
-            Autor a = Communication.getInstance().ulogujAutora("adam13", "adam13"); //radi
-            System.out.println("Autor " + a);
-            ViewCoordinator.getInstance().addParam(Constants.CURRENT_AUTOR, a);
+        ViewCoordinator.getInstance().openMainForm();
+//        try {
+//            Autor a = Communication.getInstance().ulogujAutora("adam13", "adam13"); //radi
+//            System.out.println("Autor " + a);
+//            ViewCoordinator.getInstance().addParam(Constants.CURRENT_AUTOR, a);
 
 //            boolean k = Communication.getInstance().kreirajNovuKategoriju("neki cetvrti naziv"); //radi, ako ne posotji ulogovan user baca exception
 //            System.out.println("Kategorija " + k);
@@ -51,8 +51,8 @@ public class Main {
 //            boolean t = Communication.getInstance().objaviClanak(nc);
 //            System.out.println(t);
 
-            ObjavljenClanak oc = Communication.getInstance().ucitajObjavljeniClanak(4); //radi
-            System.out.println("ucitajOC " + oc);
+//            ObjavljenClanak oc = Communication.getInstance().ucitajObjavljeniClanak(4); //radi
+//            System.out.println("ucitajOC " + oc);
             
 //            ArrayList<ObjavljenClanak> ocLista = Communication.getInstance().ucitajListuObjavljenihClanaka("naslov"); // radi
 //            for (ObjavljenClanak objavljenClanak : ocLista) {
@@ -77,13 +77,13 @@ public class Main {
 //            boolean dnc = Communication.getInstance().obrisiClanak(nc);
 //            System.out.println(dnc);
             
-            boolean uoc = Communication.getInstance().ukloniObjavljeniClanak(oc);
-            System.out.println(uoc);
+//            boolean uoc = Communication.getInstance().ukloniObjavljeniClanak(oc);
+//            System.out.println(uoc);
 
            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println(ex.getMessage());
-        }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            System.out.println(ex.getMessage());
+//        }
     }
 }
