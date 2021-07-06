@@ -74,14 +74,26 @@ public class ArticleController {
                 break;
             case ARTICLE_DELETE:
                 frmArticle.getBtnAction().setText("Obrisi clanak");
+                frmArticle.getTxtBody().setEditable(false);
+                frmArticle.getTxtBody().setBackground(new Color(245, 245, 245));
+                frmArticle.getTxtTitle().setEditable(false);
+                frmArticle.getCbCategory().setEnabled(false);
                 frmArticle.getPnlSetDateTime().setVisible(false);
                 break;
             case ARTICLE_PUBLISH:
                 frmArticle.getBtnAction().setText("Objavi clanak");
+                frmArticle.getTxtBody().setEditable(false);
+                frmArticle.getTxtBody().setBackground(new Color(245, 245, 245));
+                frmArticle.getTxtTitle().setEditable(false);
+                frmArticle.getCbCategory().setEnabled(false);
                 frmArticle.getPnlSetDateTime().setVisible(false);
                 break;
             case ARTICLE_UNPUBLISH:
                 frmArticle.getBtnAction().setText("Ukloni objvljen clanak");
+                frmArticle.getTxtBody().setEditable(false);
+                frmArticle.getTxtBody().setBackground(new Color(245, 245, 245));
+                frmArticle.getTxtTitle().setEditable(false);
+                frmArticle.getCbCategory().setEnabled(false);
                 frmArticle.getPnlSetDateTime().setVisible(false);
                 break;
         }
@@ -99,11 +111,18 @@ public class ArticleController {
                 break;
             case ARTICLE_EDIT:
             case ARTICLE_DELETE:
-            case ARTICLE_PUBLISH:
                 frmArticle.getCbArticles().removeAllItems();
                 ArrayList<NeobjavljenClanak> neobjavljeniClanci = Communication.getInstance().pronadjiClanke("");
                 for (NeobjavljenClanak neobjavljenClanak : neobjavljeniClanci) {
-                    // TODO - ako pripada piscu
+                    if (((Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR)).equals(neobjavljenClanak.getAutor())) {
+                        frmArticle.getCbArticles().addItem(neobjavljenClanak);
+                    }
+                }
+                break;
+            case ARTICLE_PUBLISH:
+                frmArticle.getCbArticles().removeAllItems();
+                ArrayList<NeobjavljenClanak> neobjavljeniClanciObjavljivanje = Communication.getInstance().pronadjiClanke("");
+                for (NeobjavljenClanak neobjavljenClanak : neobjavljeniClanciObjavljivanje) {
                     frmArticle.getCbArticles().addItem(neobjavljenClanak);
                 }
                 break;
@@ -155,8 +174,20 @@ public class ArticleController {
                             Autor autor = (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR);
                             Kategorija kategorija = (Kategorija) frmArticle.getCbCategory().getSelectedItem();
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                            LocalDateTime datumVreme = LocalDateTime.parse(frmArticle.getTxtDateTime().getText(), formatter);
+                            LocalDateTime datumVreme;
+                            try {
+                                datumVreme = LocalDateTime.parse(frmArticle.getTxtDateTime().getText(), formatter);
+                            }
+                            catch (Exception ex) {
+                                frmArticle.showErrorMessage("Datum i vreme moraju biti uneti u datom formatu (npr. 2021-07-21 13:15)");
+                                return;
+                            }
                             NeobjavljenClanak clanak = new NeobjavljenClanak(naslov, tekst, autor, kategorija, datumVreme);
+                            
+                            if (clanak.getNaslov().trim().equals("") || clanak.getTekst().trim().equals("")) {
+                                frmArticle.showErrorMessage("Naslov i tekst clanka ne smeju biti prazni");
+                                return;
+                            }
                             
                             boolean success = Communication.getInstance().kreirajClanak(clanak);
                             if (success) {
@@ -180,7 +211,20 @@ public class ArticleController {
                             clanak.setKategorija((Kategorija) frmArticle.getCbCategory().getSelectedItem());
                             
                                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                            clanak.setDatum(LocalDateTime.parse(frmArticle.getTxtDateTime().getText(), formatter));
+                            LocalDateTime datumVreme;
+                            try {
+                                datumVreme = LocalDateTime.parse(frmArticle.getTxtDateTime().getText(), formatter);
+                            }
+                            catch (Exception ex) {
+                                frmArticle.showErrorMessage("Datum i vreme moraju biti uneti u datom formatu (npr. 2021-07-21 13:15)");
+                                return;
+                            }
+                            clanak.setDatum(datumVreme);
+                            
+                            if (clanak.getNaslov().trim().equals("") || clanak.getTekst().trim().equals("")) {
+                                frmArticle.showErrorMessage("Naslov i tekst clanka ne smeju biti prazni!");
+                                return;
+                            }
                                                         
                             boolean success = Communication.getInstance().azurirajClanak(clanak);
                             if (success) {

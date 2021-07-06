@@ -48,6 +48,10 @@ public class AddCategoryController {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 try {
+                    if (frmAddCategory.getTxtName().getText().trim().equals("")) {
+                        frmAddCategory.showErrorMessage("Naziv kategorije ne sme biti prazan!");
+                        return;
+                    }
                     boolean success = Communication.getInstance().kreirajNovuKategoriju(frmAddCategory.getTxtName().getText());
                     if (success) {
                         frmAddCategory.showInfoMessage("Uspesno ste dodali novu kategoriju");
