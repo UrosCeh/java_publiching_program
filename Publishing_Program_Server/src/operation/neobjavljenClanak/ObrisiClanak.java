@@ -30,7 +30,12 @@ public class ObrisiClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.delete((NeobjavljenClanak) params);
+        try {
+            result = repo.delete((NeobjavljenClanak) params);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Sistem ne moze da obrise clanak.");
+        }
     }
     
     public boolean getResult() {

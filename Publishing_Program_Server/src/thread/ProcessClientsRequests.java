@@ -59,8 +59,8 @@ public class ProcessClientsRequests extends Thread {
                             // da li je autor pisac
                             response.setResult(Controller.getInstance().kreirajClanak((Clanak) request.getObject(), request.getAutor()));
                             break;
-                        case PRONADJI_CLANKE:
-                            response.setResult(Controller.getInstance().pronadjiClanke((String) request.getObject(), request.getAutor()));
+                        case UCITAJ_LISTU_NEOBJAVLJENIH_CLANAKA:
+                            response.setResult(Controller.getInstance().ucitajListuNeobjavljenihClanaka((String) request.getObject(), request.getAutor()));
                             break; 
                         case UCITAJ_OBJAVLJEN_CLANAK:
                             response.setResult(Controller.getInstance().ucitajObjavljenClanak((ObjavljenClanak) request.getObject()));

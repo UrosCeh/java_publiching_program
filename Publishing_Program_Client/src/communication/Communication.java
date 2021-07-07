@@ -106,19 +106,6 @@ public class Communication {
         else {
             throw response.getException();
         }
-    } 
-    
-    public ArrayList<NeobjavljenClanak> pronadjiClanke(String s) throws Exception {
-        Request request = new Request(Operation.PRONADJI_CLANKE, s, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        
-        if(response.getException() == null) {
-            return (ArrayList<NeobjavljenClanak>) response.getResult();
-        }
-        else {
-            throw response.getException();
-        }      
     }
     
     public ObjavljenClanak ucitajObjavljeniClanak(int id) throws Exception {
@@ -225,6 +212,19 @@ public class Communication {
         
         if(response.getException() == null) {
             return (ArrayList<ObjavljenClanak>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }      
+    }
+    
+    public ArrayList<NeobjavljenClanak> ucitajListuNeobjavljenihClanaka(String s) throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_NEOBJAVLJENIH_CLANAKA, s, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (ArrayList<NeobjavljenClanak>) response.getResult();
         }
         else {
             throw response.getException();

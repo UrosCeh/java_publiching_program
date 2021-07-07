@@ -24,13 +24,19 @@ public class AzurirajClanak extends GenericOperation {
         }
         NeobjavljenClanak nc = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null);
         if (nc.getAutor().getAutorId() != autor.getAutorId()) {
-            throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
+            throw new Exception("Nemate dozvolu da izmenite dati clanak!");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.update((NeobjavljenClanak) params);
+        try {
+            result = repo.update((NeobjavljenClanak) params);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Sistem ne moze da izmeni clanak.");
+        }
+        
     }
     
     public boolean getResult() {

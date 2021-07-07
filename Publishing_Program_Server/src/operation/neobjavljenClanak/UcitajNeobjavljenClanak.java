@@ -31,7 +31,12 @@ public class UcitajNeobjavljenClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null);
+        try {
+            result = (NeobjavljenClanak) repo.get((NeobjavljenClanak) params, null);
+        } catch (Exception e) {
+            throw new Exception("Sistem ne moze da ucita clanak.");
+        }
+        
     }
     
     public NeobjavljenClanak getResult() {

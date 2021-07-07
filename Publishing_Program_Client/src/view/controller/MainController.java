@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -64,25 +65,29 @@ public class MainController {
             autor.setAdmin(false);
             autor.setPisac(false);
         }
+        
+        frmMain.getMenu().setVisible(autor.isAdmin() || autor.isPisac());
+        frmMain.getMenuPisac().setVisible(autor.isPisac());
+        frmMain.getMenuAdmin().setVisible(autor.isAdmin());
 
-        if (autor.isAdmin() && autor.isPisac()) {
-            frmMain.getMenu().setVisible(true);
-            frmMain.getMenuPisac().setVisible(true);
-            frmMain.getMenuAdmin().setVisible(true);
-        }
-        else if (autor.isPisac() && !autor.isAdmin()) {
-            frmMain.getMenu().setVisible(true);
-            frmMain.getMenuPisac().setVisible(true);
-            frmMain.getMenuAdmin().setVisible(false);
-        }
-        else if (autor.isAdmin() && !autor.isPisac()) {
-            frmMain.getMenu().setVisible(true);
-            frmMain.getMenuPisac().setVisible(false);
-            frmMain.getMenuAdmin().setVisible(true);
-        }
-        else {
-            frmMain.getMenu().setVisible(false);
-        }
+//        if (autor.isAdmin() && autor.isPisac()) {
+//            frmMain.getMenu().setVisible(true);
+//            frmMain.getMenuPisac().setVisible(true);
+//            frmMain.getMenuAdmin().setVisible(true);
+//        }
+//        else if (autor.isPisac() && !autor.isAdmin()) {
+//            frmMain.getMenu().setVisible(true);
+//            frmMain.getMenuPisac().setVisible(true);
+//            frmMain.getMenuAdmin().setVisible(false);
+//        }
+//        else if (autor.isAdmin() && !autor.isPisac()) {
+//            frmMain.getMenu().setVisible(true);
+//            frmMain.getMenuPisac().setVisible(false);
+//            frmMain.getMenuAdmin().setVisible(true);
+//        }
+//        else {
+//            frmMain.getMenu().setVisible(false);
+//        }
         
         
         setUser(autor);
@@ -185,6 +190,12 @@ public class MainController {
         try {
             String term = (String) frmMain.getTxtSearch().getText().trim();
             articles = Communication.getInstance().ucitajListuObjavljenihClanaka(term);
+            if (!term.equals("") && articles.size() == 0) {
+                JOptionPane.showMessageDialog(frmMain, "Sistem nije pronasao nijedan clanak koji odgovara kriterijumu");
+                frmMain.getTxtSearch().setText("");
+                addArticles();
+                return;
+            }
             frmMain.getPnlAllArticles().setPreferredSize(new Dimension(1000, articles.size()*220));
             for (int i = 0; i < articles.size(); i++) {
                 JPanel pnlArticle = makeArticle(articles.get(i));

@@ -112,16 +112,16 @@ public class ArticleController {
             case ARTICLE_EDIT:
             case ARTICLE_DELETE:
                 frmArticle.getCbArticles().removeAllItems();
-                ArrayList<NeobjavljenClanak> neobjavljeniClanci = Communication.getInstance().pronadjiClanke("");
+                ArrayList<NeobjavljenClanak> neobjavljeniClanci = Communication.getInstance().ucitajListuNeobjavljenihClanaka("");
                 for (NeobjavljenClanak neobjavljenClanak : neobjavljeniClanci) {
-                    if (((Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR)).equals(neobjavljenClanak.getAutor())) {
+//                    if (((Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR)).equals(neobjavljenClanak.getAutor())) {
                         frmArticle.getCbArticles().addItem(neobjavljenClanak);
-                    }
+//                    }
                 }
                 break;
             case ARTICLE_PUBLISH:
                 frmArticle.getCbArticles().removeAllItems();
-                ArrayList<NeobjavljenClanak> neobjavljeniClanciObjavljivanje = Communication.getInstance().pronadjiClanke("");
+                ArrayList<NeobjavljenClanak> neobjavljeniClanciObjavljivanje = Communication.getInstance().ucitajListuNeobjavljenihClanaka("");
                 for (NeobjavljenClanak neobjavljenClanak : neobjavljeniClanciObjavljivanje) {
                     frmArticle.getCbArticles().addItem(neobjavljenClanak);
                 }

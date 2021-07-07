@@ -31,7 +31,9 @@ public class UlogujAutora extends GenericOperation {
         String username = ((Autor) params).getKorisnickoIme();
         String password = ((Autor) params).getLozinka();
         Autor autor = (Autor) repo.get(params, "korisnickoIme = '" + username + "'");
-        
+        if (ServerViewController.getInstance().isAuthorLogged(autor)) {
+            throw new Exception("Autor je vec ulogovan na sistem!");
+        }
         if (autor.getLozinka().equals(password)) {
             ServerViewController.getInstance().loginAuthor(autor);
             result = autor;

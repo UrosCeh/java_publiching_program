@@ -79,7 +79,7 @@ public class LoginController {
 
                         Autor autor = Communication.getInstance().ulogujAutora(username, password);
 
-                        JOptionPane.showMessageDialog(frmLogin, "Uspesno ste se ulogovali!", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(frmLogin, "Uspesan pristup!", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
 
                         frmLogin.dispose();
                         ViewCoordinator.getInstance().addParam(Constants.CURRENT_AUTOR, autor);

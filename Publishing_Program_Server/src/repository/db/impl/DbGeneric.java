@@ -147,37 +147,4 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             throw e;
         }
     }
-    
-    @Override
-    public void addWithGenKeys(GenericEntity g, String table, String columns, String values) throws Exception {
-        try {
-            Connection connection = DbConnectionFactory.getInstance().getConnection();
-            StringBuilder sb = new StringBuilder();
-            sb.append("INSERT INTO ");
-                    if(table!=null) sb.append(table);
-                    else sb.append(g.getTableName());
-                    
-                    sb.append("(");
-                    if(columns!=null) sb.append(columns);
-                    else sb.append(g.columnNamesForInsert());
-                    sb.append(")");
-                    
-                    sb.append(" VALUES(");
-                    if(values!=null) sb.append(values);
-                    else sb.append(g.getInsertValues());
-                    sb.append(")");
-            String query = sb.toString();
-            System.out.println(query);
-            Statement s = connection.createStatement();
-            s.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = s.getGeneratedKeys();
-            rs.next();
-            int id = rs.getInt(1);
-            g.setId(id);
-            s.close();
-
-        } catch (Exception e) {
-            throw e;
-        }
-    }
 }

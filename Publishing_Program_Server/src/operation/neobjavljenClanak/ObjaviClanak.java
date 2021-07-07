@@ -30,15 +30,21 @@ public class ObjaviClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        NeobjavljenClanak nc = (NeobjavljenClanak) params;
-        boolean d = repo.delete(nc);
-        ObjavljenClanak oc = new ObjavljenClanak();
-            oc.setNaslov(nc.getNaslov());
-            oc.setTekst(nc.getTekst());
-            oc.setAutor(nc.getAutor());
-            oc.setKategorija(nc.getKategorija());
-        boolean a = repo.add(oc);
-        result = d && a;
+        try {
+            NeobjavljenClanak nc = (NeobjavljenClanak) params;
+            boolean d = repo.delete(nc);
+            ObjavljenClanak oc = new ObjavljenClanak();
+                oc.setNaslov(nc.getNaslov());
+                oc.setTekst(nc.getTekst());
+                oc.setAutor(nc.getAutor());
+                oc.setKategorija(nc.getKategorija());
+            boolean a = repo.add(oc);
+            result = d && a;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Sistem ne moze da objavi clanak.");
+        }
+        
     }
     
     public boolean getResult() {

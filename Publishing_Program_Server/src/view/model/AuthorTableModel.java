@@ -69,5 +69,13 @@ public class AuthorTableModel extends AbstractTableModel {
         map.put(a.getKorisnickoIme(), "offline");
         fireTableDataChanged();
     }
+
+    public boolean isAuthorLogged(Autor a) {
+        String s = map.get(a.getKorisnickoIme());
+        if (s.equals("online")) {
+            return true;
+        } 
+        return false;
+    }
     
 }

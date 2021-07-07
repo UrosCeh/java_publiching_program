@@ -31,16 +31,21 @@ public class UkloniObjavljeniClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ObjavljenClanak oc = (ObjavljenClanak) params;
-        boolean d = repo.delete(oc);
-        NeobjavljenClanak nc = new NeobjavljenClanak();
-            nc.setNaslov(oc.getNaslov());
-            nc.setTekst(oc.getTekst());
-            nc.setAutor(oc.getAutor());
-            nc.setKategorija(oc.getKategorija());
-            nc.setDatum(LocalDateTime.now());
-        boolean a = repo.add(nc);
-        result = d && a;
+        try {
+            ObjavljenClanak oc = (ObjavljenClanak) params;
+            boolean d = repo.delete(oc);
+            NeobjavljenClanak nc = new NeobjavljenClanak();
+                nc.setNaslov(oc.getNaslov());
+                nc.setTekst(oc.getTekst());
+                nc.setAutor(oc.getAutor());
+                nc.setKategorija(oc.getKategorija());
+                nc.setDatum(LocalDateTime.now());
+            boolean a = repo.add(nc);
+            result = d && a;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Sistem ne moze da ukloni clanak.");
+        }
     }
     
     public boolean getResult() {

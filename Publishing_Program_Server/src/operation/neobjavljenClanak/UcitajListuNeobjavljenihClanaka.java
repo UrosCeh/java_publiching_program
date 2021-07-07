@@ -17,7 +17,7 @@ import operation.GenericOperation;
  *
  * @author hatch
  */
-public class PronadjiClanke extends GenericOperation {
+public class UcitajListuNeobjavljenihClanaka extends GenericOperation {
 
     private ArrayList<NeobjavljenClanak> result;
     private Autor autor;

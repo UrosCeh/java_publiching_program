@@ -22,6 +22,4 @@ public interface Repository<T> {
     public boolean update(T t)throws Exception;
     
     public boolean delete(T t)throws Exception;
-    
-    public void addWithGenKeys(T t, String table, String columns, String values) throws Exception;
 }

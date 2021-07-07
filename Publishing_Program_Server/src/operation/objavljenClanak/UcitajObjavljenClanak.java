@@ -27,9 +27,13 @@ public class UcitajObjavljenClanak extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (ObjavljenClanak) repo.get((ObjavljenClanak) params, null);
-        result.setAutor((Autor) repo.get(result.getAutor(), null));
-        result.setKategorija((Kategorija) repo.get(result.getKategorija(), null));
+        try {
+            result = (ObjavljenClanak) repo.get((ObjavljenClanak) params, null);
+            result.setAutor((Autor) repo.get(result.getAutor(), null));
+            result.setKategorija((Kategorija) repo.get(result.getKategorija(), null));
+        } catch (Exception e) {
+            throw new Exception("Sistem ne moze da ucita clanak.");
+        }
     }
     
     public ObjavljenClanak getResult() {

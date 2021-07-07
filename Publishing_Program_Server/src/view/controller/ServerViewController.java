@@ -119,4 +119,8 @@ public class ServerViewController {
         model.loggedOutAuthor(autor);
     }
     
+    public boolean isAuthorLogged(Autor autor) {
+        return model.isAuthorLogged(autor);
+    }
+    
 }

@@ -23,13 +23,19 @@ public class KreirajClanak extends GenericOperation {
             throw new Exception("Podaci nisu validni!");
         }
         if (!autor.isPisac()) {
-            throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
+            throw new Exception("Nemate dozvolu da kreirate novi clanak!");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.add((NeobjavljenClanak) params);
+        try {
+            result = repo.add((NeobjavljenClanak) params);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Sistem ne moze da kreira clanak.");
+        }
+        
     }
     
     public boolean getResult() {

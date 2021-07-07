@@ -22,13 +22,19 @@ public class KreirajNovuKategoriju extends GenericOperation {
             throw new Exception("Podaci nisu validni!");
         }
         if (!autor.isAdmin()) {
-            throw new Exception("Nemate dozvolu da izvrsite ovu operaciju!");
+            throw new Exception("Nemate dozvolu da kreirate novu kategoriju!");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.add((Kategorija) params);    
+        try {
+            result = repo.add((Kategorija) params);    
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Sistem ne moze da kreira novu kategoriju.");
+        }
+        
     }
     
     public boolean getResult() {
