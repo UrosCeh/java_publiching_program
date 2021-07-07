@@ -14,6 +14,6 @@ import view.controller.ServerViewController;
  */
 public class MainServer {
     public static void main(String[] args) {
-        new Server().startServer();
+        ServerViewController.getInstance().startForm();
     }
 }

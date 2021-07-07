@@ -64,6 +64,19 @@ public class Communication {
         }
     }
     
+    public boolean izlogujAutora() throws Exception {
+        Request request = new Request(Operation.IZLOGUJ_AUTORA, null, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException() == null) {
+            return (boolean) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
     public boolean kreirajNovuKategoriju(String naziv) throws Exception {
         Kategorija k = new Kategorija();
         k.setNaziv(naziv);

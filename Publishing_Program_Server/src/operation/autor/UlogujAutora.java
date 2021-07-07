@@ -7,6 +7,7 @@ package operation.autor;
 
 import domain.classes.Autor;
 import operation.GenericOperation;
+import view.controller.ServerViewController;
 
 /**
  *
@@ -32,6 +33,7 @@ public class UlogujAutora extends GenericOperation {
         Autor autor = (Autor) repo.get(params, "korisnickoIme = '" + username + "'");
         
         if (autor.getLozinka().equals(password)) {
+            ServerViewController.getInstance().loginAuthor(autor);
             result = autor;
         }
         else {

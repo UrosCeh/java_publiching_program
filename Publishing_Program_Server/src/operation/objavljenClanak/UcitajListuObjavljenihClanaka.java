@@ -17,7 +17,7 @@ import operation.GenericOperation;
  */
 public class UcitajListuObjavljenihClanaka extends GenericOperation {
     
-    ArrayList<ObjavljenClanak> result;
+    private ArrayList<ObjavljenClanak> result;
 
     @Override
     protected void preconditions(Object params, Autor autor) throws Exception {
@@ -30,7 +30,8 @@ public class UcitajListuObjavljenihClanaka extends GenericOperation {
     protected void executeOperation(Object params) throws Exception {
         System.out.println(params);
         String where = " WHERE LOWER(naslov) LIKE '%" + params + "%'";
-        result = repo.getAll(new ObjavljenClanak(), where, null);
+        String orderby = " ORDER BY datumObjavljivanja DESC";
+        result = repo.getAll(new ObjavljenClanak(), where, orderby);
         if (result != null) {
             for (ObjavljenClanak objavljenClanak : result) {
                 objavljenClanak.setAutor((Autor) repo.get(objavljenClanak.getAutor(), null));

@@ -33,6 +33,14 @@ public class LoginController {
     }
 
     private void addActionListeners() {
+        frmLogin.getBtnCancel().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                frmLogin.dispose();
+            }
+            
+        });
+        
         if (ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR) != null) {
             frmLogin.getLblError().setText("Da li zelite da se izlogujete?");
             frmLogin.getBtnLogin().setText("Da");
@@ -44,11 +52,15 @@ public class LoginController {
             frmLogin.getBtnLogin().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    ViewCoordinator.getInstance().removeParam(Constants.CURRENT_AUTOR, ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
-                    ViewCoordinator.getInstance().repaintMainForm();
-                    frmLogin.dispose();
+                    try {
+                        Communication.getInstance().izlogujAutora();
+                        ViewCoordinator.getInstance().removeParam(Constants.CURRENT_AUTOR, ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
+                        ViewCoordinator.getInstance().repaintMainForm();
+                        frmLogin.dispose();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frmLogin, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-            
             });
         }
         else {
@@ -82,13 +94,5 @@ public class LoginController {
                 }
             });
         }
-        
-        frmLogin.getBtnCancel().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                frmLogin.dispose();
-            }
-            
-        });
     }
 }

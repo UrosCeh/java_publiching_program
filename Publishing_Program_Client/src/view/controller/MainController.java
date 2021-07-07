@@ -97,6 +97,14 @@ public class MainController {
             frmMain.getBtnLogin().setText("Login");
         }
 
+        frmMain.getBtnHome().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                frmMain.getTxtSearch().setText("");
+                addArticles();
+            }
+        });
+        
         frmMain.getBtnLogin().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -153,6 +161,18 @@ public class MainController {
             }
         });
         
+        frmMain.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                try {
+                    Communication.getInstance().izlogujAutora();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        });
+
+        
         
     }   
     
@@ -165,7 +185,7 @@ public class MainController {
         try {
             String term = (String) frmMain.getTxtSearch().getText().trim();
             articles = Communication.getInstance().ucitajListuObjavljenihClanaka(term);
-            
+            frmMain.getPnlAllArticles().setPreferredSize(new Dimension(1000, articles.size()*220));
             for (int i = 0; i < articles.size(); i++) {
                 JPanel pnlArticle = makeArticle(articles.get(i));
                 pnlArticle.setBounds(pnlAllArticles.getX(), pnlAllArticles.getY()+(i*220), pnlAllArticles.getWidth(), 200);

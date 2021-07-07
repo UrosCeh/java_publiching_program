@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public enum Operation implements Serializable {
     ULOGUJ_AUTORA,
+    IZLOGUJ_AUTORA,
     KREIRAJ_NOVU_KATEGORIJU,
     KREIRAJ_CLANAK,
     PRONADJI_CLANKE,

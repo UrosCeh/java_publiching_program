@@ -12,7 +12,9 @@ import domain.classes.NeobjavljenClanak;
 import domain.classes.ObjavljenClanak;
 import java.util.ArrayList;
 import operation.GenericOperation;
+import operation.autor.IzlogujAutora;
 import operation.autor.UlogujAutora;
+import operation.autor.ucitajSveAutore;
 import operation.kategorija.KreirajNovuKategoriju;
 import operation.kategorija.UcitajListuKategorija;
 import operation.neobjavljenClanak.AzurirajClanak;
@@ -47,6 +49,18 @@ public class Controller {
         GenericOperation o = new UlogujAutora();
         o.execute(a, loggedIn);
         return ((UlogujAutora) o).getResult();
+    }
+    
+    public boolean izlogujAutora(Autor a) throws Exception {
+        GenericOperation o = new IzlogujAutora();
+        o.execute(a, null);
+        return ((IzlogujAutora) o).getResult();
+    }
+    
+    public ArrayList<Autor> ucitajSveAutore() throws Exception {
+        GenericOperation o = new ucitajSveAutore();
+        o.execute(null, null);
+        return ((ucitajSveAutore) o).getResult();
     }
 
     public boolean kreirajNovuKategoriju(Kategorija k, Autor loggedIn) throws Exception {

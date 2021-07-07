@@ -48,6 +48,9 @@ public class ProcessClientsRequests extends Thread {
                         case ULOGUJ_AUTORA:
                             response.setResult(Controller.getInstance().ulogujAutora((Autor) request.getObject(), request.getAutor()));
                             break;
+                        case IZLOGUJ_AUTORA:
+                            response.setResult(Controller.getInstance().izlogujAutora(request.getAutor()));
+                            break;
                         case KREIRAJ_NOVU_KATEGORIJU:
                             // da li je autor admin
                             response.setResult(Controller.getInstance().kreirajNovuKategoriju((Kategorija) request.getObject(), request.getAutor()));

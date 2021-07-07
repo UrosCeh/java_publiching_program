@@ -5,18 +5,29 @@
  */
 package server;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import thread.ProcessClientsRequests;
 
 /**
  *
  * @author hatch
  */
-public class Server {
-    public void startServer() {
+public class Server extends Thread {
+       
+    private ServerSocket serverSocket;
+
+    public Server() {
+        start();
+    }
+    
+    @Override
+    public void run() {
         try {
-            ServerSocket serverSocket = new ServerSocket(9000);
+            this.serverSocket = new ServerSocket(9000);
             while (true) {
 
                 System.out.println("Waiting for connection...");
@@ -27,7 +38,6 @@ public class Server {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     private void handleClient(Socket socket) throws Exception {
