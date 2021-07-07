@@ -33,7 +33,6 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         }
         
         String query = sb.toString();
-//        System.out.println(query);
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -56,7 +55,6 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         else sb.append(g.whereCondition());
         
         String query = sb.toString();
-//        System.out.println(query);
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -66,7 +64,6 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         rs.close();
         if(lista.isEmpty()) return null;
         
-//        System.out.println(lista.get(0));
         return lista.get(0);
     }
 
@@ -87,7 +84,7 @@ public class DbGeneric implements DbRepository<GenericEntity> {
                     sb.append(")");
                     
             String query = sb.toString();
-            System.out.println(query);
+            // System.out.println(query);
             Statement s = connection.createStatement();
             int ar = s.executeUpdate(query);
             
@@ -112,7 +109,7 @@ public class DbGeneric implements DbRepository<GenericEntity> {
                     sb.append(g.whereCondition());
                     
             String query = sb.toString();
-            System.out.println(query);
+            // System.out.println(query);
             Statement s = connection.createStatement();
             int ar = s.executeUpdate(query);
             
@@ -136,7 +133,7 @@ public class DbGeneric implements DbRepository<GenericEntity> {
                     sb.append(g.whereCondition());
                     
             String query = sb.toString();
-            System.out.println(query);
+            // System.out.println(query);
             Statement s = connection.createStatement();
             int ar = s.executeUpdate(query);
             

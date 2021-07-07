@@ -48,7 +48,6 @@ public class ViewCoordinator {
     
     public void repaintMainForm() {
         mainController.repaint();
-//        mainController.openForm();
     }
     
     public void openReadArticleForm(Clanak c) {
@@ -100,7 +99,6 @@ public class ViewCoordinator {
     }
     
     public void removeParam(String name, Object key) {
-//        params.remove(name);
         params.remove(name, key);
     }
 }

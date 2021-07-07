@@ -65,7 +65,6 @@ public class Controller {
 
     public boolean kreirajNovuKategoriju(Kategorija k, Autor loggedIn) throws Exception {
         GenericOperation o = new KreirajNovuKategoriju();
-        System.out.println(k.toString());
         o.execute(k, loggedIn);
         return ((KreirajNovuKategoriju) o).getResult();
     }

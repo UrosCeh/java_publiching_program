@@ -114,9 +114,9 @@ public class ArticleController {
                 frmArticle.getCbArticles().removeAllItems();
                 ArrayList<NeobjavljenClanak> neobjavljeniClanci = Communication.getInstance().ucitajListuNeobjavljenihClanaka("");
                 for (NeobjavljenClanak neobjavljenClanak : neobjavljeniClanci) {
-//                    if (((Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR)).equals(neobjavljenClanak.getAutor())) {
+                   if (((Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR)).equals(neobjavljenClanak.getAutor())) {
                         frmArticle.getCbArticles().addItem(neobjavljenClanak);
-//                    }
+                   }
                 }
                 break;
             case ARTICLE_PUBLISH:

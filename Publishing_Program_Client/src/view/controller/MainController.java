@@ -215,7 +215,6 @@ public class MainController {
         JLabel lblDate = new JLabel(article.getStringDatum(), SwingConstants.LEADING);
 
         JLabel lblCategory = new JLabel(article.getKategorija().getNaziv());
-//        JLabel lblTitle = new JLabel("Ovo je neki naslov koji treba da bude dugacak da bih video kako radi jebani swing", SwingConstants.CENTER);
         JLabel lblTitle = new JLabel(article.getNaslov());
         JButton btnRead = new JButton("Read More");
             btnRead.setPreferredSize(new Dimension(200,35));   

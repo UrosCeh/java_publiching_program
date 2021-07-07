@@ -35,7 +35,6 @@ public class UcitajListuNeobjavljenihClanaka extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        System.out.println(params);
         String where = " WHERE LOWER(naslov) LIKE '%" + params + "%'";
         ArrayList<NeobjavljenClanak> uaList;
         ArrayList<NeobjavljenClanak> uaListFinal = new ArrayList<>();

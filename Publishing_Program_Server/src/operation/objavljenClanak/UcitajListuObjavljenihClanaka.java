@@ -28,7 +28,6 @@ public class UcitajListuObjavljenihClanaka extends GenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        System.out.println(params);
         String where = " WHERE LOWER(naslov) LIKE '%" + params + "%'";
         String orderby = " ORDER BY datumObjavljivanja DESC";
         result = repo.getAll(new ObjavljenClanak(), where, orderby);

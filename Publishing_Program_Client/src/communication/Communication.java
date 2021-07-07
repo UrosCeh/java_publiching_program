@@ -81,8 +81,6 @@ public class Communication {
         Kategorija k = new Kategorija();
         k.setNaziv(naziv);
         
-        System.out.println(k.toString());
-        
         Request request = new Request(Operation.KREIRAJ_NOVU_KATEGORIJU, k, (Autor) ViewCoordinator.getInstance().getParam(Constants.CURRENT_AUTOR));
         sender.send(request);
         Response response = (Response) receiver.receive();

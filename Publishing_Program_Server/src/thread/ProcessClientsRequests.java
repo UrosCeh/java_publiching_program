@@ -52,11 +52,9 @@ public class ProcessClientsRequests extends Thread {
                             response.setResult(Controller.getInstance().izlogujAutora(request.getAutor()));
                             break;
                         case KREIRAJ_NOVU_KATEGORIJU:
-                            // da li je autor admin
                             response.setResult(Controller.getInstance().kreirajNovuKategoriju((Kategorija) request.getObject(), request.getAutor()));
                             break;
                         case KREIRAJ_CLANAK:
-                            // da li je autor pisac
                             response.setResult(Controller.getInstance().kreirajClanak((Clanak) request.getObject(), request.getAutor()));
                             break;
                         case UCITAJ_LISTU_NEOBJAVLJENIH_CLANAKA:
@@ -66,23 +64,18 @@ public class ProcessClientsRequests extends Thread {
                             response.setResult(Controller.getInstance().ucitajObjavljenClanak((ObjavljenClanak) request.getObject()));
                             break; 
                         case UCITAJ_NEOBJAVLJEN_CLANAK:
-                            // da li je autor pisac i njegov je clanak ili je admin
                             response.setResult(Controller.getInstance().ucitajNeobjavljenClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case AZURIRAJ_CLANAK:
-                            // da li je autor pisac i njegov je clanak
                             response.setResult(Controller.getInstance().azurirajClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case OBRISI_CLANAK:
-                            // da li je autor pisac i njegov je clanak
                             response.setResult(Controller.getInstance().obrisiClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case OBJAVI_CLANAK:
-                            // da li je autor admin
                             response.setResult(Controller.getInstance().objaviClanak((NeobjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case UKLONI_OBJAVLJENI_CLANAK:
-                            // da li je autor admin
                             response.setResult(Controller.getInstance().ukloniObjavljeniClanak((ObjavljenClanak) request.getObject(), request.getAutor()));
                             break; 
                         case UCITAJ_LISTU_KATEGORIJA:
